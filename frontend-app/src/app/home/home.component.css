@@ -1,0 +1,95 @@
+body {
+  background-color: black;
+  margin: 0px;
+}
+
+.side {
+  display: grid;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+  place-items: center;
+  position: absolute;
+  width: 100%;
+}
+
+.side .title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 5vw;
+  font-weight: 600;
+  margin: 0px 10vw;
+  width: 80vw;
+}
+
+.side .fancy {
+  font-family: "Permanent Marker", cursive;
+  font-size: 1.4em;
+  line-height: 1.2em;
+}
+
+#left-side {
+  background-color: #1a2b48;
+  width: 50%;
+  z-index: 2;
+}
+
+#left-side .title {
+  color: #f5f5f5;
+}
+
+#left-side .fancy {
+  font-family: 'Orbitron', sans-serif;
+  color: #4caf50;
+}
+
+#right-side {
+  background-color: #e5e8eb;
+}
+
+#right-side .title {
+  color: #1a2b48;
+}
+
+#right-side .fancy {
+  font-family: 'Orbitron', sans-serif;
+  color: #d4af37;
+}
+
+.cta-button-left {
+  padding: 20px 40px; /* Adjusted padding to reduce button size */
+  font-size: 0.8vw;   /* Reduced font size from 1vw to 0.8vw */
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.cta-button-right {
+  padding: 20px 40px; /* Adjusted padding to reduce button size */
+  font-size: 0.8vw;   /* Reduced font size from 1vw to 0.8vw */
+  background-color: #d4af37;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #2a963d;
+}
+
+@media (max-width: 768px) {
+  .side .title {
+    font-size: 7vw; /* Smaller screens get smaller text */
+  }
+
+  .cta-button-left, .cta-button-right {
+    padding: 15px 30px;
+    font-size: 2vw;
+  }
+}

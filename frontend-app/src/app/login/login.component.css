@@ -1,0 +1,77 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #141e30; /* Dark gradient background */
+  background: linear-gradient(to bottom, #141e30, #243b55);
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: white;
+  width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  /* Flexbox for centering form elements */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.input-container {
+  margin-bottom: 20px;
+  width: 100%; /* Full width */
+}
+
+.input-container label {
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: block;
+  text-align: left; /* Align label to the left for better form readability */
+}
+
+.input-container input {
+  width: 100%; /* Full width */
+  padding: 15px 20px; /* Larger padding for a more comfortable input size */
+  font-size: 18px; /* Increased font size */
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.input-container input:focus {
+  outline: none;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+}
+
+.submit-button {
+  padding: 15px 40px; /* Increase button size for balance */
+  font-size: 18px;
+  background-color: #37b24d; /* Futuristic green for contrast */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #2a963d;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+}
