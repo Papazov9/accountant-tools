@@ -1,0 +1,32 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: accountantdb
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+#  accountant-app:
+#    image: openjdk:17
+#    container_name: accountant-app
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/accountantdb
+#      SPRING_DATASOURCE_USERNAME: accountant
+#      SPRING_DATASOURCE_PASSWORD: accountantpassword
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+#    depends_on:
+#      - mysql-db
+
+volumes:
+  mysql-data:
+    driver: local

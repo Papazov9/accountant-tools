@@ -1,0 +1,95 @@
+body {
+  background-color: black;
+  margin: 0px;
+}
+
+.side {
+  display: grid;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+  place-items: center;
+  position: absolute;
+  width: 100%;
+}
+
+.side .title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 5vw; /* Reduced from 7vw to 4vw for smaller text */
+  font-weight: 600; /* Reduced font-weight for a less bold appearance */
+  margin: 0px 10vw;
+  width: 80vw;
+}
+
+.side .fancy {
+  font-family: "Permanent Marker", cursive;
+  font-size: 1.4em; /* Reduced from 1.8em to 1.4em */
+  line-height: 1.2em; /* Adjusted line height */
+}
+
+#left-side {
+  background-color: #141e30;
+  width: 60%;
+  z-index: 2;
+}
+
+#left-side .title {
+  color: #e0e0e0;
+}
+
+#left-side .fancy {
+  font-family: 'Orbitron', sans-serif;
+  color: #45e760;
+}
+
+#right-side {
+  background-color: #00d2ff;
+}
+
+#right-side .title {
+  color: #000435;
+}
+
+#right-side .fancy {
+  font-family: 'Orbitron', sans-serif;
+  color: #f9d423;
+}
+
+.cta-button-left {
+  padding: 20px 40px; /* Adjusted padding to reduce button size */
+  font-size: 0.8vw;   /* Reduced font size from 1vw to 0.8vw */
+  background-color: #45e760;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.cta-button-right {
+  padding: 20px 40px; /* Adjusted padding to reduce button size */
+  font-size: 0.8vw;   /* Reduced font size from 1vw to 0.8vw */
+  background-color: #f9d423;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #2a963d;
+}
+
+@media (max-width: 768px) {
+  .side .title {
+    font-size: 7vw; /* Smaller screens get smaller text */
+  }
+
+  .cta-button-left, .cta-button-right {
+    padding: 15px 30px;
+    font-size: 2vw;
+  }
+}
