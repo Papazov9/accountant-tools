@@ -1,41 +1,155 @@
+/* General Navbar Styles */
 header {
-  background-color: #0d6efd; /* Blue */
-  padding: 10px 0;
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20px 5%;
+  transition: background-color 0.3s ease;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.logo {
+.logo-container {
   display: flex;
   align-items: center;
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
+  gap: 10px;
 }
 
 .logo img {
-  height: 40px;
+  height: 50px;
+  width: 50px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #483AB6; /* Accent color */
+
+}
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    color: #483AB6; /* Default link color */
+    text-decoration: none;
+    font-weight: 700; /* Bold text */
+    font-size: 18px; /* Slightly larger font size */
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease; /* Smooth transition for color */
+  }
+
+  /* Hover effect: All other links become grayed out */
+  .nav-links a:hover {
+    color: #372A95; /* Color of the hovered link */
+  }
+
+  /* Make other links disabled (grayed out) when hovering on any link */
+  .nav-links a:hover ~ a,
+  .nav-links a:not(:hover) {
+    color: #7e7979; /* Gray color for non-hovered links */
+  }
+
+/* CTA Buttons */
+.cta-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.cta-signin,
+.cta-signup {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.cta-signin {
+  color: #483AB6; /* Accent color */
+  background: transparent;
+  border: 2px solid #483AB6;
+}
+
+.cta-signin:hover {
+  background-color: rgba(72, 58, 182, 0.2);
+}
+
+.cta-signup {
+  background-color: #483AB6; /* Accent color */
+  color: white;
+}
+
+.cta-signup:hover {
+  background-color: #372A95;
+}
+
+/* Sticky Navbar Style (after scroll) */
+.sticky {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.sticky .nav-links a {
+  color: black;
+}
+
+.sticky .cta-signin {
+  color: black;
+  border: 2px solid black;
+}
+
+.sticky .cta-signup {
+  background-color: #007bff;
+  color: white;
+}
+
+.sticky .cta-signin:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Fix for long links */
+.navbar ul li {
+  display: inline-block;
+}
+
+/* Fix link spacing */
+.nav-links li {
   margin-right: 10px;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+/* Transition effect */
+.sticky-transition {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.nav-links a {
-  color: white;
+.go-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.go-back-link {
+  color: #483AB6; /* Accent color */
+  font-weight: bold;
   text-decoration: none;
-  font-weight: 500;
+  font-size: 16px;
 }
 
-.nav-links a:hover {
-  color: #f8f9fa;
+.go-back-link:hover {
+  color: #372A95; /* Darker hover color */
 }

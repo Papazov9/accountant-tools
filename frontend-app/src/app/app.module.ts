@@ -8,19 +8,26 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {NgOptimizedImage} from "@angular/common";
+import {WelcomeSectionComponent} from "./home/welcome-section/welcome-section.component";
+import {OverviewSectionComponent} from "./home/overview-section/overview-section.component";
+import {StepsSectionComponent} from "./home/steps-section/steps-section.component";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    NavbarComponent
+
   ],
   imports: [
+    AppComponent,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    HomeComponent,
+    LoginComponent,
+    NavbarComponent,
+    WelcomeSectionComponent,
+    OverviewSectionComponent,
+    StepsSectionComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
