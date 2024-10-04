@@ -1,0 +1,43 @@
+:host {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+.steps-section {
+  text-align: center;
+  max-width: 800px;
+}
+
+.steps-section h2 {
+  color: #483AB6;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step {
+  flex: 1;
+  margin: 0 20px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #d4af37;
+  border-radius: 8px;
+}
+
+.step h3 {
+  color: #483AB6;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.step p {
+  color: #333;
+  font-size: 1.1rem;
+}

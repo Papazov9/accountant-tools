@@ -1,15 +1,37 @@
 <header>
-  <nav class="navbar">
-    <div class="logo">
-      <img ngSrc="/assets/unparalled-high-resolution-logo-black-transparent.png" alt="Logo" height="50" width="100"/>
+  <nav class="navbar" *ngIf="!isLoginOrRegisterPage(); else goBackLink">
+    <div class="logo-container">
+<!--      <img src="/assets/unparalled-favicon-color.png" alt="Logo" class="logo-img" height="50" width="50"/>-->
+      <span class="logo-text">unparalleled.</span>
     </div>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Projects</a></li>
-      <li><a href="#">Team</a></li>
-      <li><a href="#">Contact Us</a></li>
+
+    <!-- Links for logged-in users -->
+    <ul class="nav-links" *ngIf="isLoggedIn(); else guestLinks">
+      <li><a href="#">Workspace</a></li>
+      <li><a href="#">Results</a></li>
+      <li><a href="#">Contacts</a></li>
+      <li><a href="#">Profile</a></li>
     </ul>
+
+    <!-- Links for guests (not logged in) -->
+    <ng-template #guestLinks>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <div class="cta-buttons">
+        <a class="cta-signin" href="/login">Log In</a>
+        <a class="cta-signup" href="/register">Get Started Free</a>
+      </div>
+    </ng-template>
   </nav>
+
+  <!-- Go Back link for login/register pages -->
+  <ng-template #goBackLink>
+    <div class="go-back">
+      <a href="/" class="go-back-link">Go Back</a>
+    </div>
+  </ng-template>
 </header>

@@ -1,77 +1,178 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arbutus', sans-serif;
+  background-color: #FFFFFF;
+  color: #483AB6; /* Accent color */
+}
+
+/* Container Styles */
 .login-container {
+  display: flex;
+  height: 100vh;
+}
+
+.login-left, .login-right {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #141e30; /* Dark gradient background */
-  background: linear-gradient(to bottom, #141e30, #243b55);
+  padding: 40px;
+  flex-direction: column;
+}
+
+/* Left Section (Form) */
+.login-left {
+  background-color: #eaecff; /* Dirty white background */
 }
 
 .login-box {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 40px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 100%;
   text-align: center;
-  color: white;
-  width: 400px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  /* Flexbox for centering form elements */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-h2 {
-  font-size: 36px;
-  margin-bottom: 30px;
-  letter-spacing: 1px;
-}
-
-.input-container {
+.logo-container {
   margin-bottom: 20px;
-  width: 100%; /* Full width */
 }
 
-.input-container label {
-  font-size: 18px;
-  margin-bottom: 8px;
-  display: block;
-  text-align: left; /* Align label to the left for better form readability */
+/* Styling inputs to be connected */
+.input-container {
+  margin-bottom: 0; /* Remove bottom margin */
 }
 
 .input-container input {
-  width: 100%; /* Full width */
-  padding: 15px 20px; /* Larger padding for a more comfortable input size */
-  font-size: 18px; /* Increased font size */
-  border-radius: 8px;
+  width: 100%;
+  padding: 20px;
+  font-size: 16px;
   border: none;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-  transition: box-shadow 0.3s ease;
+  border-bottom: 0.2px solid #d5d3d3; /* Only bottom border */
+  background-color: #ffffff; /* Light background */
+  margin-bottom: 0;
+  box-sizing: border-box;
 }
 
-.input-container input:focus {
-  outline: none;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+.input-container #email {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
-.submit-button {
-  padding: 15px 40px; /* Increase button size for balance */
-  font-size: 18px;
-  background-color: #37b24d; /* Futuristic green for contrast */
-  color: white;
-  border: none;
-  border-radius: 10px;
+.input-container #password {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom: none;
+}
+
+/* Align "Remember me" and "Forgot Password?" in the same row */
+.remember-me-forgot-password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none; /* Hide the default checkbox */
+}
+
+.custom-checkbox label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
   cursor: pointer;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+  font-weight: bold;
+}
+
+.custom-checkbox label::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+  margin-right: 10px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + label::before {
+  background-color: #483AB6; /* Accent color */
+  box-shadow: inset 0px 0px 0px 2px white;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + label::after {
+  content: "✔";
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  left: 4px; /* Adjust the horizontal position */
+  top: 0px; /* Adjust the vertical position */
+  line-height: 20px; /* Center the checkmark vertically */
+}
+
+.custom-checkbox label span {
+  font-weight: bold; /* Make the text bolder */
+}
+
+.forgot-password a {
+  color: #483AB6;
+  text-decoration: none;
+}
+
+/* Center the button */
+.submit-button {
+  display: block;  /* Ensures the button takes up the full width */
+  margin: 20px auto;  /* Center the button horizontally */
+  padding: 15px;
+  background-color: #483AB6; /* Accent color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.3s ease; /* Add transition for smooth scaling */
+  width: 100%;
 }
 
 .submit-button:hover {
-  background-color: #2a963d;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+  background-color: #3b329c;
+  transform: scale(0.95); /* Shrink the button to 95% of its original size */
+}
+
+.signup-link {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.signup-link a {
+  color: #483AB6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Right Section (Illustration) */
+.login-right {
+  background: linear-gradient(-145deg, #483AB6 25%, #d1cdb6 100%);
+  text-align: center;
+  justify-content: center;
+  padding: 50px;
+}
+
+.closing-remark {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .login-left, .login-right {
+    flex: 1 100%;
+  }
 }
