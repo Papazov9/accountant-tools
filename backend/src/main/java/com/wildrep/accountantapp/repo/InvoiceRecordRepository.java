@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface InvoiceRecordRepository extends JpaRepository<InvoiceRecord, InvoiceRecordId> {
-    List<InvoiceRecord> findAllByBatchId(String batchId);
+
 }

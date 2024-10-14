@@ -20,20 +20,21 @@ header {
 
 .logo-container {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: center; /* Align text and image at the baseline */
+  margin-bottom: 20px;
 }
 
-.logo img {
+.logo-img {
   height: 50px;
   width: 50px;
+  vertical-align: middle; /* Ensures alignment with the text */
 }
 
 .logo-text {
   font-size: 24px;
   font-weight: bold;
   color: #483AB6; /* Accent color */
-
+  margin-top: 23px;
 }
   .nav-links {
     display: flex;

@@ -18,10 +18,6 @@ export class NavbarComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  isLoggedIn(): boolean {
-    return false;
-  }
-
   isLoginOrRegisterPage() {
     return this.router.url === '/login' || this.router.url === '/register';
   }

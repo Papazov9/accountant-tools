@@ -30,6 +30,6 @@ import {StepsSectionComponent} from "./home/steps-section/steps-section.componen
     StepsSectionComponent
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }

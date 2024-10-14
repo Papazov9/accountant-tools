@@ -4,5 +4,6 @@ public enum ComparisonStatus {
     MATCH,
     MISMATCH,
     MISSING_IN_CSV,
-    MISSING_IN_TXT
+    MISSING_IN_TXT,
+    DUPLICATE
 }

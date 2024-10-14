@@ -1,0 +1,78 @@
+/* General Styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arbutus', sans-serif;
+}
+
+/* Main container for logged-in view */
+.main-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+  padding: 0;
+  position: relative; /* To control hamburger button positioning */
+}
+
+/* Hamburger Button */
+.hamburger-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1100; /* Ensure it's above everything else */
+  display: none; /* Initially hidden */
+}
+
+.hamburger-button i {
+  color: #000;
+}
+
+/* Show Hamburger Button on Small Screens */
+@media (max-width: 768px) {
+  .hamburger-button {
+    display: block;
+  }
+}
+
+/* Side Navbar */
+app-side-navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: #483AB6;
+  color: #FFFFFF;
+  width: 240px;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0);
+  z-index: 1000;
+}
+
+app-side-navbar.closed {
+  transform: translateX(-100%);
+}
+
+app-side-navbar.open {
+  transform: translateX(0);
+}
+
+/* Content container for logged-in view */
+.content-container {
+  flex-grow: 1;
+  overflow-y: auto; /* Allow scrolling if content overflows vertically */
+  background-color: #eaecff; /* Light background for contrast */
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 240px; /* Offset the side navbar */
+}
+
+/* Adjust content-container for mobile view */
+@media (max-width: 768px) {
+  .content-container {
+    margin-left: 0; /* Full width if side navbar is closed */
+  }
+}

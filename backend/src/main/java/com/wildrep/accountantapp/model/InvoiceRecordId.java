@@ -5,15 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
-@Embeddable
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class InvoiceRecordId implements Serializable {
-
+@AllArgsConstructor
+@Embeddable
+public class InvoiceRecordId {
     private String bulstat;
     private String documentType;
     private String documentNumber;

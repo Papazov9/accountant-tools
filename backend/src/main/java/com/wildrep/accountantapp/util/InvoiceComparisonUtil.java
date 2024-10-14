@@ -1,105 +1,139 @@
 package com.wildrep.accountantapp.util;
 
-import com.wildrep.accountantapp.model.CSVInvoiceRecord;
-import com.wildrep.accountantapp.model.ComparisonResult;
-import com.wildrep.accountantapp.model.InvoiceRecord;
-import com.wildrep.accountantapp.model.InvoiceRecordId;
+import com.wildrep.accountantapp.model.*;
 import com.wildrep.accountantapp.model.enums.ComparisonStatus;
 import com.wildrep.accountantapp.model.enums.InvoiceField;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class InvoiceComparisonUtil {
-    public static List<ComparisonResult> compareInvoices(List<CSVInvoiceRecord> csvInvoiceRecords, List<InvoiceRecord> txtInvoiceRecords) {
+
+    public static List<ComparisonResult> compareInvoicesAndStoreResults(List<CSVInvoiceRecord> csvRecords, List<InvoiceRecord> txtRecords) {
         List<ComparisonResult> results = new ArrayList<>();
 
-        Map<InvoiceRecordId, CSVInvoiceRecord> csvrecordMap = csvInvoiceRecords.stream().collect(Collectors.toMap(CSVInvoiceRecord::getId, Function.identity()));
-        Map<InvoiceRecordId, InvoiceRecord> txtRecordMap = txtInvoiceRecords.stream().collect(Collectors.toMap(InvoiceRecord::getId, Function.identity()));
+        // Group CSV and TXT records by their IDs
+        Map<InvoiceRecordId, List<CSVInvoiceRecord>> csvRecordMap = csvRecords.stream()
+                .collect(Collectors.groupingBy(CSVInvoiceRecord::getId));
+        Map<InvoiceRecordId, List<InvoiceRecord>> txtRecordMap = txtRecords.stream()
+                .collect(Collectors.groupingBy(InvoiceRecord::getId));
 
+        // Combine all keys from both CSV and TXT maps
         Set<InvoiceRecordId> allKeys = new HashSet<>();
-        allKeys.addAll(csvrecordMap.keySet());
+        allKeys.addAll(csvRecordMap.keySet());
         allKeys.addAll(txtRecordMap.keySet());
 
+        // Iterate through all unique keys and compare records
         for (InvoiceRecordId key : allKeys) {
-            CSVInvoiceRecord csvInvoiceRecord = csvrecordMap.get(key);
-            InvoiceRecord txtInvoiceRecord = txtRecordMap.get(key);
+            List<CSVInvoiceRecord> csvRecordList = csvRecordMap.getOrDefault(key, Collections.emptyList());
+            List<InvoiceRecord> txtRecordList = txtRecordMap.getOrDefault(key, Collections.emptyList());
 
-            ComparisonResult.ComparisonResultBuilder comparisonResultBuilder = ComparisonResult.builder()
-                    .invoiceRecordId(key)
-                    .csvInvoiceRecord(csvInvoiceRecord)
-                    .txtInvoiceRecord(txtInvoiceRecord);
+            boolean isDuplicate = csvRecordList.size() > 1 || txtRecordList.size() > 1;
 
-            if (csvInvoiceRecord != null && txtInvoiceRecord != null) {
-                Set<InvoiceField> mismatchedFields = compareFields(csvInvoiceRecord, txtInvoiceRecord);
-                if (mismatchedFields.isEmpty()) {
-                    comparisonResultBuilder
-                            .status(ComparisonStatus.MATCH);
+            // Compare CSV and TXT records for each combination
+            for (CSVInvoiceRecord csvRecord : csvRecordList) {
+                if (!txtRecordList.isEmpty()) {
+                    for (InvoiceRecord txtRecord : txtRecordList) {
+                        results.add(compareAndCreateResult(csvRecord, txtRecord, isDuplicate));
+                    }
                 } else {
-                    comparisonResultBuilder
-                            .status(ComparisonStatus.MISMATCH)
-                            .mismatchedFields(mismatchedFields);
+                    // TXT record is missing
+                    results.add(createMissingTxtResult(csvRecord));
                 }
-            } else if (csvInvoiceRecord != null) {
-                comparisonResultBuilder
-                        .status(ComparisonStatus.MISSING_IN_TXT);
-            } else {
-                comparisonResultBuilder
-                        .status(ComparisonStatus.MISSING_IN_CSV);
             }
 
-            results.add(comparisonResultBuilder.build());
+            // Handle cases where the CSV record is missing
+            for (InvoiceRecord txtRecord : txtRecordList) {
+                if (csvRecordList.isEmpty()) {
+                    results.add(createMissingCsvResult(txtRecord));
+                }
+            }
         }
 
         return results;
     }
 
-    private static Set<InvoiceField> compareFields(CSVInvoiceRecord csvInvoiceRecord, InvoiceRecord txtInvoiceRecord) {
+    private static ComparisonResult compareAndCreateResult(CSVInvoiceRecord csvRecord, InvoiceRecord txtRecord, boolean isDuplicate) {
+        ComparisonResult comparisonResult = new ComparisonResult();
+        comparisonResult.setCsvInvoiceRecord(csvRecord);
+        comparisonResult.setTxtInvoiceRecord(txtRecord);
+
+        if (isDuplicate) {
+            comparisonResult.setStatus(ComparisonStatus.DUPLICATE);
+            comparisonResult.setMatchColumn("Duplicate");
+            comparisonResult.setMismatchedFields(Arrays.stream(InvoiceField.values()).collect(Collectors.toSet()));
+        } else {
+            Set<InvoiceField> mismatchedFields = compareFields(csvRecord, txtRecord);
+            if (mismatchedFields.isEmpty()) {
+                comparisonResult.setStatus(ComparisonStatus.MATCH);
+                comparisonResult.setMismatchedFields(new HashSet<>());
+            } else {
+                comparisonResult.setStatus(ComparisonStatus.MISMATCH);
+                comparisonResult.setMismatchedFields(mismatchedFields);
+            }
+        }
+
+        return comparisonResult;
+    }
+
+    private static ComparisonResult createMissingTxtResult(CSVInvoiceRecord csvRecord) {
+        ComparisonResult comparisonResult = new ComparisonResult();
+        comparisonResult.setCsvInvoiceRecord(csvRecord);
+        comparisonResult.setStatus(ComparisonStatus.MISSING_IN_TXT);
+        comparisonResult.setMismatchedFields(Arrays.stream(InvoiceField.values()).collect(Collectors.toSet()));
+        return comparisonResult;
+    }
+
+    private static ComparisonResult createMissingCsvResult(InvoiceRecord txtRecord) {
+        ComparisonResult comparisonResult = new ComparisonResult();
+        comparisonResult.setTxtInvoiceRecord(txtRecord);
+        comparisonResult.setStatus(ComparisonStatus.MISSING_IN_CSV);
+        comparisonResult.setMismatchedFields(Arrays.stream(InvoiceField.values()).collect(Collectors.toSet()));
+        return comparisonResult;
+    }
+
+    private static Set<InvoiceField> compareFields(CSVInvoiceRecord csvRecord, InvoiceRecord txtRecord) {
         Set<InvoiceField> mismatchedFields = new HashSet<>();
 
         for (InvoiceField field : InvoiceField.values()) {
-            String csvValue = getFieldValue(csvInvoiceRecord, field);
-            String txtValue = getFieldValue(txtInvoiceRecord, field);
-            if (!Objects.equals(csvValue, txtValue)) {
+            String csvValue = getFieldValue(csvRecord, field);
+            String txtValue = getFieldValue(txtRecord, field);
+
+            if (!areValuesEqual(csvValue, txtValue)) {
                 mismatchedFields.add(field);
             }
         }
+
         return mismatchedFields;
     }
 
-
-    public static String getFieldValue(InvoiceRecord txtInvoiceRecord, InvoiceField field) {
-        return switch (field) {
-            case BULSTAT -> txtInvoiceRecord.getId().getBulstat();
-            case ACCOUNTING_PERIOD -> txtInvoiceRecord.getAccountingPeriod();
-            case DOCUMENT_TYPE -> txtInvoiceRecord.getId().getDocumentType();
-            case DOCUMENT_NUMBER -> txtInvoiceRecord.getId().getDocumentNumber();
-            case ISSUE_DATE -> txtInvoiceRecord.getIssueDate() != null
-                    ? new SimpleDateFormat("dd-MM-yyyy").format(txtInvoiceRecord.getIssueDate())
-                    : "";
-            case TOTAL_AMOUNT ->
-                    txtInvoiceRecord.getTotalAmount() != null ? String.valueOf(txtInvoiceRecord.getTotalAmount()) : "";
-            case VAT_AMOUNT ->
-                    txtInvoiceRecord.getVatAmount() != null ? String.valueOf(txtInvoiceRecord.getVatAmount()) : "";
-            };
+    private static boolean areValuesEqual(String csvValue, String txtValue) {
+        return Objects.equals(csvValue != null ? csvValue.trim() : null, txtValue != null ? txtValue.trim() : null);
     }
 
-    public static String getFieldValue(CSVInvoiceRecord csvInvoiceRecord, InvoiceField field) {
+    public static String getFieldValue(CSVInvoiceRecord csvRecord, InvoiceField field) {
+        if (csvRecord == null) return "";
         return switch (field) {
-            case BULSTAT -> csvInvoiceRecord.getId().getBulstat();
-            case ACCOUNTING_PERIOD -> csvInvoiceRecord.getAccountingPeriod();
-            case DOCUMENT_TYPE -> csvInvoiceRecord.getId().getDocumentType();
-            case DOCUMENT_NUMBER -> csvInvoiceRecord.getId().getDocumentNumber();
-            case ISSUE_DATE -> csvInvoiceRecord.getIssueDate() != null
-                    ? new SimpleDateFormat("dd-MM-yyyy").format(csvInvoiceRecord.getIssueDate())
-                    : "";
-            case TOTAL_AMOUNT ->
-                    csvInvoiceRecord.getTotalAmount() != null ? String.valueOf(csvInvoiceRecord.getTotalAmount()) : "";
-            case VAT_AMOUNT ->
-                    csvInvoiceRecord.getVatAmount() != null ? String.valueOf(csvInvoiceRecord.getVatAmount()) : "";
-            };
+            case BULSTAT -> csvRecord.getId() != null ? csvRecord.getId().getBulstat() : "";
+            case ACCOUNTING_PERIOD -> csvRecord.getAccountingPeriod() != null ? csvRecord.getAccountingPeriod() : "";
+            case DOCUMENT_TYPE -> csvRecord.getId() != null ? csvRecord.getId().getDocumentType() : "";
+            case DOCUMENT_NUMBER -> csvRecord.getId() != null ? csvRecord.getId().getDocumentNumber() : "";
+            case ISSUE_DATE -> csvRecord.getIssueDate() != null ? csvRecord.getIssueDate().toString() : "";
+            case TOTAL_AMOUNT -> csvRecord.getTotalAmount() != null ? String.valueOf(csvRecord.getTotalAmount()) : "";
+            case VAT_AMOUNT -> csvRecord.getVatAmount() != null ? String.valueOf(csvRecord.getVatAmount()) : "";
+        };
     }
 
+    public static String getFieldValue(InvoiceRecord txtRecord, InvoiceField field) {
+        if (txtRecord == null) return "";
+        return switch (field) {
+            case BULSTAT -> txtRecord.getId() != null ? txtRecord.getId().getBulstat() : "";
+            case ACCOUNTING_PERIOD -> txtRecord.getAccountingPeriod() != null ? txtRecord.getAccountingPeriod() : "";
+            case DOCUMENT_TYPE -> txtRecord.getId() != null ? txtRecord.getId().getDocumentType() : "";
+            case DOCUMENT_NUMBER -> txtRecord.getId() != null ? txtRecord.getId().getDocumentNumber() : "";
+            case ISSUE_DATE -> txtRecord.getIssueDate() != null ? txtRecord.getIssueDate().toString() : "";
+            case TOTAL_AMOUNT -> txtRecord.getTotalAmount() != null ? String.valueOf(txtRecord.getTotalAmount()) : "";
+            case VAT_AMOUNT -> txtRecord.getVatAmount() != null ? String.valueOf(txtRecord.getVatAmount()) : "";
+        };
+    }
 }

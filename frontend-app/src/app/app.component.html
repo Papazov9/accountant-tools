@@ -1,2 +1,25 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<!-- Top Navbar for non-logged users -->
+<header *ngIf="!isLoggedIn()">
+  <app-navbar></app-navbar>
+</header>
+
+<!-- Loading Spinner -->
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+<!-- Main container for logged-in view -->
+<div class="main-container" *ngIf="isLoggedIn(); else loggedOutContent">
+  <button class="hamburger-button" (click)="toggleSideNav()">
+    <i class="fa" [ngClass]="isNavOpen ? 'fa-times' : 'fa-bars'"></i>
+  </button>
+  <app-side-navbar [ngClass]="{ 'open': isNavOpen, 'closed': !isNavOpen }"></app-side-navbar>
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- Content for non-logged users -->
+<ng-template #loggedOutContent>
+  <div class="guest-container">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>

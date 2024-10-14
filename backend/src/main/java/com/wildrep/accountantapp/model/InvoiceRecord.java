@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "invoice_records")
@@ -15,15 +15,24 @@ import java.util.Date;
 @Data
 @Builder
 public class InvoiceRecord {
+
     @EmbeddedId
     private InvoiceRecordId id;
 
+    @Column(name = "company_name")
     private String companyName;
-    private String accountingPeriod;
-    private Date issueDate;
 
+    @Column(name = "accounting_period", nullable = false)
+    private String accountingPeriod;
+
+    @Column(name = "total_amount")
     private Double totalAmount;
+
+    @Column(name = "vat_amount")
     private Double vatAmount;
 
-    private String batchId;
+    @Column(name = "issue_date")
+    private LocalDate issueDate;
+
+    // Other relevant fields
 }

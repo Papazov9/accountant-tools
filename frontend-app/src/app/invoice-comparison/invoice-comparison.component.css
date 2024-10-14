@@ -1,0 +1,113 @@
+.invoice-comparison-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  color: #483AB6;
+}
+
+.title-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title-section h1 {
+  color: #483AB6;
+  font-size: 2.5rem;
+}
+
+.subscription-details {
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+  background-color: #f7f7ff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.upload-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  gap: 20px; /* Add space between the boxes */
+}
+
+.upload-section .dropbox-container {
+  width: 48%;
+  height: 200px;  /* Give the boxes a square-like shape */
+  padding: 20px;
+  border: 2px dashed #483AB6;
+  border-radius: 10px;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space between label and file list */
+  align-items: center;
+}
+
+.upload-section .dropbox-container:hover {
+  background-color: #f0f0ff;
+}
+
+.upload-section .dropbox-label {
+  font-size: 1.2rem;
+  color: #483AB6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Ensures label is centered vertically */
+}
+
+.uploaded-files {
+  margin-top: 10px;
+  list-style-type: none;
+  font-size: 0.9rem;
+  color: #483AB6;
+  position: absolute;
+  bottom: 10px; /* Pushes the "No files selected" text to the bottom */
+}
+
+input[type="file"] {
+  display: none; /* Completely hide the file input field */
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress {
+  height: 10px;
+  background-color: #483AB6;
+  border-radius: 10px;
+}
+
+.upload-button {
+  background-color: #5e4cce;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+  background-color: #483AB6;
+}
+
+@media (max-width: 768px) {
+  .upload-section {
+    flex-direction: column;
+  }
+
+  .upload-section .dropbox-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

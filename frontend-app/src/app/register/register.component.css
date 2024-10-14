@@ -1,0 +1,263 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arbutus', sans-serif;
+  background-color: #FFFFFF;
+  color: #483AB6; /* Accent color */
+}
+
+/* Container Styles */
+.register-container {
+  display: flex;
+  height: 100vh;
+}
+
+.register-left, .register-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  flex-direction: column;
+}
+
+/* Left Section (Form) */
+.register-left {
+  background-color: #eaecff; /* Dirty white background */
+}
+
+.register-box {
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+}
+
+.logo-container {
+  margin-bottom: 20px;
+}
+
+/* Styling inputs to be connected */
+.input-container {
+  margin: 0; /* Remove all margin */
+}
+
+.input-container input {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0; /* Lighter bottom border */
+  background-color: #ffffff; /* Light background */
+  box-sizing: border-box; /* Rounded corners for a smooth look */
+  transition: all 0.3s ease; /* Transition effect for focus */
+}
+
+#first-name {
+  border-top-left-radius: 10px;
+  border-right: 0.5px solid #e0e0e0;
+}
+
+#email {
+  border-right: 0.5px solid #e0e0e0;
+}
+
+#last-name {
+  border-top-right-radius: 10px;
+}
+
+#password {
+  border-bottom-left-radius: 10px;
+  border-right: 0.5px solid #e0e0e0;
+}
+
+#confirm-password {
+  border-bottom-right-radius: 10px;
+}
+
+/* Make the first and last name inputs share the same row */
+.input-row {
+  display: flex;
+}
+
+.input-row .input-container {
+  flex: 1; /* Ensure both inputs in the row are equally sized */
+  margin: 0; /* Remove margin between input containers */
+}
+
+.input-container input:focus {
+  outline: none;
+  border-bottom: 1px solid #483AB6; /* Accent color for focus to indicate activity */
+}
+
+/* Birth Date Styling */
+.birth-date-container {
+  position: relative;
+  margin-top: 20px; /* Add space above birth date input */
+  text-align: left;
+}
+
+.birth-date-container input {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border: 1px solid #e0e0e0; /* Add border to birth date input */
+  border-radius: 10px; /* Rounded corners for birth date input */
+  background-color: #ffffff;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* Center the button */
+.submit-button {
+  display: block;  /* Ensures the button takes up the full width */
+  margin: 20px auto;  /* Center the button horizontally */
+  padding: 15px;
+  background-color: #483AB6; /* Accent color */
+  color: white;
+  border: none;
+  border-radius: 12px; /* Rounded button for consistent design */
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.3s ease; /* Add transition for smooth scaling */
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #3b329c;
+  transform: scale(0.95); /* Shrink the button to 95% of its original size */
+}
+
+.signup-link {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.signup-link a {
+  color: #483AB6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Right Section (Illustration) */
+.register-right {
+  background: linear-gradient(-145deg, #483AB6 25%, #d1cdb6 100%);
+  text-align: center;
+  justify-content: center;
+  padding: 50px;
+}
+
+.closing-remark {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center spinner and text vertically */
+}
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 16px; /* Adjusted size to be proportional with text */
+  height: 16px; /* Adjusted size to be proportional with text */
+  margin-right: 8px; /* Space between spinner and text */
+  color: #ffffff; /* Set to white color for consistency */
+}
+
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 8px 8px; /* Adjusted to match the new size */
+}
+
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 3.6px; /* Adjusted size to match the smaller spinner */
+  height: 3.6px; /* Adjusted size to match the smaller spinner */
+  border-radius: 50%;
+  background: currentColor; /* Matches color of spinner */
+  margin: -1.8px 0 0 -1.8px; /* Adjusted for smaller size centering */
+}
+
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 12.5px;
+  left: 12.5px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 13.7px;
+  left: 11px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 14.8px;
+  left: 9px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 15px;
+  left: 8px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 14.8px;
+  left: 6.5px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 13.7px;
+  left: 5px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 12.5px;
+  left: 3.5px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 11px;
+  left: 3px;
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+  }
+
+  .register-left, .register-right {
+    flex: 1 100%;
+  }
+}

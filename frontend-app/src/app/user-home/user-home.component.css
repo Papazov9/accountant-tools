@@ -1,0 +1,57 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arbutus', sans-serif;
+  background-color: #FFFFFF;
+  color: #483AB6;
+}
+
+.user-home-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Dashboard Content Styling */
+.dashboard-content {
+  flex-grow: 1;
+  padding: 40px;
+  background-color: #eaecff; /* Light Dirty White */
+  overflow: auto; /* Ensure scroll if content is larger than view */
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.dashboard-header p {
+  font-size: 18px;
+  color: #7e7e7e;
+}
+
+.metrics-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.metric-card {
+  background-color: #FFFFFF;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.metric-card h2 {
+  font-size: 24px;
+  color: #483AB6;
+  margin-bottom: 10px;
+}
+
+.metric-value {
+  font-size: 40px;
+  font-weight: bold;
+  color: #483AB6;
+}

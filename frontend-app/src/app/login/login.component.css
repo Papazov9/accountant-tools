@@ -13,6 +13,13 @@ body, html {
   height: 100vh;
 }
 
+.error-message {
+  color: #da4f4f; /* Error color */
+  margin-bottom: 10px; /* Space between error message and input fields */
+  font-weight: bold; /* Make the error message stand out */
+  font-size: 16px; /* Adjust font size as needed */
+}
+
 .login-left, .login-right {
   flex: 1;
   display: flex;
@@ -82,6 +89,7 @@ body, html {
   font-size: 16px;
   cursor: pointer;
   font-weight: bold;
+  position: relative; /* Added for correct positioning */
 }
 
 .custom-checkbox label::before {
@@ -93,21 +101,20 @@ body, html {
   background-color: #e0e0e0;
   margin-right: 10px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
 }
 
 .custom-checkbox input[type="checkbox"]:checked + label::before {
-  background-color: #483AB6; /* Accent color */
-  box-shadow: inset 0px 0px 0px 2px white;
+  background-color: #483AB6; /* Full purple background when checked */
+  box-shadow: none; /* Remove the white border completely */
 }
 
 .custom-checkbox input[type="checkbox"]:checked + label::after {
   content: "✔";
   color: white;
-  font-size: 14px;
+  font-size: 17px;
   position: absolute;
-  left: 4px; /* Adjust the horizontal position */
-  top: 0px; /* Adjust the vertical position */
+  left: 3px; /* Adjust the horizontal position to keep centered */
+  top: 2px;  /* Adjust the vertical position to keep centered */
   line-height: 20px; /* Center the checkmark vertically */
 }
 
@@ -118,6 +125,103 @@ body, html {
 .forgot-password a {
   color: #483AB6;
   text-decoration: none;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center spinner and text vertically */
+}
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 16px; /* Adjusted size to be proportional with text */
+  height: 16px; /* Adjusted size to be proportional with text */
+  margin-right: 8px; /* Space between spinner and text */
+  color: #ffffff; /* Set to white color for consistency */
+}
+
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 8px 8px; /* Adjusted to match the new size */
+}
+
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 3.6px; /* Adjusted size to match the smaller spinner */
+  height: 3.6px; /* Adjusted size to match the smaller spinner */
+  border-radius: 50%;
+  background: currentColor; /* Matches color of spinner */
+  margin: -1.8px 0 0 -1.8px; /* Adjusted for smaller size centering */
+}
+
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 12.5px;
+  left: 12.5px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 13.7px;
+  left: 11px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 14.8px;
+  left: 9px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 15px;
+  left: 8px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 14.8px;
+  left: 6.5px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 13.7px;
+  left: 5px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 12.5px;
+  left: 3.5px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 11px;
+  left: 3px;
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Center the button */

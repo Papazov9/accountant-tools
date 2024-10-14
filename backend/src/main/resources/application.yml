@@ -1,6 +1,6 @@
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3307/accountantdb?createDatabaseIfNotExist=true
+        url: jdbc:mysql://localhost:3307/accountantdb?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8
         username: root
         password: rootpassword
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,3 +11,6 @@ spring:
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.MySQLDialect
+
+jwt:
+    secret: 3Fj8pD6xRv9nT6yUz4wA9hXrQ2bK7jL5

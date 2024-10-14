@@ -1,0 +1,122 @@
+/* Side Navigation Container */
+.side-nav-container {
+  position: relative;
+  background-color: #483AB6;
+  color: #FFFFFF;
+  width: 240px;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start; /* Align elements to the start horizontally for a uniform left edge */
+}
+
+.company-logo-container {
+  position: absolute;
+  top: 20px; /* Set to leave space at the top */
+  display: flex; /* Use Flexbox to align items horizontally */
+  align-items: center; /* Align items vertically in the center */
+  gap: 5px;
+  text-align: center;
+}
+
+.company-logo-img {
+  height: 40px;
+  width: 40px;
+  padding-left: 10px;
+}
+
+.company-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 17px;
+}
+
+/* Profile Section */
+.profile-container {
+  margin-top: 120px; /* Maintain space from the logo */
+  text-align: center;
+  color: #FFFFFF; /* Keep text white for contrast */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align the icon and text */
+}
+
+.profile-container i {
+  font-size: 60px; /* Slightly smaller icon size */
+  color: #d1cdb6; /* Set to a vibrant complementary color */
+}
+
+.profile-name {
+  font-size: 20px;
+  /*font-weight: bold;*/
+  margin-bottom: 5px;
+}
+
+.profile-role {
+  font-size: 14px;
+  color: #d1cdb6; /* Lighter text color for the role */
+}
+
+/* Navigation Links Styling */
+.side-nav-links {
+  margin-top: 50px;
+  list-style-type: none;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.side-nav-links li {
+  margin: 15px 0;
+}
+
+.side-nav-links a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  padding-left: 15px; /* Consistent padding for all links */
+  transition: color 0.3s;
+  width: 100%;
+}
+
+.side-nav-links a:hover {
+  color: #d1cdb6;
+}
+
+.side-nav-links i {
+  font-size: 20px; /* Ensure all icons are the same size */
+}
+
+/* Logout Section Styling */
+.logout-container {
+  margin-top: auto;
+  width: 100%; /* Take full width to ensure left alignment with other links */
+}
+
+.logout-button {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between icon and text */
+  padding-left: 10px; /* Align with other nav links */
+  transition: color 0.3s;
+  width: 100%; /* Take full width to match the alignment of other links */
+}
+
+.logout-button:hover {
+  color: #d1cdb6;
+}
+
+.logout-button i {
+  font-size: 20px; /* Same size as other icons to maintain consistency */
+}
