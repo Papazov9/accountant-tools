@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +26,7 @@ public class FileService {
     private final UserRepository userRepository;
     private final ComparisonRepository comparisonRepository;
     private final ComparisonResultRepository comparisonResultRepository;
+    private final MetricsService metricsService;
 
     public ByteArrayOutputStream processFiles(String username, List<MultipartFile> csvFiles, List<MultipartFile> txtFiles) throws IOException {
         String batchId = UUID.randomUUID().toString();
@@ -59,6 +60,7 @@ public class FileService {
             }
         } catch (RuntimeException e) {
             comparison.setStatus("FAILED");
+            metricsService.updateMetricsAfterComparison(user, false, 0);
             throw new RuntimeException(e);
         }
         List<ComparisonResult> results = InvoiceComparisonUtil.compareInvoicesAndStoreResults(csvRecords, invoiceRecords);
@@ -68,6 +70,9 @@ public class FileService {
         comparison.setStatus("COMPLETED");
         comparisonRepository.save(comparison);
 
+        AtomicLong mismatches = new AtomicLong();
+        results.forEach(c -> mismatches.addAndGet(c.getMismatchedFields().size()));
+        metricsService.updateMetricsAfterComparison(user, true, mismatches.get());
         return XlsxWriterUtil.generateComparisonReport(results);
     }
 

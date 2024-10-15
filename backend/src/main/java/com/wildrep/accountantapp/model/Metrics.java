@@ -23,17 +23,14 @@ public class Metrics {
     private User user;
 
     @Column(name = "total_comparisons", nullable = false)
-    private int totalComparisons;
+    private long totalComparisons;
 
     @Column(name = "successful_comparisons", nullable = false)
-    private int successfulComparisons;
+    private long successfulComparisons;
 
     @Column(name = "failed_comparisons", nullable = false)
-    private int failedComparisons;
+    private long failedComparisons;
 
     @Column(name = "total_mismatches", nullable = false)
-    private int totalMismatches;
-
-    @Column(name = "remaining_comparisons", nullable = false)
-    private int remainingComparisons;
+    private long totalMismatches;
 }

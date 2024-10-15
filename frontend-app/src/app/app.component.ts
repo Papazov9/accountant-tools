@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet} from "@angular/router";
 import {LoadingService} from "./services/loading.service";
@@ -29,17 +29,20 @@ export class AppComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private sideBarService: SidebarService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private cdr: ChangeDetectorRef
   ) {
-    this.loadingService.loadingOverlay$.subscribe((isLoading) => {
-      this.isLoading = isLoading;
-    });
   }
 
   ngOnInit(): void {
     // Subscribe to sidebar service to keep the sidebar state updated
+    this.loadingService.loadingOverlay$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+      this.cdr.detectChanges();
+    });
     this.sideBarService.sidebarState$.subscribe(isOpen => {
       this.isNavOpen = isOpen;
+      this.cdr.detectChanges();
     });
 
     // Set sidebar open or closed depending on screen size
@@ -53,6 +56,7 @@ export class AppComponent implements OnInit {
     } else {
       this.sideBarService.openSidebar(); // Open sidebar on desktop screens
     }
+    this.cdr.detectChanges();
   }
 
   isLoggedIn(): boolean {
@@ -61,5 +65,6 @@ export class AppComponent implements OnInit {
 
   toggleSideNav(): void {
     this.sideBarService.toggleSidebar();
+    this.cdr.detectChanges();
   }
 }

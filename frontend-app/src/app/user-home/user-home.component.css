@@ -11,12 +11,11 @@ body, html {
   height: 100vh;
 }
 
-/* Dashboard Content Styling */
 .dashboard-content {
   flex-grow: 1;
   padding: 40px;
-  background-color: #eaecff; /* Light Dirty White */
-  overflow: auto; /* Ensure scroll if content is larger than view */
+  background-color: #eaecff;
+  overflow: auto;
 }
 
 .dashboard-header h1 {
@@ -54,4 +53,24 @@ body, html {
   font-size: 40px;
   font-weight: bold;
   color: #483AB6;
+}
+
+.graph-section {
+  width: 100%;
+  height: 400px; /* Adjust height as necessary */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-data-message {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #7e7e7e;
+}
+
+@media (max-width: 768px) {
+  .metrics-container {
+    flex-direction: column;
+  }
 }

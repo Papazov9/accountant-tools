@@ -55,6 +55,7 @@ public class UserService {
 
         User user = User.builder()
                 .username(registerRequest.username())
+                .comparisonCount(1)
                 .email(registerRequest.email())
                 .password(passwordEncoder.encode(registerRequest.password()))
                 .firstName(registerRequest.firstName())

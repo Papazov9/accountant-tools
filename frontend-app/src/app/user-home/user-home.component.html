@@ -5,13 +5,54 @@
       <p>Here is a quick summary of your invoice comparisons.</p>
     </header>
 
-    <div class="metrics-container">
-      <!-- Metrics, Graphs, and Other Widgets -->
-      <div class="metric-card">
-        <h2>Total Comparisons</h2>
-        <span class="metric-value">45</span>
+    <!-- Metrics Section -->
+    <div *ngIf="metrics; else noMetrics">
+      <div class="metrics-container">
+        <!-- Total Comparisons Card -->
+        <div class="metric-card">
+          <h2>Total Comparisons</h2>
+          <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.totalComparisons }}</span>
+        </div>
+
+        <!-- Successful Comparisons Card -->
+        <div class="metric-card">
+          <h2>Successful Comparisons</h2>
+          <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.successfulComparisons }}</span>
+        </div>
+
+        <!-- Failed Comparisons Card -->
+        <div class="metric-card">
+          <h2>Failed Comparisons</h2>
+          <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.failedComparisons }}</span>
+        </div>
+
+        <!-- Total Mismatches Card -->
+        <div class="metric-card">
+          <h2>Total Mismatches</h2>
+          <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.totalMismatches }}</span>
+        </div>
       </div>
-      <!-- Add other metrics similarly -->
+
+      <!-- Graph Section for Mismatch Trends -->
+      <div class="graph-section" *ngIf="!metrics.empty">
+        <canvas baseChart
+                [datasets]="mismatchData"
+                [labels]="mismatchLabels"
+                [options]="chartOptions"
+                [legend]="true"
+                chartType="line">
+        </canvas>
+      </div>
+
+      <!-- No Data Message for Graph -->
+      <div class="no-data-message" *ngIf="metrics.empty">
+        <p>No data available for graph.</p>
+      </div>
     </div>
+
+    <!-- Fallback when no metrics available -->
+    <ng-template #noMetrics>
+      <p>No metrics available yet.</p>
+    </ng-template>
   </main>
 </div>
