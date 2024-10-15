@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, catchError, map, Observable, of, tap, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {jwtDecode, JwtPayload} from "jwt-decode";
@@ -49,11 +49,28 @@ export class AuthService {
   private API_URL = "http://localhost:8080/api/auth";
   public TOKEN_KEY = "authToken";
   private currentUser: BehaviorSubject<CurrentUser | null>;
+  private lastActivityTime: number;
 
   constructor(private http: HttpClient, private router: Router) {
     const token = this.getToken();
     const user = token ? this.decodeToken(token) : null;
     this.currentUser = new BehaviorSubject<CurrentUser | null>(user);
+    this.trackUserActivity();
+    this.lastActivityTime = this.getLastActivityTime();
+  }
+
+  private trackUserActivity() {
+    ['click', 'keydown', 'mousemove'].forEach(event => {
+      window.addEventListener(event, () => this.updateLastActivity());
+    });
+  }
+
+  private updateLastActivity() {
+    this.lastActivityTime = Date.now();
+  }
+
+  getLastActivityTime() {
+    return this.lastActivityTime;
   }
 
   get currentUser$(): Observable<CurrentUser | null> {
@@ -100,9 +117,26 @@ export class AuthService {
         username: decodedToken.sub,
         roles: decodedToken.roles || []
       };
-    }catch (error) {
+    } catch (error) {
       console.error("Invalid JWT token", error);
       return null;
     }
+  }
+
+  refreshToken(): Observable<string> {
+    const currentUser =   this.currentUser.getValue();
+    let username: string;
+    if (currentUser) {
+      username = currentUser.username;
+    }else {
+      this.logout();
+      return of("");
+    }
+    return this.http.post(`${this.API_URL}/refresh`, {username}, {responseType: "text"}).pipe(
+      catchError((error) => {
+        this.logout();
+        return throwError(() => new Error('Token refresh failed, please login again.'));
+      })
+    )
   }
 }

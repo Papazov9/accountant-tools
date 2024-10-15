@@ -38,7 +38,7 @@ export class InvoiceComparisonService {
     this.loadingService.showOverlay();
     return this.http.post(this.API_URL, formData, {
       reportProgress: true,
-      observe: 'events',
+      observe: 'response',
       responseType: 'arraybuffer'
     }).pipe(
       tap((event: HttpEvent<any>) => {

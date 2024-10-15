@@ -27,9 +27,10 @@ public class FileService {
     private final ComparisonRepository comparisonRepository;
     private final ComparisonResultRepository comparisonResultRepository;
 
-    public ByteArrayOutputStream  processFiles(String username, List<MultipartFile> csvFiles, List<MultipartFile> txtFiles) throws IOException {
+    public ByteArrayOutputStream processFiles(String username, List<MultipartFile> csvFiles, List<MultipartFile> txtFiles) throws IOException {
         String batchId = UUID.randomUUID().toString();
-        List<ComparisonResult> results = new ArrayList<>();
+        List<CSVInvoiceRecord> csvRecords = new ArrayList<>();
+        List<InvoiceRecord> invoiceRecords = new ArrayList<>();
 
 
         User user = this.userRepository
@@ -43,23 +44,24 @@ public class FileService {
                 .status("IN_PROGRESS")
                 .build();
         this.comparisonRepository.saveAndFlush(comparison);
+        try {
+            for (int i = 0; i < csvFiles.size(); i++) {
+                MultipartFile csvFile = csvFiles.get(i);
+                MultipartFile txtFile = txtFiles.get(i);
 
-        for (int i = 0; i < csvFiles.size(); i++) {
-            MultipartFile csvFile = csvFiles.get(i);
-            MultipartFile txtFile = txtFiles.get(i);
 
-            try {
                 List<CSVInvoiceRecord> csvInvoiceRecords = FileServiceUtil.parseCsvFile(csvFile);
                 List<InvoiceRecord> txtRecords = FileServiceUtil.parseTxtFile(txtFile);
                 csvRecordRepository.saveAllAndFlush(csvInvoiceRecords);
                 invoiceRecordRepository.saveAllAndFlush(txtRecords);
-                List<ComparisonResult> partition = InvoiceComparisonUtil.compareInvoicesAndStoreResults(csvInvoiceRecords, txtRecords);
-                results.addAll(partition);
-            }catch (RuntimeException e) {
-                comparison.setStatus("FAILED");
-                throw new RuntimeException(e);
+                csvRecords.addAll(csvInvoiceRecords);
+                invoiceRecords.addAll(txtRecords);
             }
+        } catch (RuntimeException e) {
+            comparison.setStatus("FAILED");
+            throw new RuntimeException(e);
         }
+        List<ComparisonResult> results = InvoiceComparisonUtil.compareInvoicesAndStoreResults(csvRecords, invoiceRecords);
         this.comparisonResultRepository.saveAllAndFlush(results);
         comparison.setComparisonResults(results);
         this.comparisonRepository.saveAndFlush(comparison);

@@ -44,9 +44,8 @@ public class FileUploadController {
                 ByteArrayOutputStream reportStream = fileService.processFiles(username, csvFiles, txtFiles);
 
 
-                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String timestamp = new SimpleDateFormat("dd-MM-yyyy_HH\\:mm\\:ss").format(new Date());
                 String filename = "comparison_report_" + timestamp + ".xlsx";
-                saveToLocalFile(reportStream, filename);
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
@@ -82,7 +81,7 @@ public class FileUploadController {
 
 
     private void saveToLocalFile(ByteArrayOutputStream reportStream, String filePath) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream("D:\\opt\\app\\comparison-reports" + filePath)) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream("C:\\opt\\app\\comparison-reports\\" + filePath)) {
             reportStream.writeTo(fileOutputStream);
         } catch (IOException e) {
             throw new RuntimeException("Error saving report to local file", e);

@@ -54,10 +54,11 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOrigins(List.of("http://localhost:4200"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setExposedHeaders(List.of("Authorization"));
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
         config.setAllowCredentials(true);
+        config.addExposedHeader("Authorization");
+        config.addExposedHeader("Content-Disposition");
         config.setMaxAge(3600L);
 
         source.registerCorsConfiguration("/**", config);
@@ -69,10 +70,11 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOrigins(List.of("http://localhost:4200"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
         config.setAllowCredentials(true);
-        config.setExposedHeaders(List.of("Authorization"));
+        config.addExposedHeader("Authorization");
+        config.addExposedHeader("Content-Disposition");
         config.setMaxAge(3600L);
 
         source.registerCorsConfiguration("/**", config);

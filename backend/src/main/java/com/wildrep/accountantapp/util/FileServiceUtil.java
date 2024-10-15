@@ -25,7 +25,7 @@ public class FileServiceUtil {
 
     private final CSVRecordRepository csvRecordRepository;
 
-    private static final String FULL_TXT_REGEX = "(BG\\d{9})\\s+(\\d{6,7})\\s+(?:\\d\\s+)?(\\d+)(0[1-3])(\\d{10})\\s+(\\d{2}/\\d{2}/\\d{4})((?:BG)?\\d{9})\\s+(.+?)\\s{2,}\\s+([\\p{L}\\s\\-_=+]+)\\s{2,}\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})";
+    private static final String FULL_TXT_REGEX = "(BG\\d{9})\\s+(\\d{6,7})\\s+(?:\\d\\s+)?(\\d+)(0[1-3])(\\d{10})\\s+(\\d{2}\\/\\d{2}\\/\\d{4})((?:BG)?\\d{9})\\s+(.+?)\\s{2,}\\s+([\\p{L}\\s\\-_=+]+)\\s{2,}\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})";
 
     private static final String BULSTAT_REGEX = "([A-Z]{2}\\d{9}|\\d{9})";
     private static final Set<String> POSSIBLE_DOC_TYPES = Set.of("01", "02", "03");
@@ -108,7 +108,14 @@ public class FileServiceUtil {
                     Double vatAmount = Double.parseDouble(matcher.group(12).trim());
                     Double totalAmount = calculateTXTAmount(matcher);
                     InvoiceRecordId invoiceRecordId = new InvoiceRecordId(bulstat, docType, docNumber);
-                    InvoiceRecord invoiceRecord = InvoiceRecord.builder().id(invoiceRecordId).companyName(companyName).accountingPeriod(accountingPeriod).issueDate(DateParser.parseDate(matcher.group(6).trim())).totalAmount(totalAmount).vatAmount(vatAmount).build();
+                    InvoiceRecord invoiceRecord = InvoiceRecord
+                            .builder()
+                            .id(invoiceRecordId)
+                            .companyName(companyName)
+                            .accountingPeriod(accountingPeriod)
+                            .issueDate(DateParser.parseDate(matcher.group(6).trim()))
+                            .totalAmount(totalAmount)
+                            .vatAmount(vatAmount).build();
                     txtResults.add(invoiceRecord);
                 }
             }

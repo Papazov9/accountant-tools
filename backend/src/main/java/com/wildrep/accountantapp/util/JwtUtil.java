@@ -1,5 +1,6 @@
 package com.wildrep.accountantapp.util;
 
+import com.wildrep.accountantapp.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -38,7 +39,7 @@ public class JwtUtil {
                 .setSubject(authentication.getName())
                 .addClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) // Token expiration (10 hours)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -66,5 +67,20 @@ public class JwtUtil {
                 .getExpiration();
 
         return expiration.before(new Date());
+    }
+
+    public String generateNewToken(User user) {
+
+        Set<String> roles = user.getRoles().stream().map(r -> r.getRoleName().name()).collect(Collectors.toSet());
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", roles);
+
+        return Jwts.builder()
+                .setSubject(user.getUsername())
+                .addClaims(claims)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 }

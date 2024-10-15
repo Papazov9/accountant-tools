@@ -13,8 +13,8 @@
 
   <!-- Upload Section -->
   <div class="upload-section">
-    <div class="dropbox-container">
-      <label for="csv-upload" class="dropbox-label">Upload CSV Files</label>
+    <label for="csv-upload" class="dropbox-container">
+      <span class="dropbox-label">Upload CSV Files</span>
       <input type="file" id="csv-upload" accept=".csv" (change)="onCsvFileSelect($event)" multiple>
       <div class="uploaded-files">
         <p *ngIf="csvFiles.length === 0">No files selected.</p>
@@ -22,10 +22,10 @@
           <li *ngFor="let file of csvFiles">{{ file.name }} ({{ file.size }} KB)</li>
         </ul>
       </div>
-    </div>
+    </label>
 
-    <div class="dropbox-container">
-      <label for="txt-upload" class="dropbox-label">Upload TXT Files</label>
+    <label for="txt-upload" class="dropbox-container">
+      <span class="dropbox-label">Upload TXT Files</span>
       <input type="file" id="txt-upload" accept=".txt" (change)="onTxtFileSelect($event)" multiple>
       <div class="uploaded-files">
         <p *ngIf="txtFiles.length === 0">No files selected.</p>
@@ -33,24 +33,9 @@
           <li *ngFor="let file of txtFiles">{{ file.name }} ({{ file.size }} KB)</li>
         </ul>
       </div>
-    </div>
+    </label>
   </div>
 
-  <!-- Progress Bar for File Upload -->
-  <div *ngIf="uploadProgress > 0">
-    <p>File Upload Progress: {{ uploadProgress }}%</p>
-    <div class="progress-bar">
-      <div class="progress" [style.width.%]="uploadProgress"></div>
-    </div>
-  </div>
-
-  <!-- Processing Progress Bar -->
-  <div *ngIf="isProcessing">
-    <p>Processing Files: {{ processingProgress }}%</p>
-    <div class="progress-bar">
-      <div class="progress" [style.width.%]="processingProgress"></div>
-    </div>
-  </div>
 
   <!-- Upload Button -->
   <button class="upload-button" (click)="uploadFiles()">Upload & Compare</button>

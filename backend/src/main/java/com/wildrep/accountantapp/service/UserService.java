@@ -92,4 +92,10 @@ public class UserService {
 
         return new DashboardUserResponse(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getBirthDate(), "User loaded successfully!");
     }
+
+    public String createNewToken(String username) {
+        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
+
+     return this.jwtUtil.generateNewToken(user);
+    }
 }

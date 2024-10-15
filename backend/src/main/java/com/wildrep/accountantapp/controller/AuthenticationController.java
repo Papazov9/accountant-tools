@@ -47,4 +47,15 @@ public class AuthenticationController {
         }
 
     }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<String> refreshToken(String username) {
+        try{
+        String newToken = userService.createNewToken(username);
+
+        return ResponseEntity.ok(newToken);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Token");
+        }
+    }
 }

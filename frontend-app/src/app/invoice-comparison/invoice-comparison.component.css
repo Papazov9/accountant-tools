@@ -1,5 +1,5 @@
 .invoice-comparison-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
@@ -28,12 +28,15 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
-  gap: 20px; /* Add space between the boxes */
+  gap: 20px;
+  max-width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
 .upload-section .dropbox-container {
-  width: 48%;
-  height: 200px;  /* Give the boxes a square-like shape */
+  width: 45%; /* Adjusted to 48% to create spacing between the boxes */
+  height: 250px;
   padding: 20px;
   border: 2px dashed #483AB6;
   border-radius: 10px;
@@ -42,8 +45,12 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Space between label and file list */
+  justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+}
+.dropbox-container {
+  margin-top: 20px;
 }
 
 .upload-section .dropbox-container:hover {

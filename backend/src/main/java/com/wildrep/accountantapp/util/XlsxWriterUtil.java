@@ -29,6 +29,7 @@ public class XlsxWriterUtil {
 
             CellStyle defaultStyle = createDefaultStyle(workbook);
             CellStyle redTextStyle = createRedTextStyle(workbook);
+            CellStyle headerStyle = createHeaderStyle(workbook);
 
             // Initialize row numbers for each sheet
             int allRecordsRowNum = 0;
@@ -38,11 +39,11 @@ public class XlsxWriterUtil {
             int duplicateRowNum = 0;
 
             // Create headers for all sheets
-            createHeaderRowForDetailedRecords(workbook, allRecordsSheet, allRecordsRowNum++);
-            createHeaderRowForDetailedRecords(workbook, mismatchedSheet, mismatchedRowNum++);
-            createHeaderRowForDetailedRecords(workbook, missingInCsvSheet, missingInCsvRowNum++);
-            createHeaderRowForDetailedRecords(workbook, missingInTxtSheet, missingInTxtRowNum++);
-            createHeaderRowForDetailedRecords(workbook, duplicateSheet, duplicateRowNum++);
+            createHeaderRowForDetailedRecords(workbook, allRecordsSheet, allRecordsRowNum++, headerStyle);
+            createHeaderRowForDetailedRecords(workbook, mismatchedSheet, mismatchedRowNum++, headerStyle);
+            createHeaderRowForDetailedRecords(workbook, missingInCsvSheet, missingInCsvRowNum++, headerStyle);
+            createHeaderRowForDetailedRecords(workbook, missingInTxtSheet, missingInTxtRowNum++, headerStyle);
+            createHeaderRowForDetailedRecords(workbook, duplicateSheet, duplicateRowNum++, headerStyle);
 
             // Process each comparison result and write it to the appropriate sheet(s)
             for (ComparisonResult comparisonResult : comparisonResults) {
@@ -78,11 +79,10 @@ public class XlsxWriterUtil {
         }
     }
 
-    private static void createHeaderRowForDetailedRecords(Workbook workbook, Sheet sheet, int rowNum) {
+    private static void createHeaderRowForDetailedRecords(Workbook workbook, Sheet sheet, int rowNum, CellStyle headerStyle) {
         String[] headers = {"Field", "CSV Value", "TXT Value", "Matched"};
 
         Row headerRow = sheet.createRow(rowNum);
-        CellStyle headerStyle = createHeaderStyle(workbook);
 
         for (int i = 0; i < headers.length; i++) {
             Cell cell = headerRow.createCell(i + OFFSET);
