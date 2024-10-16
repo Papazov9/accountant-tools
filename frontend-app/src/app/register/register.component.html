@@ -2,44 +2,117 @@
   <div class="register-left">
     <div class="register-box">
       <div class="logo-container">
-        <img src="/assets/unparalled-high-resolution-logo-transparent.png" alt="Logo" class="register-logo" height="250" width="300"/>
+        <img src="/assets/unparalled-high-resolution-logo-transparent.png" alt="Logo" class="register-logo" height="250"
+             width="300"/>
       </div>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="input-row">
           <div class="input-container half">
-            <input id="first-name" type="text" formControlName="firstName" placeholder="First Name" required>
+            <input id="first-name" type="text" formControlName="firstName" placeholder="First Name"
+                   [ngClass]="{'invalid': isFieldInvalid('firstName')}" required>
           </div>
           <div class="input-container half">
-            <input id="last-name" type="text" formControlName="lastName" placeholder="Last Name" required>
+            <input id="last-name" type="text" formControlName="lastName" placeholder="Last Name"
+                   [ngClass]="{'invalid': isFieldInvalid('lastName')}" required>
           </div>
         </div>
 
         <div class="input-row">
           <div class="input-container half">
-            <input id="email" type="email" formControlName="email" placeholder="Email Address" required>
+            <input id="email" type="email" formControlName="email" placeholder="Email Address"
+                   [ngClass]="{'invalid': isFieldInvalid('email')}" required>
           </div>
           <div class="input-container half">
-            <input id="username" type="text" formControlName="username" placeholder="Username" required>
+            <input id="username" type="text" formControlName="username" placeholder="Username"
+                   [ngClass]="{'invalid': isFieldInvalid('username')}" required>
           </div>
         </div>
 
         <div class="input-row">
           <div class="input-container">
-            <input id="password" type="password" formControlName="password" placeholder="Choose Password" required>
+            <input id="password" type="password" formControlName="password" placeholder="Choose Password"
+                   [ngClass]="{'invalid': isFieldInvalid('password')}" (input)="onPasswordInput()" required>
+
+            <!-- Password Requirements List -->
+            <div class="password-requirements" *ngIf="showPasswordRequirements">
+              <p [ngClass]="{'valid': passwordErrors?.minLength, 'invalid': !passwordErrors?.minLength}">
+        <span class="requirement-icon">
+          <i
+            [ngClass]="{'fa-solid fa-x': !passwordErrors?.minLength, 'fa fa-check-circle': passwordErrors?.minLength}"></i>
+        </span>
+                Minimum 8 characters
+              </p>
+              <p [ngClass]="{'valid': passwordErrors?.hasUppercase, 'invalid': !passwordErrors?.hasUppercase}">
+        <span class="requirement-icon">
+          <i
+            [ngClass]="{'fa-solid fa-x': !passwordErrors?.hasUppercase, 'fa fa-check-circle': passwordErrors?.hasUppercase}"></i>
+        </span>
+                At least 1 uppercase letter
+              </p>
+              <p [ngClass]="{'valid': passwordErrors?.hasLowercase, 'invalid': !passwordErrors?.hasLowercase}">
+        <span class="requirement-icon">
+          <i
+            [ngClass]="{'fa-solid fa-x': !passwordErrors?.hasLowercase, 'fa fa-check-circle': passwordErrors?.hasLowercase}"></i>
+        </span>
+                At least 1 lowercase letter
+              </p>
+              <p [ngClass]="{'valid': passwordErrors?.hasNumber, 'invalid': !passwordErrors?.hasNumber}">
+        <span class="requirement-icon">
+          <i
+            [ngClass]="{'fa-solid fa-x': !passwordErrors?.hasNumber, 'fa fa-check-circle': passwordErrors?.hasNumber}"></i>
+        </span>
+                At least 1 number
+              </p>
+              <p [ngClass]="{'valid': passwordErrors?.hasSpecialChar, 'invalid': !passwordErrors?.hasSpecialChar}">
+        <span class="requirement-icon">
+          <i
+            [ngClass]="{'fa-solid fa-x': !passwordErrors?.hasSpecialChar, 'fa fa-check-circle': passwordErrors?.hasSpecialChar}"></i>
+        </span>
+                At least 1 special character
+              </p>
+            </div>
           </div>
           <div class="input-container">
-            <input id="confirm-password" type="password" formControlName="confirmPassword" placeholder="Confirm Password" required>
+            <input id="confirm-password" type="password" formControlName="confirmPassword"
+                   placeholder="Confirm Password" [ngClass]="{'invalid': isFieldInvalid('confirmPassword')}" required>
           </div>
         </div>
 
-        <div class="birth-date-container">
-          <input id="birth-date" type="date" formControlName="birthDate" placeholder="Birth Date" required>
+        <div class="radio-container" (click)="onGenderClick()">
+          <div class="radio-option">
+            <input id="gender-male" type="radio" formControlName="gender" value="male">
+            <label for="gender-male">
+              <span class="custom-radio"></span>
+              Male
+            </label>
+          </div>
+          <div class="radio-option">
+            <input id="gender-female" type="radio" formControlName="gender" value="female">
+            <label for="gender-female">
+              <span class="custom-radio"></span>
+              Female
+            </label>
+          </div>
         </div>
-        <button type="submit" class="submit-button" [disabled]="isLoading">
+
+        <button type="submit"
+                (click)="onSubmitButtonClick()"
+                class="submit-button"
+                [disabled]="!registerForm.valid || isLoading"
+                [ngClass]="{'enabled': registerForm.valid && isPasswordValid() && !isLoading}">
           <span *ngIf="!isLoading; else loadingTemplate">Create Account</span>
           <ng-template #loadingTemplate>
             <div class="loading-container">
-              <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+              <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
               <span>Loading...</span>
             </div>
           </ng-template>

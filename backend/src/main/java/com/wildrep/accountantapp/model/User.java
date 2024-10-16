@@ -1,5 +1,6 @@
 package com.wildrep.accountantapp.model;
 
+import com.wildrep.accountantapp.model.enums.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +39,7 @@ public class User {
     private String lastName;
 
     @Column(nullable = false)
-    private LocalDate birthDate;
+    private Gender gender;
 
     @ManyToOne
     @JoinColumn(name = "subscription_id")

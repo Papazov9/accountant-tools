@@ -8,6 +8,7 @@ import com.wildrep.accountantapp.model.Role;
 import com.wildrep.accountantapp.model.Subscription;
 import com.wildrep.accountantapp.model.User;
 import com.wildrep.accountantapp.model.dto.*;
+import com.wildrep.accountantapp.model.enums.Gender;
 import com.wildrep.accountantapp.model.enums.RoleEnum;
 import com.wildrep.accountantapp.model.enums.SubscriptionType;
 import com.wildrep.accountantapp.repo.RoleRepository;
@@ -42,10 +43,6 @@ public class UserService {
             throw new UserAlreadyExistsException(registerRequest.username());
         }
 
-        if (!registerRequest.password().equals(registerRequest.confirmPassword())) {
-            throw new PasswordsDontMatchException();
-        }
-
         Role role = this.roleRepository
                 .findByRoleName(RoleEnum.USER)
                 .orElseThrow(() -> new RoleDoesNotExist(RoleEnum.USER.name()));
@@ -60,7 +57,7 @@ public class UserService {
                 .password(passwordEncoder.encode(registerRequest.password()))
                 .firstName(registerRequest.firstName())
                 .lastName(registerRequest.lastName())
-                .birthDate(registerRequest.birthDate())
+                .gender(Gender.valueOf(registerRequest.gender().toUpperCase()))
                 .roles(Set.of(role))
                 .subscription(subscription)
                 .build();
@@ -91,7 +88,7 @@ public class UserService {
 
         User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
 
-        return new DashboardUserResponse(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getBirthDate(), "User loaded successfully!");
+        return new DashboardUserResponse(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getGender().name(), "User loaded successfully!");
     }
 
     public String createNewToken(String username) {

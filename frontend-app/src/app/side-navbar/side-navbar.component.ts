@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {Router, RouterLink} from "@angular/router";
-import {NgClass} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {UserService} from "../services/user.service";
 
 @Component({
@@ -9,7 +9,8 @@ import {UserService} from "../services/user.service";
   standalone: true,
   imports: [
     RouterLink,
-    NgClass
+    NgClass,
+    NgIf
   ],
   templateUrl: './side-navbar.component.html',
   styleUrls: ['./side-navbar.component.css']
@@ -28,5 +29,9 @@ export class SideNavbarComponent implements OnInit {
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  clickSub() {
+    console.log(this.profile)
   }
 }

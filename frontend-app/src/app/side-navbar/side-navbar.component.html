@@ -5,9 +5,16 @@
   </div>
 
   <div class="profile-container">
-    <i class="fa fa-user-circle fa-5x"></i>
+    <ng-container *ngIf="profile?.gender === 'MALE'; else femaleProfile">
+<!--      <i class="fa fa-male fa-5x"></i>-->
+      <img src="/assets/man-avatar-side-nav.png" alt="Profile image" class="profile-image"/>
+    </ng-container>
+    <ng-template #femaleProfile>
+<!--      <i class="fa fa-female fa-5x"></i>-->
+      <img src="/assets/woman-avatar-side-nav.png" alt="Profile image" class="profile-image" />
+    </ng-template>
     <h4 class="profile-name">{{ profile?.firstName }} {{ profile?.lastName }}</h4>
-    <span class="user-role">PRO</span>
+    <span class="user-role" (click)="clickSub()">PRO</span>
   </div>
   <nav>
     <ul class="side-nav-links">

@@ -8,7 +8,7 @@ export interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
-  birthDate: string;
+  gender: string;
 }
 
 export interface Metrics {

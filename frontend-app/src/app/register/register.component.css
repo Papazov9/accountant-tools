@@ -42,6 +42,10 @@ body, html {
   margin: 0; /* Remove all margin */
 }
 
+.input-container input.invalid {
+  border-color: red;
+}
+
 .input-container input {
   width: 100%;
   padding: 15px;
@@ -90,30 +94,115 @@ body, html {
   border-bottom: 1px solid #483AB6; /* Accent color for focus to indicate activity */
 }
 
-/* Birth Date Styling */
-.birth-date-container {
-  position: relative;
-  margin-top: 20px; /* Add space above birth date input */
-  text-align: left;
+.password-requirements {
+  margin-top: 10px;
+  text-align: left; /* Align text to the left */
+  padding-left: 10px; /* Add padding to align with input field */
 }
 
-.birth-date-container input {
-  width: 100%;
-  padding: 15px;
-  font-size: 16px;
-  border: 1px solid #e0e0e0; /* Add border to birth date input */
-  border-radius: 10px; /* Rounded corners for birth date input */
-  background-color: #ffffff;
-  box-sizing: border-box;
-  transition: all 0.3s ease;
+.password-requirements p {
+  font-size: 14px;
+  display: flex;
+  align-items: center; /* Align icon and text vertically */
 }
+
+.password-requirements p.invalid {
+  color: red;
+}
+
+.password-requirements p.valid {
+  color: green;
+}
+
+/* Icon styling */
+.requirement-icon {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.requirement-icon .fa {
+  font-size: 16px; /* Adjust icon size */
+}
+
+/* X and checkmark icon colors */
+.fa-x {
+  color: red;
+}
+
+.fa-check-circle {
+  color: green;
+}
+
+.radio-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.radio-option {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-option input[type="radio"] {
+  display: none; /* Hide the default radio button */
+}
+
+.radio-option label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radio-option label .custom-radio {
+  height: 20px;
+  width: 20px;
+  border: 2px solid #483AB6; /* Border color */
+  border-radius: 50%;
+  position: relative;
+  margin-right: 8px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.radio-option input[type="radio"]:checked + label .custom-radio {
+  background-color: #483AB6; /* Purple color when checked */
+  border-color: #483AB6; /* Change border color */
+}
+
+.radio-option input[type="radio"]:checked + label .custom-radio:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 10px;
+  width: 10px;
+  background-color: white; /* White dot inside when checked */
+  border-radius: 50%;
+}
+
+.radio-option label {
+  font-size: 16px;
+  color: #483AB6; /* Purple accent color */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .radio-container {
+    flex-direction: column;
+  }
+}
+
 
 /* Center the button */
 .submit-button {
   display: block;  /* Ensures the button takes up the full width */
   margin: 20px auto;  /* Center the button horizontally */
   padding: 15px;
-  background-color: #483AB6; /* Accent color */
+  background-color: #e0e0e0; /* Accent color */
   color: white;
   border: none;
   border-radius: 12px; /* Rounded button for consistent design */
@@ -121,11 +210,41 @@ body, html {
   font-size: 18px;
   transition: background-color 0.3s, transform 0.3s ease; /* Add transition for smooth scaling */
   width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
-.submit-button:hover {
+.submit-button.enabled {
+  background-color: #483AB6;
+  cursor: pointer;
+}
+
+.submit-button.enabled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
   background-color: #3b329c;
-  transform: scale(0.95); /* Shrink the button to 95% of its original size */
+  transition: width 0.5s ease-in-out;
+  z-index: -1;
+}
+
+.submit-button.enabled:hover::before {
+  width: 100%;
+}
+
+.submit-button.enabled:hover {
+  color: white;
+}
+
+.submit-button.enabled:hover {
+  transform: scale(0.95);
+}
+
+.submit-button.enabled span {
+  z-index: 1; /* Ensure the text remains visible over the animation */
 }
 
 .signup-link {

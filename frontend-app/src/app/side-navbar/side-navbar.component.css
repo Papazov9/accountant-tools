@@ -9,67 +9,68 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start; /* Align elements to the start horizontally for a uniform left edge */
+  align-items: center; /* Center elements horizontally */
 }
 
 .company-logo-container {
-  position: absolute;
-  top: 20px; /* Set to leave space at the top */
-  display: flex; /* Use Flexbox to align items horizontally */
-  align-items: center; /* Align items vertically in the center */
+  display: flex;
+  align-items: center;
   gap: 5px;
   text-align: center;
+  margin-bottom: 15px; /* Reduced margin */
 }
 
 .company-logo-img {
   height: 40px;
   width: 40px;
-  padding-left: 10px;
 }
 
 .company-name {
   font-size: 18px;
   font-weight: bold;
+  margin-left: 3px;
   margin-top: 17px;
 }
 
 /* Profile Section */
 .profile-container {
-  margin-top: 120px; /* Maintain space from the logo */
+  margin-top: 15px; /* Reduced space between company and profile */
   text-align: center;
-  color: #FFFFFF; /* Keep text white for contrast */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center-align the icon and text */
+  align-items: center; /* Center profile content */
+  gap: 5px; /* Reduced gap between elements */
+  margin-bottom: 4rem;
 }
 
-.profile-container i {
-  font-size: 60px; /* Slightly smaller icon size */
-  color: #d1cdb6; /* Set to a vibrant complementary color */
+.profile-image {
+  width: 140px; /* Adjusted to be smaller */
+  height: auto;
 }
 
 .profile-name {
-  font-size: 20px;
-  /*font-weight: bold;*/
+  font-size: 18px;
+  margin-top: 3px;
   margin-bottom: 5px;
 }
 
-.profile-role {
-  font-size: 14px;
-  color: #d1cdb6; /* Lighter text color for the role */
+.user-role {
+  font-size: 12px;
+  color: #d1cdb6;
 }
 
 /* Navigation Links Styling */
 .side-nav-links {
-  margin-top: 50px;
+  margin-top: 15px; /* Adjusted spacing */
   list-style-type: none;
   padding: 0;
-  flex-grow: 1;
+  width: 100%;
 }
 
 .side-nav-links li {
-  margin: 15px 0;
+  margin: 10px 0;
+  width: 100%; /* Make sure li element takes the full width */
+  display: block;
 }
 
 .side-nav-links a {
@@ -79,23 +80,26 @@
   display: flex;
   align-items: center;
   gap: 10px; /* Space between icon and text */
-  padding-left: 15px; /* Consistent padding for all links */
-  transition: color 0.3s;
+  padding: 12px 15px; /* Increased padding for better clickability */
   width: 100%;
+  background-color: transparent;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.side-nav-links a:hover {
-  color: #d1cdb6;
+.side-nav-links li:hover {
+  background-color: #6152c7; /* Lighter background color on hover */
 }
 
 .side-nav-links i {
-  font-size: 20px; /* Ensure all icons are the same size */
+  font-size: 20px;
 }
 
 /* Logout Section Styling */
 .logout-container {
   margin-top: auto;
-  width: 100%; /* Take full width to ensure left alignment with other links */
+  width: 100%;
+  padding-top: 20px;
 }
 
 .logout-button {
@@ -107,10 +111,10 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 15px; /* Space between icon and text */
-  padding-left: 10px; /* Align with other nav links */
+  gap: 10px;
+  padding-left: 10px;
   transition: color 0.3s;
-  width: 100%; /* Take full width to match the alignment of other links */
+  width: 100%;
 }
 
 .logout-button:hover {
@@ -118,5 +122,27 @@
 }
 
 .logout-button i {
-  font-size: 20px; /* Same size as other icons to maintain consistency */
+  font-size: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .side-nav-container {
+    width: 100%;
+    height: auto;
+    padding-bottom: 10px;
+  }
+
+  .profile-container {
+    padding: 15px 0;
+  }
+
+  .side-nav-links {
+    margin-top: 15px;
+  }
+
+  .logout-container {
+    margin-top: auto;
+    padding-top: 10px;
+  }
 }
