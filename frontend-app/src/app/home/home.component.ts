@@ -3,6 +3,7 @@ import {StepsSectionComponent} from "./steps-section/steps-section.component";
 import {OverviewSectionComponent} from "./overview-section/overview-section.component";
 import {WelcomeSectionComponent} from "./welcome-section/welcome-section.component";
 import {CommonModule} from "@angular/common";
+import {PricingSectionComponent} from "./pricing-section/pricing-section.component";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ import {CommonModule} from "@angular/common";
     CommonModule,
     WelcomeSectionComponent,
     OverviewSectionComponent,
-    StepsSectionComponent
+    StepsSectionComponent,
+    PricingSectionComponent
   ]
 })
 export class HomeComponent {

@@ -26,4 +26,17 @@ export class NavbarComponent {
     this.authService.logout();
     this.router.navigate(['/home']);
   }
+
+  scrollTo(event: MouseEvent) {
+    event.preventDefault();
+
+    const targetedSection = (event.target as HTMLElement).getAttribute('data-section');
+
+    const selectionElement = document.getElementById(`${targetedSection}`);
+
+    if (selectionElement) {
+      selectionElement.scrollIntoView({behavior: 'smooth'});
+    }
+
+  }
 }

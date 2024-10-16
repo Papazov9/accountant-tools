@@ -13,8 +13,34 @@ html, body {
 
 .section {
   scroll-snap-align: start;
-  height: 100vh;
+  height: 100vh; /* Each section takes the full height of the viewport */
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 20px;
+  background-color: #f4f5ff; /* Common background color */
+  box-sizing: border-box;
+}
+
+/* Basic setup for each section to avoid content overlap */
+#welcome, #overview, #pricing, #steps {
+  width: 100%;
+}
+
+/* Adjusting background colors for distinction between sections */
+#welcome {
+  background-color: #ffffff; /* White background for welcome section */
+}
+
+#pricing {
+  background-color: #f4f5ff;
+}
+
+#overview {
+  background-color: #ffffff;
+}
+
+
+#steps {
+  background-color: #f4f5ff;
 }

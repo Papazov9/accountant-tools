@@ -6,7 +6,7 @@
   background-image: url('/assets/welcome-bg-enhanced.png'); /* Update image path if needed */
   background-size: cover;
   background-position: center;
-  padding-left: 100px; /* Adjust this value to move the text to the left */
+  padding-left: 100px; /* Adjust this value to move the text further to the left */
 }
 
 .text-container {
@@ -41,6 +41,18 @@
 .cta-button:hover {
   transform: scale(0.95);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the text stays on the left and doesn't overlap the center */
+.welcome-section {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start; /* Ensure the container stays aligned left */
+  padding-left: 5%;
+}
+
+.text-container {
+  flex: 1 0 30%; /* Keep the text container on the left side, occupying 30% */
 }
 
 /* Responsive Design */
