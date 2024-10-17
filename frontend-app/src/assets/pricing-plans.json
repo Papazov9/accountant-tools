@@ -1,0 +1,49 @@
+[
+  {
+    "title": "Free",
+    "price": "$0 / month",
+    "comparisons": "1 Comparison per Month",
+    "pros": [
+      "Basic Support",
+      "Access to Basic Features",
+      "Email Support"
+    ],
+    "buttonText": "Learn More"
+  },
+  {
+    "title": "Premium",
+    "price": "$9.99 / month",
+    "comparisons": "3 Comparisons per Month",
+    "pros": [
+      "Premium Support",
+      "Access to All Features",
+      "Priority Email Support",
+      "Additional Comparisons"
+    ],
+    "buttonText": "Learn More"
+  },
+  {
+    "title": "Business",
+    "price": "$29.99 / month",
+    "comparisons": "6 Comparisons per Month",
+    "pros": [
+      "Business-Level Support",
+      "Team Management",
+      "Access to Advanced Features",
+      "Additional Comparisons"
+    ],
+    "buttonText": "Learn More"
+  },
+  {
+    "title": "Enterprise",
+    "price": "Contact Us",
+    "comparisons": "12+ Comparisons per Month",
+    "pros": [
+      "Dedicated Support",
+      "Custom Integrations",
+      "Unlimited Comparisons",
+      "Priority Handling"
+    ],
+    "buttonText": "Learn More"
+  }
+]

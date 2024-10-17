@@ -34,13 +34,8 @@
       </div>
 
       <!-- Graph Section for Mismatch Trends -->
-      <div class="graph-section" *ngIf="!metrics.empty">
-        <canvas baseChart
-                [datasets]="mismatchData"
-                [labels]="mismatchLabels"
-                [options]="chartOptions"
-                [legend]="true"
-                chartType="line">
+      <div class="graph-section" *ngIf="metrics">
+        <canvas #mismatchChart>
         </canvas>
       </div>
 

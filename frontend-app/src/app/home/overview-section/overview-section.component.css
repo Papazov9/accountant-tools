@@ -8,7 +8,7 @@
 
 .overview-section {
   text-align: center;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .overview-section h2 {
@@ -19,17 +19,63 @@
 
 .overview-section p {
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   color: #333;
 }
 
-.overview-section ul {
-  list-style-type: none;
-  padding: 0;
+/* Feature Container */
+.features-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.overview-section li {
-  margin: 10px 0;
+/* Individual Feature Styling */
+.feature {
+  position: relative;
+  text-align: center;
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+/* Arrow Styling */
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 60px solid #483AB6;
+  margin: 0 auto;
+}
+
+.feature h3 {
   color: #483AB6;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.feature p {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+  .features-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .arrow-up {
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 45px solid #483AB6;
+  }
 }

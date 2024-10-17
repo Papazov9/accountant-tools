@@ -1,11 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {LoadingService} from "../services/loading.service";
 import {Metrics, UserProfile, UserService} from "../services/user.service";
 import {AsyncPipe, DatePipe, NgIf} from "@angular/common";
-import {map, Observable, of, switchMap} from "rxjs";
-import {BaseChartDirective} from "ng2-charts";
-import {BarController, BarElement, Chart, ChartDataset, ChartOptions, ChartType} from "chart.js";
-import { LinearScale, CategoryScale, LineController, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import {of, switchMap} from "rxjs";
+import {Chart} from 'chart.js/auto';
 
 @Component({
   selector: 'app-user-home',
@@ -13,57 +11,32 @@ import { LinearScale, CategoryScale, LineController, PointElement, LineElement, 
   imports: [
     DatePipe,
     AsyncPipe,
-    BaseChartDirective,
     NgIf
   ],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })
-export class UserHomeComponent implements OnInit {
+export class UserHomeComponent implements OnInit, AfterViewInit {
 
   profile: UserProfile | null = null;
   metrics: Metrics | null = null;
 
-  mismatchData: ChartDataset[] = [
-    {data: [], label: 'Mismatches'}
-  ];
+  chart: any;
+  mismatchData: number[] = [];
 
-  mismatchLabels: string[] = [];
+  @ViewChild('mismatchChart', {static: false}) mismatchChart!: ElementRef<HTMLCanvasElement>;
 
-  chartOptions: ChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        type: 'linear',
-        ticks: {
-          color: '#483AB6'
-        }
-      },
-      y: {
-        beginAtZero: true,
-        ticks: {
-          color: '#483AB6'
-        },
-      },
-    }
-  };
-  chartType: ChartType = 'line';
-
-  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
 
   constructor(private userService: UserService, private loadingService: LoadingService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
-    Chart.register(LinearScale, CategoryScale, LineController, PointElement, LineElement, Title, Tooltip, Legend, BarController, BarElement);
     this.loadingService.showOverlay();
 
     this.userService.fetchUserProfile().pipe(
       switchMap((userProfile) => {
         this.profile = userProfile;
         if (userProfile.username) {
-          this.cdr.detectChanges();
           return this.userService.loadMetrics(userProfile.username);
         }
 
@@ -72,8 +45,9 @@ export class UserHomeComponent implements OnInit {
     ).subscribe({
       next: (metrics: Metrics | null) => {
         if (metrics && !metrics.empty) {
-          this.updateMismatchData(metrics);
           this.metrics = metrics;
+          this.cdr.detectChanges();
+          this.initializeChart();
         }
         this.loadingService.hideOverlay();
         this.cdr.detectChanges();
@@ -88,21 +62,62 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
-  private updateMismatchData(metrics: Metrics | null): void {
-    const comparisonCount = this.mismatchData[0].data.length + 1;
-    let lastCountOfMismatches: number = 0;
-    if (comparisonCount !== 0) {
-      lastCountOfMismatches = this.mismatchData[0].data[comparisonCount - 1] as number;
+  ngAfterViewInit(): void {
+    if (this.metrics) {
+      this.initializeChart();
     }
-    if (metrics) {
-    this.mismatchData[0].data.push(metrics?.totalMismatches - lastCountOfMismatches);
-      this.mismatchLabels.push(`Comparison ${comparisonCount}`);
+  }
 
-      if (this.chart) {
-        this.chart.update();
-        console.log(metrics);
-        console.log(this.mismatchData[0].data);
-      }
+  updateMismatchData(metrics: Metrics | null) {
+    if (!this.chart && metrics == null) {
+      return;
     }
+    const mismatchesTilNow = this.sumAllMismatches();
+    const currentMismatchValue = metrics!.totalMismatches - mismatchesTilNow;
+    this.mismatchData.push(currentMismatchValue);
+
+    this.chart.data.labels.push(`Comparison ${this.chart.data.labels.length + 1}`);
+    this.chart.update();
+  }
+
+  private sumAllMismatches(): number {
+    if (this.mismatchData.length > 0) {
+      return this.mismatchData.reduce((acc, value) => acc + value, 0);
+    }
+    return 0;
+  }
+
+  initializeChart() {
+    this.chart = new Chart(this.mismatchChart.nativeElement, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: `Mismatch Trends`,
+          data: this.mismatchData,
+          borderColor: '#483AB6',
+          fill: false,
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Comparisons',
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Mismatches',
+            },
+            beginAtZero: true,
+          }
+        }
+      }
+    });
+
+    this.updateMismatchData(this.metrics);
   }
 }
