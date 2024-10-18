@@ -1,43 +1,87 @@
 :host {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f9f9f9;
+  display: block;
+  background-image: url('/assets/steps-background.jpg'); /* Update image path if needed */
+  background-size: cover;
+  background-position: center;
+  padding: 50px 20px; /* Adds padding for better spacing */
+  /*overflow-y: auto; !* Allows scrolling when the section content is large *!*/
 }
 
 .steps-section {
   text-align: center;
-  max-width: 800px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .steps-section h2 {
   color: #483AB6;
   font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.steps-section p {
+  font-size: 1.2rem;
   margin-bottom: 40px;
+  color: #7e7e7e;
 }
 
 .steps {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .step {
-  flex: 1;
-  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
+  border-radius: 10px;
   border: 1px solid #d4af37;
+}
+
+.step img {
+  width: 250px;
+  height: auto;
+  margin-left: 20px;
   border-radius: 8px;
 }
 
-.step h3 {
+.step-content {
+  flex: 1;
+  text-align: left;
+}
+
+.step-content h3 {
   color: #483AB6;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-bottom: 10px;
 }
 
-.step p {
+.step-content p {
   color: #333;
   font-size: 1.1rem;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .steps {
+    flex-direction: column;
+  }
+
+  .step {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .step img {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .step-content {
+    text-align: center;
+  }
 }

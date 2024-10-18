@@ -60,6 +60,7 @@ public class FileService {
             }
         } catch (RuntimeException e) {
             comparison.setStatus("FAILED");
+            this.comparisonRepository.save(comparison);
             metricsService.updateMetricsAfterComparison(user, false, 0);
             throw new RuntimeException(e);
         }

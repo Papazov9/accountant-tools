@@ -4,9 +4,11 @@ import com.wildrep.accountantapp.model.Metrics;
 import com.wildrep.accountantapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface MetricsRepository extends JpaRepository<Metrics, Long> {
     Optional<Metrics> findByUser(User user);
 

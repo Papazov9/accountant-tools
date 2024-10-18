@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -18,4 +20,5 @@ public class MetricsResponse {
     private Long successfulComparisons;
     private Long failedComparisons;
     private Long totalMismatches;
+    private List<ComparisonMetricResponse> comparisonMetricResponses;
 }

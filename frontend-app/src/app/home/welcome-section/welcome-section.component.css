@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start; /* Align content to the left */
-  background-image: url('/assets/welcome-bg-enhanced.png'); /* Update image path if needed */
+  background-image: url('/assets/welcome-background.jpeg'); /* Update image path if needed */
   background-size: cover;
   background-position: center;
   padding-left: 100px; /* Adjust this value to move the text further to the left */

@@ -28,10 +28,37 @@ body, html {
   color: #7e7e7e;
 }
 
+
 .metrics-container {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
+}
+
+
+.graph-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.graph-section {
+  flex: 1 1 45%;
+  margin: 10px;
+  min-width: 300px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .graph-section {
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+  }
 }
 
 .metric-card {
@@ -55,14 +82,6 @@ body, html {
   color: #483AB6;
 }
 
-.graph-section {
-  width: 100%;
-  height: 400px; /* Adjust height as necessary */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .no-data-message {
   text-align: center;
   font-size: 1.5rem;
@@ -70,7 +89,8 @@ body, html {
 }
 
 @media (max-width: 768px) {
-  .metrics-container {
-    flex-direction: column;
+  .metric-card {
+    flex: 1 1 100%;
+    margin-bottom: 20px;
   }
 }

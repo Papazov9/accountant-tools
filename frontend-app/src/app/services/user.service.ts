@@ -11,6 +11,11 @@ export interface UserProfile {
   gender: string;
 }
 
+export interface ComparisonMetric {
+  mismatches: number;
+  comparisonDate: string;
+}
+
 export interface Metrics {
   message: string;
   empty: boolean;
@@ -19,6 +24,7 @@ export interface Metrics {
   successfulComparisons: number;
   failedComparisons: number;
   totalMismatches: number;
+  comparisonMetricResponses: ComparisonMetric[];
 }
 
 @Injectable({
