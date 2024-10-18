@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {CommonModule} from "@angular/common";
@@ -11,8 +11,16 @@ import {CommonModule} from "@angular/common";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
-  isMenuOpen = false;  // State for mobile menu
+  constructor(private router: Router, private route: ActivatedRoute) {
+  }
+  isMenuOpen = false;
+  isSticky: boolean = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.isSticky = offset > 50; // Change this value depending on when you want the sticky effect to kick in
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -22,15 +30,11 @@ export class NavbarComponent {
     return this.router.url === '/login' || this.router.url === '/register';
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/home']);
-  }
-
   scrollTo(event: MouseEvent) {
     event.preventDefault();
 
     const targetedSection = (event.target as HTMLElement).getAttribute('data-section');
+    console.log(targetedSection);
 
     const selectionElement = document.getElementById(`${targetedSection}`);
 

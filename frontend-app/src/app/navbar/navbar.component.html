@@ -1,14 +1,16 @@
-<header>
+<header [ngClass]="{'sticky sticky-transition': isSticky}">
   <nav class="navbar" *ngIf="!isLoginOrRegisterPage()">
+    <a href="#" data-section="welcome" (click)="scrollTo($event)" class="logo-link">
     <div class="logo-container">
       <img src="/assets/unparalled-favicon-color.png" alt="Logo" class="logo-img" height="50" width="50"/>
       <span class="logo-text">unparalleled.</span>
     </div>
+    </a>
     <ul class="nav-links">
       <li><a href="#" data-section="welcome" (click)="scrollTo($event)">Home</a></li>
       <li><a href="#" data-section="pricing" (click)="scrollTo($event)">Pricing</a></li>
-      <li><a href="#" data-section="overview" (click)="scrollTo($event)">About Us</a></li>
-      <li><a href="#" data-section="steps" (click)="scrollTo($event)">Contact Us</a></li>
+      <li><a href="#" data-section="overview" (click)="scrollTo($event)">About us</a></li>
+      <li><a href="#" data-section="steps" (click)="scrollTo($event)">How to...</a></li>
     </ul>
     <div class="cta-buttons">
       <a class="cta-signin" href="/login">Log In</a>

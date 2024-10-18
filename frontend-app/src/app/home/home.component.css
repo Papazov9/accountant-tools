@@ -1,45 +1,44 @@
 html, body {
   height: 100%;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .scroll-container {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  height: 100vh;
-  scroll-behavior: smooth;
+  overflow-y: auto;
+  height: 100%;
 }
-
+/*.section {*/
+/*   !* Ensure sections take at least the full viewport height *!*/
+/*  height: auto; !* Allow them to adjust based on content *!*/
+/*  padding: 0; !* Remove extra padding *!*/
+/*}*/
 .section {
-  scroll-snap-align: start;
-  height: 100vh; /* Each section takes the full height of the viewport */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: #f4f5ff; /* Common background color */
+  min-height: 100vh;
   box-sizing: border-box;
-}
-
-/* Basic setup for each section to avoid content overlap */
-#welcome, #overview, #pricing, #steps {
   width: 100%;
 }
 
-/* Adjusting background colors for distinction between sections */
+#welcome, #pricing, #overview, #steps {
+  min-height: 80vh;
+  padding-bottom: 100px;
+}
+
 #welcome {
-  background-color: #ffffff; /* White background for welcome section */
+  background-color: #ffffff;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 #pricing {
   background-color: #f4f5ff;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 #overview {
   background-color: #ffffff;
 }
-
 
 #steps {
   background-color: #f4f5ff;

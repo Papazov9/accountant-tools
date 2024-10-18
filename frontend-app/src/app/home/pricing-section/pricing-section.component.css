@@ -3,6 +3,7 @@
   padding: 60px 0;
   background-color: #f4f5ff;
   width: 100%;
+  min-height: 100vh;
 }
 
 .heading {
