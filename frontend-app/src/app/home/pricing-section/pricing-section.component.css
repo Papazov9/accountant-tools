@@ -1,0 +1,148 @@
+.pricing-section {
+  text-align: center;
+  padding: 60px 0;
+  background-color: #f4f5ff;
+  width: 100%;
+}
+
+.heading {
+  margin-bottom: 50px;
+}
+
+.pricing-title {
+  font-size: 42px;
+  color: #483AB6;
+}
+
+.pricing-subtitle {
+  font-size: 20px;
+  color: #7e7e7e;
+}
+
+.pricing-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 30px;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+.pricing-card {
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  flex: 1 1 25%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: scale(1.05);
+}
+
+.pricing-card-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #483AB6;
+}
+
+.pricing-price {
+  font-size: 36px;
+  color: #000;
+  margin: 10px 0;
+}
+
+.comparison-count {
+  font-size: 18px;
+  font-weight: bold;
+  color: #483AB6;
+  margin-bottom: 20px;
+}
+
+.separator {
+  width: 100%;
+  height: 2px;
+  background-color: #e0e0e0;
+  margin: 20px 0;
+}
+
+/* Pros List Styling */
+.pros-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.pros-list li {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.tick-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #483AB6;
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+}
+
+.tick-icon::after {
+  content: '✔'; /* Unicode checkmark */
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pricing-btn {
+  background-color: #483AB6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color 0.3s ease;
+}
+
+.pricing-btn:hover {
+  background-color: #372A95;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .pricing-container {
+    flex-wrap: wrap;
+  }
+
+  .pricing-card {
+    flex: 1 1 calc(33.33% - 40px);
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pricing-card {
+    width: 100%;
+    max-width: 90%;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,24 @@
+<div class="pricing-section">
+  <div class="heading">
+    <h1 class="pricing-title">Our Pricing Plans</h1>
+    <p class="pricing-subtitle">Choose the plan that best suits your needs.</p>
+  </div>
+
+  <div class="pricing-container">
+    <div class="pricing-card" *ngFor="let plan of pricingPlans">
+      <h2 class="pricing-card-title">{{ plan.title }}</h2>
+      <p class="pricing-price">{{ plan.price }}</p>
+      <p class="comparison-count">{{ plan.comparisons }}</p>
+
+      <div class="separator"></div>
+
+      <ul class="pros-list">
+        <li *ngFor="let pro of plan.pros">
+          <span class="tick-icon"></span> {{ pro }}
+        </li>
+      </ul>
+
+      <button class="pricing-btn">{{ plan.buttonText }}</button>
+    </div>
+  </div>
+</div>
