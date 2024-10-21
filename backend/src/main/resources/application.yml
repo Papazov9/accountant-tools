@@ -14,3 +14,6 @@ spring:
 
 jwt:
     secret: 3Fj8pD6xRv9nT6yUz4wA9hXrQ2bK7jL5
+stripe:
+    api:
+        key: sk_test_yourStripeApiKey

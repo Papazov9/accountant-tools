@@ -1,19 +1,8 @@
 [
   {
-    "title": "Free",
-    "price": "$0 / month",
-    "comparisons": "1 Comparison per Month",
-    "pros": [
-      "Basic Support",
-      "Access to Basic Features",
-      "Email Support"
-    ],
-    "buttonText": "Learn More"
-  },
-  {
-    "title": "Premium",
-    "price": "$9.99 / month",
-    "comparisons": "3 Comparisons per Month",
+    "title": "Pro",
+    "price": "23.01 EUR",
+    "comparisons": "3 Comparisons",
     "pros": [
       "Premium Support",
       "Access to All Features",
@@ -23,9 +12,9 @@
     "buttonText": "Learn More"
   },
   {
-    "title": "Business",
-    "price": "$29.99 / month",
-    "comparisons": "6 Comparisons per Month",
+    "title": "Premium",
+    "price": "38.35 EUR",
+    "comparisons": "6 Comparisons",
     "pros": [
       "Business-Level Support",
       "Team Management",
@@ -35,9 +24,33 @@
     "buttonText": "Learn More"
   },
   {
+    "title": "Business",
+    "price": "46.02 EUR",
+    "comparisons": "9 Comparisons",
+    "pros": [
+      "Dedicated Support",
+      "Custom Integrations",
+      "Unlimited Comparisons",
+      "Priority Handling"
+    ],
+    "buttonText": "Learn More"
+  },
+  {
     "title": "Enterprise",
-    "price": "Contact Us",
-    "comparisons": "12+ Comparisons per Month",
+    "price": "51.13 EUR",
+    "comparisons": "12 Comparisons",
+    "pros": [
+      "Dedicated Support",
+      "Custom Integrations",
+      "Unlimited Comparisons",
+      "Priority Handling"
+    ],
+    "buttonText": "Learn More"
+  },
+  {
+    "title": "Unparalleled",
+    "price": "61.35 EUR",
+    "comparisons": "UNLIMITED Comparisons",
     "pros": [
       "Dedicated Support",
       "Custom Integrations",

@@ -1,6 +1,5 @@
 package com.wildrep.accountantapp.service;
 
-import com.wildrep.accountantapp.exceptions.PasswordsDontMatchException;
 import com.wildrep.accountantapp.exceptions.RoleDoesNotExist;
 import com.wildrep.accountantapp.exceptions.UserAlreadyExistsException;
 import com.wildrep.accountantapp.exceptions.UserDoesNotExistException;

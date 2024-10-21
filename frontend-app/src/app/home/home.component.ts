@@ -20,7 +20,7 @@ import {PricingSectionComponent} from "./pricing-section/pricing-section.compone
 })
 export class HomeComponent {
 
-  constructor(private renderer: Renderer2) {}
+  constructor() {}
 
 
 }
