@@ -50,7 +50,6 @@ import {
   EventEmitter,
   ExperimentalPendingTasks,
   FactoryTarget,
-  GLOBAL_EVENT_DELEGATION,
   HOST_TAG_NAME,
   Host,
   HostAttributeToken,
@@ -112,6 +111,7 @@ import {
   RendererFactory2,
   RendererStyleFlags2,
   RuntimeError,
+  SIGNAL,
   SSR_CONTENT_INTEGRITY_MARKER,
   Sanitizer,
   SecurityContext,
@@ -229,7 +229,6 @@ import {
   platformCore,
   provideExperimentalCheckNoChangesForDebug,
   provideExperimentalZonelessChangeDetection,
-  provideGlobalEventDelegation,
   provideZoneChangeDetection,
   readHydrationInfo,
   reflectComponentType,
@@ -462,7 +461,7 @@ import {
   ɵɵvalidateIframeAttribute,
   ɵɵviewQuery,
   ɵɵviewQuerySignal
-} from "./chunk-7DBOSODH.js";
+} from "./chunk-2MTT7F56.js";
 import "./chunk-GM2YTKEO.js";
 import "./chunk-WDMUDEB6.js";
 export {
@@ -619,7 +618,6 @@ export {
   DeferBlockBehavior as ɵDeferBlockBehavior,
   DeferBlockState as ɵDeferBlockState,
   EffectScheduler as ɵEffectScheduler,
-  GLOBAL_EVENT_DELEGATION as ɵGLOBAL_EVENT_DELEGATION,
   IMAGE_CONFIG as ɵIMAGE_CONFIG,
   IMAGE_CONFIG_DEFAULTS as ɵIMAGE_CONFIG_DEFAULTS,
   INJECTOR_SCOPE as ɵINJECTOR_SCOPE,
@@ -648,6 +646,7 @@ export {
   ComponentRef as ɵRender3ComponentRef,
   NgModuleRef as ɵRender3NgModuleRef,
   RuntimeError as ɵRuntimeError,
+  SIGNAL as ɵSIGNAL,
   SSR_CONTENT_INTEGRITY_MARKER as ɵSSR_CONTENT_INTEGRITY_MARKER,
   TESTABILITY as ɵTESTABILITY,
   TESTABILITY_GETTER as ɵTESTABILITY_GETTER,
@@ -709,7 +708,6 @@ export {
   noSideEffects as ɵnoSideEffects,
   patchComponentDefWithScope as ɵpatchComponentDefWithScope,
   performanceMarkFeature as ɵperformanceMarkFeature,
-  provideGlobalEventDelegation as ɵprovideGlobalEventDelegation,
   readHydrationInfo as ɵreadHydrationInfo,
   registerLocaleData as ɵregisterLocaleData,
   renderDeferBlockState as ɵrenderDeferBlockState,

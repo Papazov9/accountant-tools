@@ -58,7 +58,7 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-7DBOSODH.js";
+} from "./chunk-2MTT7F56.js";
 import {
   __async,
   __spreadProps,
@@ -2284,15 +2284,19 @@ var NgForOfContext = class {
     this.index = index;
     this.count = count;
   }
+  // Indicates whether this is the first item in the collection.
   get first() {
     return this.index === 0;
   }
+  // Indicates whether this is the last item in the collection.
   get last() {
     return this.index === this.count - 1;
   }
+  // Indicates whether an index of this item in the collection is even.
   get even() {
     return this.index % 2 === 0;
   }
+  // Indicates whether an index of this item in the collection is odd.
   get odd() {
     return !this.even;
   }
@@ -3508,13 +3512,6 @@ var DecimalPipe = class _DecimalPipe {
   constructor(_locale) {
     this._locale = _locale;
   }
-  /**
-   * @param value The value to be formatted.
-   * @param digitsInfo Sets digit and decimal representation.
-   * [See more](#digitsinfo).
-   * @param locale Specifies what locale format rules to use.
-   * [See more](#locale).
-   */
   transform(value, digitsInfo, locale) {
     if (!isValue(value)) return null;
     locale ||= this._locale;
@@ -3618,39 +3615,6 @@ var CurrencyPipe = class _CurrencyPipe {
     this._locale = _locale;
     this._defaultCurrencyCode = _defaultCurrencyCode;
   }
-  /**
-   *
-   * @param value The number to be formatted as currency.
-   * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
-   * such as `USD` for the US dollar and `EUR` for the euro. The default currency code can be
-   * configured using the `DEFAULT_CURRENCY_CODE` injection token.
-   * @param display The format for the currency indicator. One of the following:
-   *   - `code`: Show the code (such as `USD`).
-   *   - `symbol`(default): Show the symbol (such as `$`).
-   *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
-   * currency.
-   * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
-   * locale has no narrow symbol, uses the standard symbol for the locale.
-   *   - String: Use the given string value instead of a code or a symbol.
-   * For example, an empty string will suppress the currency & symbol.
-   *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
-   *
-   * @param digitsInfo Decimal representation options, specified by a string
-   * in the following format:<br>
-   * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
-   *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
-   * Default is `1`.
-   *   - `minFractionDigits`: The minimum number of digits after the decimal point.
-   * Default is `2`.
-   *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
-   * Default is `2`.
-   * If not provided, the number will be formatted with the proper amount of digits,
-   * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
-   * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
-   * @param locale A locale code for the locale format rules to use.
-   * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
-   * See [Setting your app locale](guide/i18n/locale-id).
-   */
   transform(value, currencyCode = this._defaultCurrencyCode, display = "symbol", digitsInfo, locale) {
     if (!isValue(value)) return null;
     locale ||= this._locale;
@@ -3792,7 +3756,7 @@ function isPlatformBrowser(platformId) {
 function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
 }
-var VERSION = new Version("18.2.6");
+var VERSION = new Version("18.2.9");
 var ViewportScroller = class _ViewportScroller {
   static {
     this.ɵprov = ɵɵdefineInjectable({
@@ -4629,6 +4593,7 @@ var NgOptimizedImage = class _NgOptimizedImage {
     };
     const removeLoadListenerFn = this.renderer.listen(img, "load", callback);
     const removeErrorListenerFn = this.renderer.listen(img, "error", callback);
+    callOnLoadIfImageIsLoaded(img, callback);
   }
   /** @nodoc */
   ngOnDestroy() {
@@ -4882,7 +4847,7 @@ function assertGreaterThanZero(dir, inputValue, inputName) {
   }
 }
 function assertNoImageDistortion(dir, img, renderer) {
-  const removeLoadListenerFn = renderer.listen(img, "load", () => {
+  const callback = () => {
     removeLoadListenerFn();
     removeErrorListenerFn();
     const computedStyle = window.getComputedStyle(img);
@@ -4930,11 +4895,13 @@ Recommended intrinsic image size: ${recommendedWidth}w x ${recommendedHeight}h.
 Note: Recommended intrinsic image size is calculated assuming a maximum DPR of ${RECOMMENDED_SRCSET_DENSITY_CAP}. To improve loading time, resize the image or consider using the "ngSrcset" and "sizes" attributes.`));
       }
     }
-  });
+  };
+  const removeLoadListenerFn = renderer.listen(img, "load", callback);
   const removeErrorListenerFn = renderer.listen(img, "error", () => {
     removeLoadListenerFn();
     removeErrorListenerFn();
   });
+  callOnLoadIfImageIsLoaded(img, callback);
 }
 function assertNonEmptyWidthAndHeight(dir) {
   let missingAttributes = [];
@@ -4950,18 +4917,20 @@ function assertEmptyWidthAndHeight(dir) {
   }
 }
 function assertNonZeroRenderedHeight(dir, img, renderer) {
-  const removeLoadListenerFn = renderer.listen(img, "load", () => {
+  const callback = () => {
     removeLoadListenerFn();
     removeErrorListenerFn();
     const renderedHeight = img.clientHeight;
     if (dir.fill && renderedHeight === 0) {
       console.warn(formatRuntimeError(2952, `${imgDirectiveDetails(dir.ngSrc)} the height of the fill-mode image is zero. This is likely because the containing element does not have the CSS 'position' property set to one of the following: "relative", "fixed", or "absolute". To fix this problem, make sure the container element has the CSS 'position' property defined and the height of the element is not zero.`));
     }
-  });
+  };
+  const removeLoadListenerFn = renderer.listen(img, "load", callback);
   const removeErrorListenerFn = renderer.listen(img, "error", () => {
     removeLoadListenerFn();
     removeErrorListenerFn();
   });
+  callOnLoadIfImageIsLoaded(img, callback);
 }
 function assertValidLoadingInput(dir) {
   if (dir.loading && dir.priority) {
@@ -5015,6 +4984,11 @@ function assertPlaceholderDimensions(dir, imgElement) {
   let renderedHeight = parseFloat(computedStyle.getPropertyValue("height"));
   if (renderedWidth > PLACEHOLDER_DIMENSION_LIMIT || renderedHeight > PLACEHOLDER_DIMENSION_LIMIT) {
     console.warn(formatRuntimeError(2967, `${imgDirectiveDetails(dir.ngSrc)} it uses a placeholder image, but at least one of the dimensions attribute (height or width) exceeds the limit of ${PLACEHOLDER_DIMENSION_LIMIT}px. To fix this, use a smaller image as a placeholder.`));
+  }
+}
+function callOnLoadIfImageIsLoaded(img, callback) {
+  if (img.complete && img.naturalWidth) {
+    callback();
   }
 }
 function round(input) {
@@ -5134,9 +5108,9 @@ export {
 
 @angular/common/fesm2022/common.mjs:
   (**
-   * @license Angular v18.2.6
+   * @license Angular v18.2.9
    * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-EOW6XMTD.js.map
+//# sourceMappingURL=chunk-Z366FMBX.js.map

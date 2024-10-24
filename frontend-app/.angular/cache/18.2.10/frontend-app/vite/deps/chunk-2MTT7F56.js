@@ -413,11 +413,6 @@ var parseCache = {};
 function get(element) {
   return element[Property.JSACTION];
 }
-function getDefaulted(element) {
-  const cache = get(element) ?? {};
-  set(element, cache);
-  return cache;
-}
 function set(element, actionMap) {
   element[Property.JSACTION] = actionMap;
 }
@@ -7003,7 +6998,6 @@ var PRESERVE_HOST_CONTENT = new InjectionToken(typeof ngDevMode === "undefined" 
 var IS_I18N_HYDRATION_ENABLED = new InjectionToken(typeof ngDevMode === "undefined" || !!ngDevMode ? "IS_I18N_HYDRATION_ENABLED" : "");
 var IS_EVENT_REPLAY_ENABLED = new InjectionToken(typeof ngDevMode === "undefined" || !!ngDevMode ? "IS_EVENT_REPLAY_ENABLED" : "");
 var EVENT_REPLAY_ENABLED_DEFAULT = false;
-var IS_GLOBAL_EVENT_DELEGATION_ENABLED = new InjectionToken(typeof ngDevMode === "undefined" || !!ngDevMode ? "IS_GLOBAL_EVENT_DELEGATION_ENABLED" : "");
 var policy$1;
 function getPolicy$1() {
   if (policy$1 === void 0) {
@@ -11745,7 +11739,7 @@ function createRootComponent(componentView, rootComponentDef, rootDirectives, ho
 }
 function setRootNodeAttributes(hostRenderer, componentDef, hostRNode, rootSelectorOrNode) {
   if (rootSelectorOrNode) {
-    setUpAttributes(hostRenderer, hostRNode, ["ng-version", "18.2.6"]);
+    setUpAttributes(hostRenderer, hostRNode, ["ng-version", "18.2.9"]);
   } else {
     const {
       attrs,
@@ -13381,6 +13375,7 @@ var AfterRenderImpl = class _AfterRenderImpl {
       sequence.afterRun();
       if (sequence.once) {
         this.sequences.delete(sequence);
+        sequence.destroy();
       }
     }
     for (const sequence of this.deferredRegistrations) {
@@ -13430,7 +13425,7 @@ var AfterRenderSequence = class {
     this.once = once;
     this.erroredOrDestroyed = false;
     this.pipelinedValue = void 0;
-    this.unregisterOnDestroy = destroyRef.onDestroy(() => this.destroy());
+    this.unregisterOnDestroy = destroyRef?.onDestroy(() => this.destroy());
   }
   afterRun() {
     this.erroredOrDestroyed = false;
@@ -13438,7 +13433,7 @@ var AfterRenderSequence = class {
   }
   destroy() {
     this.impl.unregister(this);
-    this.unregisterOnDestroy();
+    this.unregisterOnDestroy?.();
   }
 };
 function afterRender(callbackOrSpec, options) {
@@ -13485,7 +13480,8 @@ function afterRenderImpl(callbackOrSpec, injector, options, once) {
   const manager = injector.get(AfterRenderManager);
   manager.impl ??= injector.get(AfterRenderImpl);
   const hooks = options?.phase ?? AfterRenderPhase.MixedReadWrite;
-  const sequence = new AfterRenderSequence(manager.impl, getHooks(callbackOrSpec, hooks), once, injector.get(DestroyRef));
+  const destroyRef = options?.manualCleanup !== true ? injector.get(DestroyRef) : null;
+  const sequence = new AfterRenderSequence(manager.impl, getHooks(callbackOrSpec, hooks), once, destroyRef);
   manager.impl.register(sequence);
   return sequence;
 }
@@ -19323,7 +19319,7 @@ var Version = class {
     this.patch = parts.slice(2).join(".");
   }
 };
-var VERSION = new Version("18.2.6");
+var VERSION = new Version("18.2.9");
 var Console = class _Console {
   log(message) {
     console.log(message);
@@ -21174,10 +21170,8 @@ var ImagePerformanceWarning = class _ImagePerformanceWarning {
     let lcpElementFound, lcpElementLoadedCorrectly = false;
     images.forEach((image) => {
       if (!this.options?.disableImageSizeWarning) {
-        for (const image2 of images) {
-          if (!image2.getAttribute("ng-img") && this.isOversized(image2)) {
-            logOversizedImageWarning(image2.src);
-          }
+        if (!image.getAttribute("ng-img") && this.isOversized(image)) {
+          logOversizedImageWarning(image.src);
         }
       }
       if (!this.options?.disableImageLazyLoadWarning && this.lcpImageUrl) {
@@ -21195,6 +21189,15 @@ var ImagePerformanceWarning = class _ImagePerformanceWarning {
   }
   isOversized(image) {
     if (!this.window) {
+      return false;
+    }
+    const nonOversizedImageExtentions = [
+      // SVG images are vector-based, which means they can scale
+      // to any size without losing quality.
+      ".svg"
+    ];
+    const imageSource = (image.src || "").toLowerCase();
+    if (nonOversizedImageExtentions.some((extension) => imageSource.endsWith(extension))) {
       return false;
     }
     const computedStyle = this.window.getComputedStyle(image);
@@ -21250,7 +21253,7 @@ function logOversizedImageWarning(src) {
 }
 var PLATFORM_DESTROY_LISTENERS = new InjectionToken(ngDevMode ? "PlatformDestroyListeners" : "");
 function isApplicationBootstrapConfig(config) {
-  return !!config.platformInjector;
+  return !config.moduleRef;
 }
 function bootstrap(config) {
   const envInjector = isApplicationBootstrapConfig(config) ? config.r3Injector : config.moduleRef.injector;
@@ -21288,9 +21291,13 @@ function bootstrap(config) {
         onPlatformDestroyListeners.delete(destroyListener);
       });
     } else {
+      const destroyListener = () => config.moduleRef.destroy();
+      const onPlatformDestroyListeners = config.platformInjector.get(PLATFORM_DESTROY_LISTENERS);
+      onPlatformDestroyListeners.add(destroyListener);
       config.moduleRef.onDestroy(() => {
         remove(config.allPlatformModules, config.moduleRef);
         onErrorSubscription.unsubscribe();
+        onPlatformDestroyListeners.delete(destroyListener);
       });
     }
     return _callAndReportToErrorHandler(exceptionHandler, ngZone, () => {
@@ -21361,7 +21368,8 @@ var PlatformRef = class _PlatformRef {
     const moduleRef = createNgModuleRefWithProviders(moduleFactory.moduleType, this.injector, allAppProviders);
     return bootstrap({
       moduleRef,
-      allPlatformModules: this._modules
+      allPlatformModules: this._modules,
+      platformInjector: this.injector
     });
   }
   /**
@@ -23227,69 +23235,9 @@ var JSACTION_EVENT_CONTRACT = new InjectionToken(ngDevMode ? "EVENT_CONTRACT_DET
   providedIn: "root",
   factory: () => ({})
 });
-var GLOBAL_EVENT_DELEGATION = new InjectionToken(ngDevMode ? "GLOBAL_EVENT_DELEGATION" : "");
-var GlobalEventDelegation = class _GlobalEventDelegation {
-  constructor() {
-    this.eventContractDetails = inject(JSACTION_EVENT_CONTRACT);
-  }
-  ngOnDestroy() {
-    this.eventContractDetails.instance?.cleanUp();
-  }
-  supports(eventType) {
-    return isEarlyEventType(eventType);
-  }
-  addEventListener(element, eventType, handler) {
-    if (element.nodeType === Node.ELEMENT_NODE) {
-      this.eventContractDetails.instance.addEvent(eventType);
-      getDefaulted(element)[eventType] = "";
-      sharedStashFunction(element, eventType, handler);
-    } else {
-      element.addEventListener(eventType, handler);
-    }
-    return () => this.removeEventListener(element, eventType, handler);
-  }
-  removeEventListener(element, eventType, callback) {
-    if (element.nodeType === Node.ELEMENT_NODE) {
-      getDefaulted(element)[eventType] = void 0;
-    } else {
-      element.removeEventListener(eventType, callback);
-    }
-  }
-  static {
-    this.ɵfac = function GlobalEventDelegation_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _GlobalEventDelegation)();
-    };
-  }
-  static {
-    this.ɵprov = ɵɵdefineInjectable({
-      token: _GlobalEventDelegation,
-      factory: _GlobalEventDelegation.ɵfac
-    });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GlobalEventDelegation, [{
-    type: Injectable
-  }], null, null);
-})();
-var initGlobalEventDelegation = (eventContractDetails, injector) => {
-  if (injector.get(IS_EVENT_REPLAY_ENABLED, EVENT_REPLAY_ENABLED_DEFAULT)) {
-    return;
-  }
-  const eventContract = eventContractDetails.instance = new EventContract(new EventContractContainer(document.body));
-  const dispatcher = new EventDispatcher(
-    invokeRegisteredListeners,
-    /** clickModSupport */
-    false
-  );
-  registerDispatcher$1(eventContract, dispatcher);
-};
 var jsactionSet = /* @__PURE__ */ new Set();
-function isGlobalEventDelegationEnabled(injector) {
-  return injector.get(IS_GLOBAL_EVENT_DELEGATION_ENABLED, false);
-}
 function shouldEnableEventReplay(injector) {
-  return injector.get(IS_EVENT_REPLAY_ENABLED, EVENT_REPLAY_ENABLED_DEFAULT) && !isGlobalEventDelegationEnabled(injector);
+  return injector.get(IS_EVENT_REPLAY_ENABLED, EVENT_REPLAY_ENABLED_DEFAULT);
 }
 function withEventReplay() {
   return [{
@@ -23811,28 +23759,6 @@ function verifySsrContentsIntegrity() {
     throw new RuntimeError(-507, typeof ngDevMode !== "undefined" && ngDevMode && "Angular hydration logic detected that HTML content of this page was modified after it was produced during server side rendering. Make sure that there are no optimizations that remove comment nodes from HTML enabled on your CDN. Angular hydration relies on HTML produced by the server, including whitespaces and comment nodes.");
   }
 }
-function provideGlobalEventDelegation(multiContract = false) {
-  return [{
-    provide: IS_GLOBAL_EVENT_DELEGATION_ENABLED,
-    useValue: true
-  }, {
-    provide: ENVIRONMENT_INITIALIZER,
-    useValue: () => {
-      const injector = inject(Injector);
-      const eventContractDetails = injector.get(JSACTION_EVENT_CONTRACT);
-      if (multiContract && window.__jsaction_contract) {
-        eventContractDetails.instance = window.__jsaction_contract;
-        return;
-      }
-      initGlobalEventDelegation(eventContractDetails, injector);
-      window.__jsaction_contract = eventContractDetails.instance;
-    },
-    multi: true
-  }, {
-    provide: GLOBAL_EVENT_DELEGATION,
-    useClass: GlobalEventDelegation
-  }];
-}
 function booleanAttribute(value) {
   return typeof value === "boolean" ? value : value != null && value !== "false";
 }
@@ -24104,6 +24030,7 @@ if (typeof ngDevMode !== "undefined" && ngDevMode) {
 }
 
 export {
+  SIGNAL,
   XSS_SECURITY_URL,
   RuntimeError,
   formatRuntimeError,
@@ -24543,12 +24470,10 @@ export {
   internalCreateApplication,
   getDeferBlocks,
   JSACTION_EVENT_CONTRACT,
-  GLOBAL_EVENT_DELEGATION,
   withEventReplay,
   annotateForHydration,
   withDomHydration,
   withI18nSupport,
-  provideGlobalEventDelegation,
   booleanAttribute,
   numberAttribute,
   ɵɵngDeclareDirective,
@@ -24572,21 +24497,21 @@ export {
 
 @angular/core/fesm2022/primitives/signals.mjs:
   (**
-   * @license Angular v18.2.6
+   * @license Angular v18.2.9
    * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/core/fesm2022/primitives/event-dispatch.mjs:
   (**
-   * @license Angular v18.2.6
+   * @license Angular v18.2.9
    * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/core/fesm2022/core.mjs:
   (**
-   * @license Angular v18.2.6
+   * @license Angular v18.2.9
    * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
@@ -24618,4 +24543,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-7DBOSODH.js.map
+//# sourceMappingURL=chunk-2MTT7F56.js.map

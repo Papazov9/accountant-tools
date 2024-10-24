@@ -1,6 +1,6 @@
 import {
   withHttpTransferCache
-} from "./chunk-76GLMTDH.js";
+} from "./chunk-KCX2WQDE.js";
 import {
   CommonModule,
   DOCUMENT,
@@ -11,7 +11,7 @@ import {
   isPlatformServer,
   parseCookieValue,
   setRootDomAdapter
-} from "./chunk-EOW6XMTD.js";
+} from "./chunk-Z366FMBX.js";
 import {
   APP_ID,
   ApplicationModule,
@@ -20,7 +20,6 @@ import {
   Console,
   ENVIRONMENT_INITIALIZER,
   ErrorHandler,
-  GLOBAL_EVENT_DELEGATION,
   INJECTOR_SCOPE,
   Inject,
   Injectable,
@@ -69,7 +68,7 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-7DBOSODH.js";
+} from "./chunk-2MTT7F56.js";
 import {
   __spreadProps,
   __spreadValues
@@ -854,45 +853,6 @@ var DomEventsPlugin = class _DomEventsPlugin extends EventManagerPlugin {
     }]
   }], null);
 })();
-var EventDelegationPlugin = class _EventDelegationPlugin extends EventManagerPlugin {
-  constructor(doc) {
-    super(doc);
-    this.delegate = inject(GLOBAL_EVENT_DELEGATION, {
-      optional: true
-    });
-  }
-  supports(eventName) {
-    return this.delegate ? this.delegate.supports(eventName) : false;
-  }
-  addEventListener(element, eventName, handler) {
-    return this.delegate.addEventListener(element, eventName, handler);
-  }
-  removeEventListener(element, eventName, callback) {
-    return this.delegate.removeEventListener(element, eventName, callback);
-  }
-  static {
-    this.ɵfac = function EventDelegationPlugin_Factory(__ngFactoryType__) {
-      return new (__ngFactoryType__ || _EventDelegationPlugin)(ɵɵinject(DOCUMENT));
-    };
-  }
-  static {
-    this.ɵprov = ɵɵdefineInjectable({
-      token: _EventDelegationPlugin,
-      factory: _EventDelegationPlugin.ɵfac
-    });
-  }
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(EventDelegationPlugin, [{
-    type: Injectable
-  }], () => [{
-    type: void 0,
-    decorators: [{
-      type: Inject,
-      args: [DOCUMENT]
-    }]
-  }], null);
-})();
 var MODIFIER_KEYS = ["alt", "control", "meta", "shift"];
 var _keyMap = {
   "\b": "Backspace",
@@ -1132,10 +1092,6 @@ var BROWSER_MODULE_PROVIDERS = [{
   useClass: KeyEventsPlugin,
   multi: true,
   deps: [DOCUMENT]
-}, {
-  provide: EVENT_MANAGER_PLUGINS,
-  useClass: EventDelegationPlugin,
-  multi: true
 }, DomRendererFactory2, SharedStylesHost, EventManager, {
   provide: RendererFactory2,
   useExisting: DomRendererFactory2
@@ -1931,7 +1887,7 @@ function provideClientHydration(...features) {
   }
   return makeEnvironmentProviders([typeof ngDevMode !== "undefined" && ngDevMode ? provideZoneJsCompatibilityDetector() : [], withDomHydration(), featuresKind.has(HydrationFeatureKind.NoHttpTransferCache) || hasHttpTransferCacheOptions ? [] : withHttpTransferCache({}), providers]);
 }
-var VERSION = new Version("18.2.6");
+var VERSION = new Version("18.2.9");
 
 export {
   BrowserDomAdapter,
@@ -1975,9 +1931,9 @@ export {
 
 @angular/platform-browser/fesm2022/platform-browser.mjs:
   (**
-   * @license Angular v18.2.6
+   * @license Angular v18.2.9
    * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-VIQ2BJIE.js.map
+//# sourceMappingURL=chunk-QY5VV6OJ.js.map

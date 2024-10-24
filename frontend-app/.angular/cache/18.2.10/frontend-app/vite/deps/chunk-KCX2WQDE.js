@@ -3,7 +3,7 @@ import {
   XhrFactory,
   isPlatformServer,
   parseCookieValue
-} from "./chunk-EOW6XMTD.js";
+} from "./chunk-Z366FMBX.js";
 import {
   APP_BOOTSTRAP_LISTENER,
   ApplicationRef,
@@ -31,7 +31,7 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-7DBOSODH.js";
+} from "./chunk-2MTT7F56.js";
 import {
   Observable,
   concatMap,
@@ -1448,6 +1448,8 @@ var JsonpClientBackend = class _JsonpClientBackend {
         finished = true;
       };
       const cleanup = () => {
+        node.removeEventListener("load", onLoad);
+        node.removeEventListener("error", onError);
         node.remove();
         delete this.callbackMap[callback];
       };
@@ -2366,9 +2368,9 @@ export {
 
 @angular/common/fesm2022/http.mjs:
   (**
-   * @license Angular v18.2.6
+   * @license Angular v18.2.9
    * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-76GLMTDH.js.map
+//# sourceMappingURL=chunk-KCX2WQDE.js.map
