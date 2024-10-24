@@ -11,8 +11,6 @@ import {NgOptimizedImage} from "@angular/common";
 import {WelcomeSectionComponent} from "./home/welcome-section/welcome-section.component";
 import {OverviewSectionComponent} from "./home/overview-section/overview-section.component";
 import {StepsSectionComponent} from "./home/steps-section/steps-section.component";
-import {ToastrModule} from "ngx-toastr";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -30,8 +28,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     WelcomeSectionComponent,
     OverviewSectionComponent,
     StepsSectionComponent,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: []
