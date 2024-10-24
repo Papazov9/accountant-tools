@@ -19,17 +19,72 @@ import {CommonModule, NgIf} from "@angular/common";
 export class InvoiceComparisonComponent {
   csvFiles: File[] = [];
   txtFiles: File[] = [];
-  remainingComparisons: number = 0;
-  subscriptionPlan: string = "";
+  remainingComparisons: number = 5;
+  subscriptionPlan: string = "FREE";
+  isFreePlan: boolean = true;
 
   constructor(private comparisonService: InvoiceComparisonService) {
   }
 
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  onCsvDrop(event: DragEvent): void {
+    event.preventDefault();
+    this.checkPlan();
+    if (event.dataTransfer?.files) {
+      if (this.isFreePlan) {
+        this.csvFiles.push(event.dataTransfer.files[0]);
+      } else {
+        const filesToUpload: File[] = Array.from(event.dataTransfer.files);
+        filesToUpload.forEach(file => {
+          if (!this.csvFiles.some(existingFile => existingFile.name === file.name)) {
+            this.csvFiles.push(file);
+          }
+        });
+      }
+    }
+  }
+
+  private checkPlan() {
+    if (this.isFreePlan && this.csvFiles.length >= 1) {
+      alert("Free plan allows only one CSV file. Please upgrade to upload more.");
+      return;
+    }
+  }
+
+  removeCsvFile(file: File): void {
+    this.csvFiles = this.csvFiles.filter(f => f !== file);
+  }
+
+  removeTxtFile(file: File): void {
+    this.txtFiles = this.txtFiles.filter(f => f !== file);
+  }
+
+  onTxtDrop(event: DragEvent): void {
+    event.preventDefault();
+    this.checkPlan();
+    if (event.dataTransfer?.files) {
+      if (this.isFreePlan) {
+        this.txtFiles.push(event.dataTransfer.files[0]);
+      } else {
+        const filesToUpload: File[] = Array.from(event.dataTransfer.files);
+        filesToUpload.forEach(file => {
+          if (!this.txtFiles.some(existingFile => existingFile.name === file.name)) {
+            this.txtFiles.push(file);
+          }
+        });
+      }
+    }
+  }
+
   onCsvFileSelect(event: any): void {
-    const selectedFiles: File[] = Array.from(event.target.files);  // Convert selected files to an array
+    this.checkPlan();
+    const selectedFiles: File[] = Array.from(event.target.files);
     selectedFiles.forEach(file => {
       if (!this.csvFiles.some(existingFile => existingFile.name === file.name)) {
-        this.csvFiles.push(file);  // Only add the file if it's not already present
+        this.csvFiles.push(file);
       }
     });
   }
@@ -38,9 +93,13 @@ export class InvoiceComparisonComponent {
     const selectedFiles: File[] = Array.from(event.target.files);  // Convert selected files to an array
     selectedFiles.forEach(file => {
       if (!this.txtFiles.some(existingFile => existingFile.name === file.name)) {
-        this.txtFiles.push(file);  // Only add the file if it's not already present
+        this.txtFiles.push(file);
       }
     });
+  }
+
+  triggerFileInput(inputId: string): void {
+    document.getElementById(inputId)?.click();
   }
 
   uploadFiles(): void {
@@ -89,16 +148,6 @@ export class InvoiceComparisonComponent {
   resetPage() {
     this.csvFiles = [];
     this.txtFiles = [];
-    // const csvInput = <HTMLInputElement>document.getElementById('csv-upload');
-    // const txtInput = <HTMLInputElement>document.getElementById('txt-upload');
-    //
-    // if (csvInput) {
-    //   csvInput.value = '';
-    // }
-    //
-    // if (txtInput) {
-    //   txtInput.value = '';
-    // }
   }
 
 }

@@ -1,0 +1,160 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Blurs the background */
+  z-index: 1000;
+  overflow-y: auto; /* Allow scrolling for the entire page */
+  animation: fadeIn 0.5s ease-out;
+  padding: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  max-width: 90%;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.5s ease-out;
+  border-radius: 10px;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Plan Cards Styling */
+.plan-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.title {
+  color: #483AB6;
+}
+
+.sub-title {
+  color: #6557cf;
+}
+
+.plan-card {
+  background-color: white;
+  border: 2px solid #483AB6;
+  border-radius: 12px;
+  padding: 20px;
+  flex: 1 1 220px; /* Ensures all cards have a fixed minimum width */
+  max-width: 400px; /* Ensures the max width is the same for all cards */
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.plan-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.plan-card.selected h3,
+.plan-card.selected h4,
+.plan-card.selected ul,
+.plan-card.selected ul li {
+  color: white;
+}
+
+.plan-card.selected {
+  background-color: #483AB6;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.plan-card h3 {
+  color: #483AB6;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.plan-card h4 {
+  color: #6557cf;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.plan-card ul {
+  color: #584ca6;
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.plan-card ul li {
+  margin-bottom: 10px;
+  padding-left: 30px;
+  position: relative;
+}
+/* Button Styling */
+button {
+  background-color: #483AB6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.plan-card.selected button {
+  background-color: white;
+  color: #483AB6;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #6c63ff;
+}
+
+/* Close Button */
+.close-btn {
+  background-color: transparent;
+  border: 2px solid #483AB6;
+  color: #483AB6;
+  margin-left: 10px;
+}
+
+.close-btn:hover {
+  background-color: #483AB6;
+  color: white;
+}
+
+.continue-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .plan-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .plan-card {
+    width: 100%; /* Cards take full width on small screens */
+    max-width: 300px; /* Set a consistent max-width for mobile */
+  }
+}

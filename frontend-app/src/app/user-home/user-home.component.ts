@@ -4,6 +4,7 @@ import {ComparisonMetric, Metrics, UserProfile, UserService} from "../services/u
 import {AsyncPipe, DatePipe, NgIf} from "@angular/common";
 import {of, switchMap} from "rxjs";
 import {Chart} from 'chart.js/auto';
+import {ToggleService} from "../services/toggle.service";
 
 @Component({
   selector: 'app-user-home',
@@ -29,7 +30,7 @@ export class UserHomeComponent implements OnInit {
   @ViewChild('comparisonPieChart', {static: false}) comparisonPieChart?: ElementRef<HTMLCanvasElement>;
 
 
-  constructor(private userService: UserService, private loadingService: LoadingService, private cdr: ChangeDetectorRef) {
+  constructor(private userService: UserService, private loadingService: LoadingService, private cdr: ChangeDetectorRef, private toggleService: ToggleService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +39,10 @@ export class UserHomeComponent implements OnInit {
     this.userService.fetchUserProfile().pipe(
       switchMap((userProfile) => {
         this.profile = userProfile;
+        if (!userProfile.isAcknowledge) {
+          localStorage.setItem('hasSeenPopup', 'false');
+          this.toggleService.showSubscriptions();
+        }
         if (userProfile.username) {
           return this.userService.loadMetrics(userProfile.username);
         }

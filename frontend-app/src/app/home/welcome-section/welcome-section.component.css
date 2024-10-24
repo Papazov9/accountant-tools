@@ -1,76 +1,112 @@
 :host {
-  height: 100vh;
+  min-height: 120vh; /* Extending the section beyond the viewport */
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align content to the left */
-  background-image: url('/assets/welcome-background.jpeg'); /* Update image path if needed */
+  justify-content: center; /* Align everything in the center */
+  background-image: url('/assets/welc0me-background.jpg');
   background-size: cover;
   background-position: center;
-  padding-left: 100px; /* Adjust this value to move the text further to the left */
+  padding: 60px 30px; /* Extra space for top padding */
 }
 
-.text-container {
-  max-width: 500px;
-  color: #483AB6; /* Text color */
-  text-align: left; /* Align text to the left */
-  margin-left: 40px;
+.content-container {
+  text-align: center;
+  color: #483AB6;
 }
 
-.text-container h1 {
-  font-size: 3rem;
+.sub-header {
+  color: #7e7ce4; /* A light blue color for sub-header */
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.content-container h1 {
+  font-size: 3.5rem; /* Larger title for better readability */
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
-.text-container p {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  margin-bottom: 30px;
+.animate {
+  color: #483AB6;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 40px;
+  color: #7e7ce4;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px; /* Space between buttons and image */
 }
 
 .cta-button {
   padding: 15px 30px;
-  background-color: #483AB6;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta-button:hover {
-  transform: scale(0.95);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.cta-button.primary {
+  background-color: #483AB6;
+  color: white;
+  border: 2px solid #483AB6;
 }
 
-/* Ensure the text stays on the left and doesn't overlap the center */
-.welcome-section {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start; /* Ensure the container stays aligned left */
-  padding-left: 5%;
+.cta-button.primary:hover {
+  transform: scale(0.97);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.text-container {
-  flex: 1 0 30%; /* Keep the text container on the left side, occupying 30% */
+.cta-button.secondary {
+  background-color: white;
+  color: #483AB6;
+  border: 2px solid #483AB6;
 }
 
-/* Responsive Design */
+.cta-button.secondary:hover {
+  background-color: rgba(72, 58, 182, 0.2);
+  transform: scale(0.97);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Dashboard image */
+.dashboard-img {
+  max-width: 70%;
+  margin: 50px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow to make it stand out */
+  border-radius: 10px; /* Rounded corners for aesthetic */
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); /* Fade effect */
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   :host {
-    padding-left: 30px; /* Reduce padding on smaller screens */
+    padding: 30px; /* Smaller padding for mobile screens */
   }
 
-  .text-container h1 {
-    font-size: 2rem;
+  .content-container h1 {
+    font-size: 2.8rem; /* Smaller font size for mobile */
   }
 
-  .text-container p {
-    font-size: 1rem;
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .dashboard-img {
+    max-width: 90%;
+    margin: 30px 0;
   }
 
   .cta-button {
-    padding: 10px 20px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }

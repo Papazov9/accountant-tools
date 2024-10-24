@@ -1,25 +1,35 @@
-<!-- Top Navbar for non-logged users -->
-<header *ngIf="!isLoggedIn()">
-  <app-navbar></app-navbar>
-</header>
+<!-- App Component -->
+<div class="app-container">
+  <!-- Top Navbar for non-logged users -->
+  <div *ngIf="!isLoggedIn()">
+    <app-navbar></app-navbar>
+  </div>
 
-<!-- Loading Spinner -->
-<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <!-- Loading Spinner -->
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 
-<!-- Main container for logged-in view -->
-<div class="main-container" *ngIf="isLoggedIn(); else loggedOutContent">
-  <button class="hamburger-button" (click)="toggleSideNav()">
-    <i class="fa" [ngClass]="isNavOpen ? 'fa-times' : 'fa-bars'"></i>
-  </button>
-  <app-side-navbar [ngClass]="{ 'open': isNavOpen, 'closed': !isNavOpen }"></app-side-navbar>
-  <div class="content-container">
-    <router-outlet></router-outlet>
+  <!-- Main container for logged-in view -->
+  <main>
+    <div class="main-container" *ngIf="isLoggedIn(); else loggedOutContent">
+      <button class="hamburger-button" (click)="toggleSideNav()">
+        <i class="fa" [ngClass]="isNavOpen ? 'fa-times' : 'fa-bars'"></i>
+      </button>
+      <app-side-navbar [ngClass]="{ 'open': isNavOpen, 'closed': !isNavOpen }"></app-side-navbar>
+      <div class="content-container">
+        <app-subscriptions *ngIf="isSubVisible"></app-subscriptions>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <!-- Content for non-logged users -->
+    <ng-template #loggedOutContent>
+      <div class="guest-container">
+        <router-outlet></router-outlet>
+      </div>
+    </ng-template>
+  </main>
+
+  <div *ngIf="!isLoggedIn()">
+    <app-footer></app-footer>
   </div>
 </div>
-
-<!-- Content for non-logged users -->
-<ng-template #loggedOutContent>
-  <div class="guest-container">
-    <router-outlet></router-outlet>
-  </div>
-</ng-template>

@@ -8,11 +8,13 @@ import {AuthGuard} from "./guards/AuthGuard";
 import {InvoiceComparisonComponent} from "./invoice-comparison/invoice-comparison.component";
 import {AuthGuardForHome} from "./guards/AuthGuardForHome";
 import {NotAuthGuard} from "./guards/NotAuthGuard";
+import {SubscriptionsComponent} from "./subscriptions/subscriptions.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardForHome]},
   {path: 'dashboard', component: UserHomeComponent, canActivate: [AuthGuard]},
+  {path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuard]},
   {path: 'invoice-comparison', component: InvoiceComparisonComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard]},

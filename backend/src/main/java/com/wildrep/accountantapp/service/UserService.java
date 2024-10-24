@@ -20,6 +20,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +60,7 @@ public class UserService {
                 .gender(Gender.valueOf(registerRequest.gender().toUpperCase()))
                 .roles(Set.of(role))
                 .subscription(subscription)
+                .isAcknowledged(false)
                 .build();
 
         this.userRepository.saveAndFlush(user);
@@ -87,7 +89,7 @@ public class UserService {
 
         User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
 
-        return new DashboardUserResponse(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getGender().name(), "User loaded successfully!");
+        return new DashboardUserResponse(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getGender().name(), user.isAcknowledged(), "User loaded successfully!");
     }
 
     public String createNewToken(String username) {

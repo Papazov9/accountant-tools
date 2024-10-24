@@ -6,91 +6,116 @@
   color: #483AB6;
 }
 
-.title-section {
-  text-align: center;
-  margin-bottom: 20px;
+.futuristic-title {
+  font-size: 3rem;
+  color: #5e4cce;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  background: linear-gradient(to right, #5e4cce, #8a6ce2);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-.title-section h1 {
-  color: #483AB6;
-  font-size: 2.5rem;
+.futuristic-subtitle {
+  font-size: 1.2rem;
+  color: #8a6ce2;
+  margin-top: 10px;
+  text-transform: none;
+  letter-spacing: 1px;
 }
 
 .subscription-details {
+  display: flex;
+  justify-content: center;
   margin-bottom: 40px;
-  font-size: 1.1rem;
-  background-color: #f7f7ff;
-  padding: 10px;
-  border-radius: 5px;
+}
+
+.subscription-box {
+  background: #f1f1ff;
+  padding: 15px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  font-size: 1rem;
+}
+
+.subscription-box p {
+  margin: 10px 0;
+  color: #5e4cce;
+  font-weight: 600;
+}
+
+.comparison-count {
+
 }
 
 .upload-section {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
   gap: 20px;
-  max-width: 100%;
-  padding: 0 20px;
-  box-sizing: border-box; /* Ensures padding is included in the width */
+  flex-wrap: wrap;
 }
 
-.upload-section .dropbox-container {
-  width: 45%; /* Adjusted to 48% to create spacing between the boxes */
-  height: 250px;
-  padding: 20px;
-  border: 2px dashed #483AB6;
-  border-radius: 10px;
+.dropbox-container {
+  flex: 1 1 40%;
+  max-width: 40%;
+  padding: 30px;
+  background-color: white;
+  border-radius: 20px;
   position: relative;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  margin: 20px auto;
+}
+
+.dropbox {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-}
-.dropbox-container {
-  margin-top: 20px;
-}
-
-.upload-section .dropbox-container:hover {
-  background-color: #f0f0ff;
-}
-
-.upload-section .dropbox-label {
-  font-size: 1.2rem;
-  color: #483AB6;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100%; /* Ensures label is centered vertically */
+  border: 3px dotted #483AB6;
+  border-radius: 20px;
+  align-items: center;
+  height: 150px;
+  background-color: #e0d8ff;
+  padding: 20px;
+}
+
+.dropbox-label {
+  color: #483AB6;
+  font-size: 1.2rem;
 }
 
 .uploaded-files {
-  margin-top: 10px;
   list-style-type: none;
+  margin-top: 30px;
+  padding: 0;
   font-size: 0.9rem;
-  color: #483AB6;
+}
+
+.uploaded-files li {
+  position: relative;
+  margin-bottom: 10px;
+  background-color: #f0f0ff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.remove-button {
   position: absolute;
-  bottom: 10px; /* Pushes the "No files selected" text to the bottom */
-}
-
-input[type="file"] {
-  display: none; /* Completely hide the file input field */
-}
-
-.progress-bar {
-  width: 100%;
-  background-color: #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-.progress {
-  height: 10px;
-  background-color: #483AB6;
-  border-radius: 10px;
+  right: 12px;
+  top: 3px;
+  background-color: red;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .upload-button {
@@ -101,20 +126,23 @@ input[type="file"] {
   border-radius: 5px;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  margin-top: 30px;
 }
+
 
 .upload-button:hover {
   background-color: #483AB6;
 }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .upload-section {
     flex-direction: column;
+    align-items: center;
   }
 
-  .upload-section .dropbox-container {
-    width: 100%;
-    margin-bottom: 20px;
+  .dropbox-container {
+    max-width: 90%;
+    width: 90%;
   }
 }

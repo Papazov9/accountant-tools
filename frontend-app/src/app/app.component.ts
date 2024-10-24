@@ -7,6 +7,9 @@ import {AuthService} from "./services/auth.service";
 import {NgClass, NgIf} from "@angular/common";
 import {SideNavbarComponent} from "./side-navbar/side-navbar.component";
 import {SidebarService} from "./services/sidebar.service";
+import {FooterComponent} from "./footer/footer.component";
+import {SubscriptionsComponent} from "./subscriptions/subscriptions.component";
+import {ToggleService} from "./services/toggle.service";
 
 @Component({
   selector: 'app-root',
@@ -19,23 +22,28 @@ import {SidebarService} from "./services/sidebar.service";
     LoadingSpinnerComponent,
     NgIf,
     SideNavbarComponent,
-    NgClass
+    NgClass,
+    FooterComponent,
+    SubscriptionsComponent
   ]
 })
 export class AppComponent implements OnInit {
   isNavOpen: boolean = true;
   isLoading: boolean = false;
+  isSubVisible: boolean = false;
 
   constructor(
     private authService: AuthService,
     private sideBarService: SidebarService,
     private loadingService: LoadingService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toggleService: ToggleService,
   ) {
   }
 
   ngOnInit(): void {
     // Subscribe to sidebar service to keep the sidebar state updated
+    this.toggleService.loadingOverlay$.subscribe((subVisible) => this.isSubVisible = subVisible);
     this.loadingService.loadingOverlay$.subscribe((isLoading) => {
       this.isLoading = isLoading;
       this.cdr.detectChanges();

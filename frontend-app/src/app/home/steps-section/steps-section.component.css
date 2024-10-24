@@ -37,18 +37,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 0;
-  background: transparent; /* No background */
-  border-radius: 10px;
-  color: white; /* Text color to stand out on the purple background */
+  background: transparent;
+  color: white;
 }
 
 .step-img {
-  width: 45%;
-  height: auto;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .step-content {
+  margin-left: 40px;
   width: 50%;
   padding-left: 20px;
   text-align: left;
@@ -65,7 +64,6 @@
   font-size: 1.1rem;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .steps {
     flex-direction: column;

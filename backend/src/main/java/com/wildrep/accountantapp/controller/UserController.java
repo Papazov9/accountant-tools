@@ -22,9 +22,9 @@ public class UserController {
 
             return ResponseEntity.ok(dashboardUserResponse);
         } catch (UserDoesNotExistException e) {
-            return ResponseEntity.badRequest().body(new DashboardUserResponse(null, null, null, null, null, e.getMessage()));
+            return ResponseEntity.badRequest().body(new DashboardUserResponse(null, null, null, null, null,false, e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DashboardUserResponse(null, null, null, null, null, "An error occurred while loading user info!"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DashboardUserResponse(null, null, null, null, null,false, "An error occurred while loading user info!"));
         }
     }
 

@@ -3,6 +3,8 @@ import {AuthService} from "../services/auth.service";
 import {Router, RouterLink} from "@angular/router";
 import {NgClass, NgIf} from "@angular/common";
 import {UserService} from "../services/user.service";
+import {NavbarComponent} from "../navbar/navbar.component";
+import {ToggleService} from "../services/toggle.service";
 
 @Component({
   selector: 'app-side-navbar',
@@ -18,7 +20,7 @@ import {UserService} from "../services/user.service";
 export class SideNavbarComponent implements OnInit {
   profile: any = null;
 
-  constructor(private authService: AuthService, private userService: UserService, private router: Router) {}
+  constructor(private authService: AuthService, private userService: UserService, private router: Router, private toggleService: ToggleService) { }
 
   ngOnInit(): void {
     this.userService.fetchUserProfile().subscribe(profile => {
@@ -32,6 +34,6 @@ export class SideNavbarComponent implements OnInit {
   }
 
   clickSub() {
-    console.log(this.profile)
+    this.toggleService.showSubscriptions();
   }
 }

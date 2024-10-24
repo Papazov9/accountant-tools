@@ -9,6 +9,7 @@ export interface UserProfile {
   lastName: string;
   email: string;
   gender: string;
+  isAcknowledge: boolean;
 }
 
 export interface ComparisonMetric {

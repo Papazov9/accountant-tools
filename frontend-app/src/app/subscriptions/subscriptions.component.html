@@ -1,0 +1,25 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <h2 class="title">Choose a Subscription Plan</h2>
+    <p class="sub-title">Select a plan or close this window.</p>
+
+    <div class="plan-cards">
+      <div *ngFor="let plan of subscriptionPlans" class="plan-card" [ngClass]="{ 'selected': selectedPlan === plan }">
+        <h3>{{ plan.title }}</h3>
+        <h4>{{ plan.price }} EUR</h4>
+        <p>{{ plan.comparisons }} Comparisons</p>
+        <ul>
+          <li *ngFor="let feature of plan.pros">
+            <span class="tick-icon" [ngClass]="{ 'selected-tick': selectedPlan === plan }"></span>{{ feature }}
+          </li>
+        </ul>
+        <button (click)="selectPlan(plan)">Select</button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button [disabled]="!selectedPlan" class="continue-btn" (click)="proceedToPayment()">Continue to Payment</button>
+      <button class="close-btn" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>

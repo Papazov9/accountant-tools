@@ -54,20 +54,19 @@ public class User {
     @Column(name = "comparison_count")
     private Integer comparisonCount;
 
+    @Column(name = "is_acknowledged")
+    private boolean isAcknowledged;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public void resetComparisonCount() {
+    public void addComparisons(int amount) {
         if (subscription != null) {
-            this.comparisonCount = subscription.getMaxComparisons();
+            this.comparisonCount += amount;
         }
-    }
-
-    public boolean canMakeComparison() {
-        return comparisonCount != null && comparisonCount > 0;
     }
 
     public void decrementComparisonCount() {
@@ -75,4 +74,9 @@ public class User {
             this.comparisonCount--;
         }
     }
+
+    public boolean canMakeComparison() {
+        return comparisonCount != null && comparisonCount > 0;
+    }
+
 }
