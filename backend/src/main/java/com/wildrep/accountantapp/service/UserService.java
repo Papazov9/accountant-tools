@@ -1,6 +1,7 @@
 package com.wildrep.accountantapp.service;
 
 import com.wildrep.accountantapp.exceptions.RoleDoesNotExist;
+import com.wildrep.accountantapp.exceptions.SubscriptionNotFoundException;
 import com.wildrep.accountantapp.exceptions.UserAlreadyExistsException;
 import com.wildrep.accountantapp.exceptions.UserDoesNotExistException;
 import com.wildrep.accountantapp.model.Role;
@@ -20,7 +21,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -46,9 +46,6 @@ public class UserService {
         Role role = this.roleRepository
                 .findByRoleName(RoleEnum.USER)
                 .orElseThrow(() -> new RoleDoesNotExist(RoleEnum.USER.name()));
-        Subscription subscription = this.subscriptionRepository
-                .findByType(SubscriptionType.FREE)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid subscription name!"));
 
         User user = User.builder()
                 .username(registerRequest.username())
@@ -59,7 +56,6 @@ public class UserService {
                 .lastName(registerRequest.lastName())
                 .gender(Gender.valueOf(registerRequest.gender().toUpperCase()))
                 .roles(Set.of(role))
-                .subscription(subscription)
                 .isAcknowledged(false)
                 .build();
 
@@ -88,13 +84,25 @@ public class UserService {
     public DashboardUserResponse loadUserData(String username) {
 
         User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
+        SubscriptionResponse subscriptionResponse = new SubscriptionResponse(user.getSubscription().getType().name(), user.getSubscription().getPrice(), user.getComparisonCount(), user.getSubscription().getDescription());
 
-        return new DashboardUserResponse(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getGender().name(), user.isAcknowledged(), "User loaded successfully!");
+        return new DashboardUserResponse(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getGender().name(), user.isAcknowledged(), "User loaded successfully!", subscriptionResponse);
     }
 
     public String createNewToken(String username) {
         User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
 
      return this.jwtUtil.generateNewToken(user);
+    }
+
+    public String updateUserSubscription(SubscriptionType subscriptionType, String username) {
+        Subscription subscription = this.subscriptionRepository.findByType(subscriptionType).orElseThrow(() -> new SubscriptionNotFoundException(String.format("Subscription with name: %s was not found", subscriptionType.name())));
+        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
+        user.setSubscription(subscription);
+        user.setAcknowledged(true);
+        user.setComparisonCount(subscription.getMaxComparisons());
+
+        this.userRepository.saveAndFlush(user);
+        return String.format("Subscription with name: %s added successfully to user with username: %s!", subscriptionType.name(), username);
     }
 }

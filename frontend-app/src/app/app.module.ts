@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -11,6 +11,8 @@ import {NgOptimizedImage} from "@angular/common";
 import {WelcomeSectionComponent} from "./home/welcome-section/welcome-section.component";
 import {OverviewSectionComponent} from "./home/overview-section/overview-section.component";
 import {StepsSectionComponent} from "./home/steps-section/steps-section.component";
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import {GlobalErrorHandler} from "./services/GlobalErrorHandler";
 
 @NgModule({
   declarations: [
@@ -28,8 +30,9 @@ import {StepsSectionComponent} from "./home/steps-section/steps-section.componen
     WelcomeSectionComponent,
     OverviewSectionComponent,
     StepsSectionComponent,
+    SweetAlert2Module.forRoot()
   ],
-  providers: [],
+  providers: [{provide: ErrorHandler, useClass: GlobalErrorHandler}],
   bootstrap: []
 })
 export class AppModule { }

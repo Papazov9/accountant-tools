@@ -1,7 +1,9 @@
 package com.wildrep.accountantapp.controller;
 
 import com.wildrep.accountantapp.exceptions.UserDoesNotExistException;
+import com.wildrep.accountantapp.model.Subscription;
 import com.wildrep.accountantapp.model.dto.DashboardUserResponse;
+import com.wildrep.accountantapp.model.enums.SubscriptionType;
 import com.wildrep.accountantapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,15 +19,17 @@ public class UserController {
 
     @GetMapping("/dashboard/{username}")
     public ResponseEntity<DashboardUserResponse> loadDashboardData(@PathVariable String username) {
-        try {
-            DashboardUserResponse dashboardUserResponse = this.userService.loadUserData(username);
-
-            return ResponseEntity.ok(dashboardUserResponse);
-        } catch (UserDoesNotExistException e) {
-            return ResponseEntity.badRequest().body(new DashboardUserResponse(null, null, null, null, null,false, e.getMessage()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DashboardUserResponse(null, null, null, null, null,false, "An error occurred while loading user info!"));
-        }
+        DashboardUserResponse dashboardUserResponse = this.userService.loadUserData(username);
+        return ResponseEntity.ok(dashboardUserResponse);
     }
 
+    @GetMapping("/free/{username}")
+    public ResponseEntity<String> freeSubscription(@PathVariable String username) {
+        try {
+            String result = this.userService.updateUserSubscription(SubscriptionType.FREE, username);
+            return ResponseEntity.ok(result);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 }

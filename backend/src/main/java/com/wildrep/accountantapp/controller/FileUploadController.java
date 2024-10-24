@@ -30,8 +30,6 @@ public class FileUploadController {
     public ResponseEntity<?> uploadFiles(@RequestParam("csvFiles") List<MultipartFile> csvFiles,
                                          @RequestParam("txtFiles") List<MultipartFile> txtFiles,
                                          @RequestParam("username") String username) {
-
-        // Validations
         if (csvFiles.size() > 12 || txtFiles.size() > 12) {
             return ResponseEntity.badRequest().body("You can upload up to 12 files per format.");
         }

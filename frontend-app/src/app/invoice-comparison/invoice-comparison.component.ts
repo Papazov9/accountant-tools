@@ -1,9 +1,12 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LoadingService} from "../services/loading.service";
 import {InvoiceComparisonService} from "../services/invoice-comparison.service";
 import {HttpClient, HttpEventType, HttpResponse, HttpStatusCode} from "@angular/common/http";
 import {CommonModule, NgIf} from "@angular/common";
+import {UserProfile, UserService} from "../services/user.service";
+import Swal from "sweetalert2";
+import {ToggleService} from "../services/toggle.service";
 
 @Component({
   selector: 'app-invoice-comparison',
@@ -16,14 +19,34 @@ import {CommonModule, NgIf} from "@angular/common";
   templateUrl: './invoice-comparison.component.html',
   styleUrl: './invoice-comparison.component.css'
 })
-export class InvoiceComparisonComponent {
+export class InvoiceComparisonComponent implements OnInit {
   csvFiles: File[] = [];
   txtFiles: File[] = [];
-  remainingComparisons: number = 5;
-  subscriptionPlan: string = "FREE";
   isFreePlan: boolean = true;
+  userProfile?: UserProfile;
 
-  constructor(private comparisonService: InvoiceComparisonService) {
+  constructor(private comparisonService: InvoiceComparisonService, private userService: UserService, private loadingService: LoadingService, private cdr: ChangeDetectorRef, private toggleService: ToggleService) {
+  }
+
+  ngOnInit(): void {
+    this.loadingService.showOverlay();
+    this.userService.fetchUserProfile().subscribe({
+      next: userProfile => {
+        if (userProfile) {
+          this.userProfile = userProfile;
+          this.isFreePlan = this.userProfile?.subscription?.title === 'FREE';
+          this.cdr.detectChanges();
+        }else {
+          console.error("User not logged in!");
+        }
+      },
+      error: error => {
+        this.loadingService.hideOverlay();
+      },
+      complete: () => {
+        this.loadingService.hideOverlay();
+      }
+    });
   }
 
   onDragOver(event: DragEvent): void {
@@ -103,8 +126,33 @@ export class InvoiceComparisonComponent {
   }
 
   uploadFiles(): void {
+    if (this.userProfile?.subscription?.comparisons === 0) {
+      Swal.fire({
+        title: 'Attention',
+        text: `It seems you are out of comparisons! Would you want to upgrade your plan to add some?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#584ca6',
+        confirmButtonText: 'Upgrade Plan!',
+        cancelButtonColor: '#d33',
+        background: '#ffffff'
+      }).then(result => {
+        if (result.isConfirmed) {
+          this.toggleService.showSubscriptions();
+        }
+      });
+
+      return;
+    }
     if (this.csvFiles.length === 0 || this.txtFiles.length === 0) {
-      alert("Please select both CSV and TXT files.");
+      Swal.fire({
+        title: 'Attention',
+        text: `Please select files from both types, otherwise the comparison cannot be possible!`,
+        icon: 'warning',
+        confirmButtonColor: '#584ca6',
+        confirmButtonText: 'Okay',
+        background: '#ffffff'
+      });
       return;
     }
 

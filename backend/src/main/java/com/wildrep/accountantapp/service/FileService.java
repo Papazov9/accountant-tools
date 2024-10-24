@@ -1,6 +1,7 @@
 package com.wildrep.accountantapp.service;
 
 import com.wildrep.accountantapp.exceptions.ComparisonNotFoundException;
+import com.wildrep.accountantapp.exceptions.NoComparisonsLeftException;
 import com.wildrep.accountantapp.exceptions.UserDoesNotExistException;
 import com.wildrep.accountantapp.model.*;
 import com.wildrep.accountantapp.model.dto.OldComparisonReportDTO;
@@ -38,6 +39,10 @@ public class FileService {
                 .findByUsername(username)
                 .orElseThrow(() -> new UserDoesNotExistException(username));
 
+        if (user.getComparisonCount() == 0) {
+            throw new NoComparisonsLeftException();
+        }
+
         Comparison comparison = Comparison.builder()
                 .comparisonDate(LocalDateTime.now())
                 .batchId(batchId)
@@ -74,16 +79,18 @@ public class FileService {
         AtomicLong mismatches = new AtomicLong();
         results.forEach(c -> mismatches.addAndGet(c.getMismatchedFields().size()));
         metricsService.updateMetricsAfterComparison(user, true, mismatches.get());
-        return XlsxWriterUtil.generateComparisonReport(results);
-    }
+        ByteArrayOutputStream byteArrayOutputStream = XlsxWriterUtil.generateComparisonReport(results);
 
+        user.decrementComparisonCount();
+        this.userRepository.saveAndFlush(user);
+        return byteArrayOutputStream;
+    }
 
     public OldComparisonReportDTO loadResourceFromOldComparison(String batchId) {
         Comparison comparison = this.comparisonRepository.findByBatchId(batchId)
                 .orElseThrow(() -> new ComparisonNotFoundException(batchId));
 
         ByteArrayOutputStream reportStream = XlsxWriterUtil.generateComparisonReport(comparison.getComparisonResults());
-
         return new OldComparisonReportDTO(reportStream, comparison.getComparisonDate());
     }
 }

@@ -5,7 +5,7 @@ import {NgForOf} from "@angular/common";
 export interface PricingPlan {
   title: string;
   price: string,
-  comparisons: string,
+  comparisons: number,
   pros: string[],
   buttonText: string,
 }

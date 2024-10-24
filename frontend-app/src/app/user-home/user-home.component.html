@@ -5,55 +5,46 @@
       <p>Here is a quick summary of your invoice comparisons.</p>
     </header>
 
-    <!-- Metrics Section -->
     <div *ngIf="metrics; else noMetrics">
       <div class="metrics-container">
 
-        <!-- Graph Section for Line Chart and Pie Chart -->
         <div class="graph-section-container">
-          <!-- Mismatch Chart (Line Chart) -->
           <div class="graph-section">
             <canvas #mismatchChart></canvas>
           </div>
 
-          <!-- Pie Chart for Total Comparisons -->
           <div class="graph-section">
             <canvas #comparisonPieChart></canvas>
           </div>
         </div>
 
-        <!-- Total Comparisons Card -->
         <div class="metric-card">
           <h2>Total Comparisons</h2>
           <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.totalComparisons }}</span>
         </div>
 
-        <!-- Successful Comparisons Card -->
         <div class="metric-card">
           <h2>Successful Comparisons</h2>
           <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.successfulComparisons }}</span>
         </div>
 
-        <!-- Failed Comparisons Card -->
         <div class="metric-card">
           <h2>Failed Comparisons</h2>
           <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.failedComparisons }}</span>
         </div>
 
-        <!-- Total Mismatches Card -->
+
         <div class="metric-card">
           <h2>Total Mismatches</h2>
           <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.totalMismatches }}</span>
         </div>
       </div>
 
-      <!-- No Data Message for Graph -->
       <div class="no-data-message" *ngIf="metrics.empty">
         <p>No data available for graph.</p>
       </div>
     </div>
 
-    <!-- Fallback when no metrics available -->
     <ng-template #noMetrics>
       <p>No metrics available yet.</p>
     </ng-template>

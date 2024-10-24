@@ -38,15 +38,15 @@ export class UserHomeComponent implements OnInit {
 
     this.userService.fetchUserProfile().pipe(
       switchMap((userProfile) => {
-        this.profile = userProfile;
-        if (!userProfile.isAcknowledge) {
-          localStorage.setItem('hasSeenPopup', 'false');
-          this.toggleService.showSubscriptions();
+        if (userProfile) {
+          this.profile = userProfile;
+          if (!userProfile.isAcknowledge) {
+            this.toggleService.showSubscriptions();
+          }
+          if (userProfile.username) {
+            return this.userService.loadMetrics(userProfile.username);
+          }
         }
-        if (userProfile.username) {
-          return this.userService.loadMetrics(userProfile.username);
-        }
-
         return of(null);
       })
     ).subscribe({

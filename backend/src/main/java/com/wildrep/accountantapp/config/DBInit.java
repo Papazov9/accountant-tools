@@ -41,23 +41,50 @@ public class DBInit implements CommandLineRunner {
                     subscription.setMaxComparisons(1);
                     subscription.setDescription("Basic subscription type with very limited rights.");
                 }
+                case PRO -> {
+                    subscription.setType(s);
+                    subscription.setPrice(23.01);
+                    subscription.setMaxComparisons(3);
+                    subscription.setDescription("Pro tier subscription. Best for private use by 1 person. Pros: Premium Support\n" +
+                            "Access to All Features\n" +
+                            "Priority Email Support\n" +
+                            "Additional Comparisons ");
+                }
                 case PREMIUM -> {
                     subscription.setType(s);
-                    subscription.setPrice(9.99);
-                    subscription.setMaxComparisons(10);
-                    subscription.setDescription("Premium tier subscription. Best for private use by 1 person.");
+                    subscription.setPrice(38.35);
+                    subscription.setMaxComparisons(6);
+                    subscription.setDescription("Premium tier subscription. Best for private use by 1 person. Pros: Business-Level Support\n" +
+                            "Team Management\n" +
+                            "Access to Advanced Features\n" +
+                            "Additional Comparisons ");
                 }
                 case BUSINESS -> {
                     subscription.setType(s);
-                    subscription.setPrice(19.99);
-                    subscription.setMaxComparisons(20);
-                    subscription.setDescription("Business tier subscription. Suitable for small business.");
+                    subscription.setPrice(46.02);
+                    subscription.setMaxComparisons(9);
+                    subscription.setDescription("Business tier subscription. Suitable for small business. Pros: Dedicated Support\n" +
+                            "Custom Integrations\n" +
+                            "Unlimited Comparisons\n" +
+                            "Priority Handling");
                 }
                 case ENTERPRISE -> {
                     subscription.setType(s);
-                    subscription.setPrice(29.99);
-                    subscription.setMaxComparisons(30);
-                    subscription.setDescription("Enterprise tier subscription. The ULTIMATE choice for UNPARALLELED results!");
+                    subscription.setPrice(51.13);
+                    subscription.setMaxComparisons(12);
+                    subscription.setDescription("Enterprise tier subscription. The ULTIMATE choice for UNPARALLELED results! Pros: Dedicated Support\n" +
+                            "Custom Integrations\n" +
+                            "Unlimited Comparisons\n" +
+                            "Priority Handling ");
+                }
+                case UNPARALLELED -> {
+                    subscription.setType(s);
+                    subscription.setPrice(61.35);
+                    subscription.setMaxComparisons(10000);
+                    subscription.setDescription("Enterprise tier subscription. The ULTIMATE choice for UNPARALLELED results! Pros: Dedicated Support\n" +
+                            "Custom Integrations\n" +
+                            "Unlimited Comparisons\n" +
+                            "Priority Handling ");
                 }
             }
             this.subscriptionRepository.saveAndFlush(subscription);

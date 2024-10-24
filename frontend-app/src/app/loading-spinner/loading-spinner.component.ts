@@ -20,6 +20,7 @@ export class LoadingSpinnerComponent implements OnInit {
   ngOnInit(): void {
     this.loadingService.loadingOverlay$.subscribe((loading) => {
       this.isLoading = loading;
+
     });
   }
 }

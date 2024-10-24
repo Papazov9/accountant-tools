@@ -9,6 +9,7 @@ import {InvoiceComparisonComponent} from "./invoice-comparison/invoice-compariso
 import {AuthGuardForHome} from "./guards/AuthGuardForHome";
 import {NotAuthGuard} from "./guards/NotAuthGuard";
 import {SubscriptionsComponent} from "./subscriptions/subscriptions.component";
+import {ErrorComponent} from "./error/error.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -18,7 +19,8 @@ export const routes: Routes = [
   {path: 'invoice-comparison', component: InvoiceComparisonComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard]},
-  {path: '**', redirectTo: 'home'}
+  {path: '**', redirectTo: 'home'},
+  { path: 'error/:code', component: ErrorComponent },
 ];
 
 @NgModule({

@@ -129,10 +129,19 @@
   margin-top: 30px;
 }
 
+.disabled-button {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
 .upload-button:hover {
   background-color: #483AB6;
 }
+
+.disabled-button:hover {
+  background-color: #ccc; /* Keep the same background color */
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

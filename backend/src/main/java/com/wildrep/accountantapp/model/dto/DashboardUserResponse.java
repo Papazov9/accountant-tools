@@ -6,5 +6,6 @@ public record DashboardUserResponse(String email,
                                     String lastName,
                                     String gender,
                                     boolean isAcknowledge,
-                                    String message) {
+                                    String message,
+                                    SubscriptionResponse subscription) {
 }

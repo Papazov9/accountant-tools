@@ -8,8 +8,8 @@
   <!-- Subscription Details Section -->
   <div class="subscription-details">
     <div class="subscription-box">
-      <p><strong>Comparisons Left: </strong><span class="comparison-count">{{ remainingComparisons }}</span></p>
-      <p><strong>Subscription Plan: </strong> <span class="sub-name">{{ subscriptionPlan }}</span></p>
+      <p><strong>Comparisons Left: </strong><span class="comparison-count">{{ userProfile?.subscription?.comparisons }}</span></p>
+      <p><strong>Subscription Plan: </strong> <span class="sub-name">{{ userProfile?.subscription?.title }}</span></p>
     </div>
   </div>
 
@@ -52,5 +52,5 @@
     </div>
   </div>
 
-  <button class="upload-button" (click)="uploadFiles()">Upload & Compare</button>
+  <button class="upload-button" [ngClass]="{'disabled-button' : userProfile?.subscription?.comparisons === 0}" (click)="uploadFiles()">Upload & Compare</button>
 </div>
