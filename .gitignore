@@ -6,3 +6,8 @@
 /dataSources/
 /dataSources.local.xml
 /node_modules
+/accountant-app/target/
+/.idea/
+/frontend-app/node_modules/
+/accountant-app/test-classes/
+/frontend-app/.idea/
