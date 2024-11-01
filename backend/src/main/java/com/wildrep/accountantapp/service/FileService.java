@@ -4,6 +4,7 @@ import com.wildrep.accountantapp.exceptions.ComparisonNotFoundException;
 import com.wildrep.accountantapp.exceptions.NoComparisonsLeftException;
 import com.wildrep.accountantapp.exceptions.UserDoesNotExistException;
 import com.wildrep.accountantapp.model.*;
+import com.wildrep.accountantapp.model.dto.HistoryRecordResponse;
 import com.wildrep.accountantapp.model.dto.OldComparisonReportDTO;
 import com.wildrep.accountantapp.repo.*;
 import com.wildrep.accountantapp.util.FileServiceUtil;
@@ -92,5 +93,21 @@ public class FileService {
 
         ByteArrayOutputStream reportStream = XlsxWriterUtil.generateComparisonReport(comparison.getComparisonResults());
         return new OldComparisonReportDTO(reportStream, comparison.getComparisonDate());
+    }
+
+    public List<HistoryRecordResponse> loadHistory(String username) {
+        User user = this.userRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new UserDoesNotExistException(username));
+
+        return this.comparisonRepository.findByUserOrderByComparisonDateDesc(user)
+                .stream()
+                .map(c -> new HistoryRecordResponse(
+                        c.getBatchId(),
+                        c.getStatus(),
+                        c.getComparisonDate(),
+                        "Success"))
+                .toList();
+
     }
 }

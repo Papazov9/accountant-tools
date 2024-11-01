@@ -1,62 +1,68 @@
 [
   {
     "title": "Pro",
-    "price": "23.01 EUR",
-    "comparisons": "3 Comparisons",
+    "price": 23.01,
+    "comparisons": 3,
     "pros": [
-      "Premium Support",
-      "Access to All Features",
+      "Access to All Essential Features",
       "Priority Email Support",
-      "Additional Comparisons"
+      "Monthly Usage Reports",
+      "3 Free Add-On Integrations",
+      "Extended Comparison Library"
     ],
-    "buttonText": "Learn More"
+    "buttonText": "Get Started"
   },
   {
     "title": "Premium",
-    "price": "38.35 EUR",
-    "comparisons": "6 Comparisons",
+    "price": 38.35,
+    "comparisons": 6,
     "pros": [
-      "Business-Level Support",
-      "Team Management",
-      "Access to Advanced Features",
-      "Additional Comparisons"
+      "Enhanced Business-Level Support",
+      "Unlimited Team Access",
+      "Advanced Analytics & Reports",
+      "5 Premium Add-Ons",
+      "Customized Comparison Tools"
     ],
-    "buttonText": "Learn More"
+    "buttonText": "Upgrade Now"
   },
   {
     "title": "Business",
-    "price": "46.02 EUR",
-    "comparisons": "9 Comparisons",
+    "price": 46.02,
+    "comparisons": 9,
     "pros": [
-      "Dedicated Support",
-      "Custom Integrations",
-      "Unlimited Comparisons",
-      "Priority Handling"
+      "Dedicated Account Manager",
+      "Priority Customer Success Assistance",
+      "Real-Time Data Access",
+      "10 Premium Add-Ons",
+      "Exclusive API Integrations"
     ],
-    "buttonText": "Learn More"
+    "buttonText": "Go Business"
   },
   {
     "title": "Enterprise",
-    "price": "51.13 EUR",
-    "comparisons": "12 Comparisons",
+    "price": 51.13,
+    "comparisons": 12,
     "pros": [
-      "Dedicated Support",
-      "Custom Integrations",
-      "Unlimited Comparisons",
-      "Priority Handling"
+      "On-Demand Dedicated Support",
+      "Unlimited Data Storage",
+      "24/7 Advanced Technical Assistance",
+      "15 Premium Add-Ons",
+      "Advanced Custom Integration Options"
     ],
-    "buttonText": "Learn More"
+    "buttonText": "Contact Us"
   },
   {
     "title": "Unparalleled",
-    "price": "61.35 EUR",
-    "comparisons": "UNLIMITED Comparisons",
+    "price": 61.35,
+    "comparisons": 1000,
     "pros": [
-      "Dedicated Support",
-      "Custom Integrations",
-      "Unlimited Comparisons",
-      "Priority Handling"
+      "Personalized Concierge Service",
+      "Bespoke Feature Development",
+      "Unlimited Global Comparisons",
+      "Ultimate Priority Support",
+      "Full Access to All Features & Integrations",
+      "Exclusive: Only Subscription Plan Offering Monthly Access with Unlimited Comparisons"
     ],
-    "buttonText": "Learn More"
+    "buttonText": "Experience the Best"
   }
 ]

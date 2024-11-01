@@ -38,12 +38,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/auth/**", "/index", "/api/files/upload").permitAll()
+                        .requestMatchers("/api/auth/**", "/index", "/api/stripe/webhook-checkout").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(new JwtAuthenticationFilter(this.jwtUtil, this.userDetailsService, authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)))
-                , UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(this.jwtUtil, this.userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

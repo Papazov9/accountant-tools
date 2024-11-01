@@ -10,17 +10,26 @@ import {AuthGuardForHome} from "./guards/AuthGuardForHome";
 import {NotAuthGuard} from "./guards/NotAuthGuard";
 import {SubscriptionsComponent} from "./subscriptions/subscriptions.component";
 import {ErrorComponent} from "./error/error.component";
+import {PaymentSuccessComponent} from "./payment-success/payment-success.component";
+import {PaymentCancelComponent} from "./payment-cancel/payment-cancel.component";
+import {HistoryComponent} from "./history/history.component";
+import {ConfirmCodeComponent} from "./confirm-code/confirm-code.component";
+import {CheckoutComponent} from "./checkout/checkout.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardForHome]},
+  {path: 'success', component: PaymentSuccessComponent, canActivate: [AuthGuard]},
+  {path: 'cancel', component: PaymentCancelComponent, canActivate: [AuthGuard]},
   {path: 'dashboard', component: UserHomeComponent, canActivate: [AuthGuard]},
-  {path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuard]},
   {path: 'invoice-comparison', component: InvoiceComparisonComponent, canActivate: [AuthGuard]},
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
+  {path: 'history', component: HistoryComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard]},
+  {path: 'confirm-code', component: ConfirmCodeComponent, canActivate: [NotAuthGuard]},
   {path: '**', redirectTo: 'home'},
-  { path: 'error/:code', component: ErrorComponent },
+  {path: 'error/:code', component: ErrorComponent}
 ];
 
 @NgModule({

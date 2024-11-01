@@ -54,6 +54,10 @@
   color: #6557cf;
 }
 
+.sub-title-warning {
+  color: red;
+}
+
 .plan-card {
   background-color: white;
   border: 2px solid #483AB6;
@@ -106,6 +110,7 @@
   margin-bottom: 10px;
   padding-left: 30px;
   position: relative;
+  text-wrap: auto;
 }
 /* Button Styling */
 button {
@@ -146,6 +151,47 @@ button:hover {
 .continue-btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.tick-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #483AB6;
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+}
+
+.tick-icon::after {
+  content: '✔'; /* Unicode checkmark */
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.selected-tick {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+
+}
+
+.selected-tick::after {
+  content: '✔'; /* Unicode checkmark */
+  color: #483AB6;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @media (max-width: 768px) {

@@ -12,7 +12,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     if (error instanceof HttpErrorResponse) {
       this.handleHttpError(error);
     } else {
-      console.error('An unexpected error occurred:', error);
+      console.error(error);
       this.router.navigate(['/error']);
     }
     this.loaderService.hideOverlay();

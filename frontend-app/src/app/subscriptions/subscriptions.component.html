@@ -2,12 +2,13 @@
   <div class="modal-content">
     <h2 class="title">Choose a Subscription Plan</h2>
     <p class="sub-title">Select a plan or close this window.</p>
+    <p class="sub-title-warning">This is a one-time payment options except the Unparalleled option. You will not be charged again unless you need more comparisons.</p>
 
     <div class="plan-cards">
       <div *ngFor="let plan of subscriptionPlans" class="plan-card" [ngClass]="{ 'selected': selectedPlan === plan }">
         <h3>{{ plan.title }}</h3>
-        <h4>{{ plan.price }}</h4>
-        <p>{{ plan.comparisons }}</p>
+        <h4>{{ plan.price }} EUR</h4>
+        <p>{{ plan.comparisons === 1000 ? 'Unlimited' : plan.comparisons }} Comparisons</p>
         <ul>
           <li *ngFor="let feature of plan.pros">
             <span class="tick-icon" [ngClass]="{ 'selected-tick': selectedPlan === plan }"></span>{{ feature }}

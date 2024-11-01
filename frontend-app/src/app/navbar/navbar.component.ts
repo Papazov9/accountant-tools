@@ -27,7 +27,7 @@ export class NavbarComponent {
   }
 
   isLoginOrRegisterPage() {
-    return this.router.url === '/login' || this.router.url === '/register';
+    return this.router.url === '/login' || this.router.url === '/register' || this.router.url === '/confirm-code';
   }
 
   scrollTo(event: MouseEvent) {

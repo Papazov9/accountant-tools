@@ -20,7 +20,7 @@
       <div class="dropbox" (drop)="onCsvDrop($event)"  (click)="triggerFileInput('csv-upload')">
         <i class="fa fa-cloud-upload" style="color: #483AB6; font-size: 50px; margin-bottom: 10px" aria-hidden="true"></i>
         <span class="dropbox-label">Drop CSV Files here or click to upload</span>
-        <input type="file" id="csv-upload" accept=".csv" (change)="onCsvFileSelect($event)" [disabled]="csvFiles.length >=1 && isFreePlan" multiple hidden>
+        <input type="file" id="csv-upload" accept=".csv" (change)="onCsvFileSelect($event)" [disabled]="(csvFiles.length >=1 && isFreePlan) || (userProfile?.subscription?.comparisons === 0)" multiple hidden>
       </div>
       <ul class="uploaded-files">
         <li *ngFor="let file of csvFiles">
@@ -38,7 +38,7 @@
       <div class="dropbox" (drop)="onTxtDrop($event)" (click)="triggerFileInput('txt-upload')">
         <i class="fa fa-cloud-upload" style="color: #483AB6; font-size: 50px; margin-bottom: 10px" aria-hidden="true"></i>
         <span class="dropbox-label">Drop TXT Files here or click to upload</span>
-        <input type="file" id="txt-upload" accept=".txt" (change)="onTxtFileSelect($event)" [disabled]="txtFiles.length >=1 && isFreePlan" multiple hidden>
+        <input type="file" id="txt-upload" accept=".txt" (change)="onTxtFileSelect($event)" [disabled]="(txtFiles.length >=1 && isFreePlan) || (userProfile?.subscription?.comparisons === 0)" multiple hidden>
       </div>
       <ul class="uploaded-files">
         <li *ngFor="let file of txtFiles">

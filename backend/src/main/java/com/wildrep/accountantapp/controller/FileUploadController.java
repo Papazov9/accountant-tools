@@ -1,5 +1,6 @@
 package com.wildrep.accountantapp.controller;
 
+import com.wildrep.accountantapp.model.dto.HistoryRecordResponse;
 import com.wildrep.accountantapp.model.dto.OldComparisonReportDTO;
 import com.wildrep.accountantapp.service.FileService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -62,27 +64,32 @@ public class FileUploadController {
     }
 
     @GetMapping("/download/{batchId}")
-    public ResponseEntity<ByteArrayResource> downloadComparisonReport(@PathVariable String batchId) {
-
+    public ResponseEntity<?> downloadComparisonReport(@PathVariable String batchId) {
         OldComparisonReportDTO reportDTO = fileService.loadResourceFromOldComparison(batchId);
-        ByteArrayResource resource = new ByteArrayResource(reportDTO.reportStream().toByteArray());
+        ByteArrayOutputStream resource = reportDTO.reportStream();
 
-        String formattedDateTime = new SimpleDateFormat("yyyyMMdd_HHmmss").format(reportDTO.comparisonTimestamp());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+        String formattedDateTime = reportDTO.comparisonTimestamp().format(formatter);
         String fileName = "ComparisonReport_" + formattedDateTime + ".xlsx";
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
+        headers.setContentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName)
-                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
-                .contentLength(resource.contentLength())
-                .body(resource);
+                .headers(headers)
+                .contentLength(resource.size())
+                .body(resource.toByteArray());
     }
 
-
-    private void saveToLocalFile(ByteArrayOutputStream reportStream, String filePath) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream("C:\\opt\\app\\comparison-reports\\" + filePath)) {
-            reportStream.writeTo(fileOutputStream);
-        } catch (IOException e) {
-            throw new RuntimeException("Error saving report to local file", e);
+    @GetMapping("/history/{username}")
+    public ResponseEntity<List<HistoryRecordResponse>> loadHistory(@PathVariable String username) {
+        try {
+            List<HistoryRecordResponse> historyRecordResponses = this.fileService.loadHistory(username);
+            return ResponseEntity.ok(historyRecordResponses);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(List.of(new HistoryRecordResponse(null, null, null, "Failed to load history!")));
         }
+
     }
 }

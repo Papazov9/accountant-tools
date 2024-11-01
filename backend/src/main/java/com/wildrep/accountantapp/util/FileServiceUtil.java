@@ -25,7 +25,7 @@ public class FileServiceUtil {
 
     private final CSVRecordRepository csvRecordRepository;
 
-    private static final String FULL_TXT_REGEX = "(BG\\d{9})\\s+(\\d{6,7})\\s+(?:\\d\\s+)?(\\d+)(0[1-3])(\\d{10})\\s+(\\d{2}\\/\\d{2}\\/\\d{4})((?:BG)?\\d{9})\\s+(.+?)\\s{2,}\\s+([\\p{L}\\s\\-_=+]+)\\s{2,}\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})";
+    private static final String FULL_TXT_REGEX = "(BG\\d{9})\\s+(\\d{6,7})\\s+(?:\\d\\s+)?(\\d+)(0[1-3])\\s*(\\d{10})\\s*(\\d{2}\\/\\d{2}\\/\\d{4})((?:BG)?\\d{9})\\s+(.+?)\\s{2,}\\s+([\\p{L}\\s\\-_=+]+)\\s{2,}\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})\\s+(-?\\d+\\.\\d{2})";
 
     private static final String BULSTAT_REGEX = "([A-Z]{2}\\d{9}|\\d{9})";
     private static final Set<String> POSSIBLE_DOC_TYPES = Set.of("01", "02", "03");
@@ -56,8 +56,22 @@ public class FileServiceUtil {
                         continue;
                     }
 
-                    InvoiceRecordId invoiceRecordId = new InvoiceRecordId(record.get(0).trim(), docType, String.format("%010d", Long.parseLong(record.get(4).trim())));
-                    CSVInvoiceRecord csvInvoiceRecord = CSVInvoiceRecord.builder().id(invoiceRecordId).companyName(record.get(1).trim()).accountingPeriod(record.get(2).trim()).issueDate(DateParser.parseDate(record.get(5).trim())).totalAmount(calculateTotalAmount(record)).vatAmount(parseDouble(record.get(10))).build();
+                    String docNumber = record.get(4).trim();
+                    String formattedDocNumber;
+                    try{
+                        formattedDocNumber = String.format("%010d", Long.parseLong(docNumber));
+                    } catch (NumberFormatException e){
+                        formattedDocNumber = "Invalid document number";
+                    }
+                    InvoiceRecordId invoiceRecordId = new InvoiceRecordId(record.get(0).trim(), docType, formattedDocNumber);
+                    CSVInvoiceRecord csvInvoiceRecord = CSVInvoiceRecord
+                            .builder()
+                            .id(invoiceRecordId)
+                            .companyName(record.get(1).trim())
+                            .accountingPeriod(record.get(2).trim())
+                            .issueDate(DateParser.parseDate(record.get(5).trim()))
+                            .totalAmount(calculateTotalAmount(record))
+                            .vatAmount(parseDouble(record.get(10))).build();
                     csvResults.add(csvInvoiceRecord);
                 }
             }

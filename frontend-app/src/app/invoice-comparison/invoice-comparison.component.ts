@@ -30,17 +30,18 @@ export class InvoiceComparisonComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingService.showOverlay();
-    this.userService.fetchUserProfile().subscribe({
+    this.userService.userProfile$.subscribe({
       next: userProfile => {
         if (userProfile) {
           this.userProfile = userProfile;
           this.isFreePlan = this.userProfile?.subscription?.title === 'FREE';
           this.cdr.detectChanges();
         }else {
-          console.error("User not logged in!");
+          console.error();
         }
+        this.loadingService.hideOverlay();
       },
-      error: error => {
+      error: () => {
         this.loadingService.hideOverlay();
       },
       complete: () => {
@@ -113,7 +114,7 @@ export class InvoiceComparisonComponent implements OnInit {
   }
 
   onTxtFileSelect(event: any): void {
-    const selectedFiles: File[] = Array.from(event.target.files);  // Convert selected files to an array
+    const selectedFiles: File[] = Array.from(event.target.files);
     selectedFiles.forEach(file => {
       if (!this.txtFiles.some(existingFile => existingFile.name === file.name)) {
         this.txtFiles.push(file);
@@ -122,28 +123,12 @@ export class InvoiceComparisonComponent implements OnInit {
   }
 
   triggerFileInput(inputId: string): void {
+    this.checkComparisonsCount();
     document.getElementById(inputId)?.click();
   }
 
   uploadFiles(): void {
-    if (this.userProfile?.subscription?.comparisons === 0) {
-      Swal.fire({
-        title: 'Attention',
-        text: `It seems you are out of comparisons! Would you want to upgrade your plan to add some?`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#584ca6',
-        confirmButtonText: 'Upgrade Plan!',
-        cancelButtonColor: '#d33',
-        background: '#ffffff'
-      }).then(result => {
-        if (result.isConfirmed) {
-          this.toggleService.showSubscriptions();
-        }
-      });
-
-      return;
-    }
+    this.checkComparisonsCount();
     if (this.csvFiles.length === 0 || this.txtFiles.length === 0) {
       Swal.fire({
         title: 'Attention',
@@ -187,10 +172,31 @@ export class InvoiceComparisonComponent implements OnInit {
         },
         error: (error) => {
           this.resetPage();
-          console.error('Error uploading files', error);
+          console.error(error);
         }
       }
     );
+  }
+
+  private checkComparisonsCount() {
+    if (this.userProfile?.subscription?.comparisons === 0) {
+      Swal.fire({
+        title: 'Attention',
+        text: `It seems you are out of comparisons! Would you want to upgrade your plan to add some?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#584ca6',
+        confirmButtonText: 'Upgrade Plan!',
+        cancelButtonColor: '#d33',
+        background: '#ffffff'
+      }).then(result => {
+        if (result.isConfirmed) {
+          this.toggleService.showSubscriptions();
+        }
+      });
+
+      return;
+    }
   }
 
   resetPage() {

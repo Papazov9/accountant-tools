@@ -25,8 +25,6 @@ export class RegisterComponent {
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              private router: Router,
-              private datePipe: DatePipe,
               private loadingService: LoadingService) {
     this.registerForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
@@ -100,20 +98,8 @@ export class RegisterComponent {
     }
 
     this.authService.register(this.registerForm.value).subscribe({
-        next: (response) => {
-          console.log(response.message);
-          this.router.navigate(['login']);
-        },
-        error: (error) => {
-          console.log(error.message)
-          this.loadingService.hideLoadingForm();
-        },
-        complete: () => {
-          console.log("Registration completed.")
-          this.loadingService.hideLoadingForm();
-        }
-      }
-    )
+      complete: () => this.loadingService.hideLoadingForm()
+    });
   }
 
   onPasswordInput() {

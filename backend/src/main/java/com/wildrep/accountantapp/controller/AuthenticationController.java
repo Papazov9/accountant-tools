@@ -1,9 +1,7 @@
 package com.wildrep.accountantapp.controller;
 
-import com.wildrep.accountantapp.model.dto.LoginRequest;
-import com.wildrep.accountantapp.model.dto.LoginResponse;
-import com.wildrep.accountantapp.model.dto.RegisterRequest;
-import com.wildrep.accountantapp.model.dto.RegisterResponse;
+import com.wildrep.accountantapp.exceptions.UserNotVerifiedException;
+import com.wildrep.accountantapp.model.dto.*;
 import com.wildrep.accountantapp.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +39,9 @@ public class AuthenticationController {
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new LoginResponse("Invalid username or password!", null, null));
+        } catch (UserNotVerifiedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new LoginResponse("Please verify the your profile witht he code sent to your email!", null, null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new LoginResponse("Unexpected error occurred!", null, null));
@@ -50,12 +51,24 @@ public class AuthenticationController {
 
     @PostMapping("/refresh")
     public ResponseEntity<String> refreshToken(String username) {
-        try{
-        String newToken = userService.createNewToken(username);
+        try {
+            String newToken = userService.createNewToken(username);
 
-        return ResponseEntity.ok(newToken);
-        }catch (Exception e) {
+            return ResponseEntity.ok(newToken);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Token");
+        }
+    }
+
+    @PostMapping("/confirm-code")
+    public ResponseEntity<CodeConfirmResponse> codeConfirmation(@RequestBody CodeConfirmRequest codeConfirmRequest) {
+
+        if (this.userService.confirmCode(codeConfirmRequest)) {
+            CodeConfirmResponse codeConfirmResponse = new CodeConfirmResponse("Your code has been confirmed!");
+            return ResponseEntity.ok(codeConfirmResponse);
+        } else {
+            CodeConfirmResponse codeConfirmResponseError = new CodeConfirmResponse("Invalid Code!");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(codeConfirmResponseError);
         }
     }
 }

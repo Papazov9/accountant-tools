@@ -11,9 +11,13 @@ spring:
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.MySQLDialect
+    sendgrid:
+        api-key: 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
 
 jwt:
     secret: 3Fj8pD6xRv9nT6yUz4wA9hXrQ2bK7jL5
 stripe:
     api:
-        key: sk_test_yourStripeApiKey
+        key: sk_test_51QBLeXFWqYIjorXP4sqcGat06jMBUs3IuTtSuWQOtMTLQTPHjLtdhQcu6ii7AvPtiKxKAcnIUGW0GkaWghSJfP33009K3lbRej
+    webhook:
+        secret: whsec_5b13680d1f948109c7d4daa7b8b9764e06c9314f4d1922358871f67d463f64c9

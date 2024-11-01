@@ -1,0 +1,171 @@
+/* Full-screen container styling */
+.checkout-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7f9fc;
+  padding: 20px;
+}
+
+.checkout-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+/* Left column: Form */
+.checkout-form {
+  flex: 1;
+  padding: 30px;
+  border-right: 1px solid #ddd;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.form-section h4 {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #584ca6; /* Your primary color */
+  background-color: #f0f4fa; /* Light background for section */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #584ca6; /* Accent border color on focus */
+  box-shadow: 0 0 5px rgba(88, 76, 166, 0.3);
+}
+
+.continue-button {
+  width: 100%;
+  background-color: #584ca6;
+  color: #ffffff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.continue-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.continue-button:not(:disabled):hover {
+  background-color: #473b93;
+}
+
+/* Right column: Summary */
+.checkout-summary {
+  flex: 0.5;
+  padding: 30px;
+  background-color: #f8f9fa;
+}
+
+.checkout-summary h3 {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.plan-summary h4 {
+  font-size: 1.5em;
+  color: #584ca6;
+}
+
+.plan-summary .price {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #1a73e8;
+}
+
+.plan-features {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.plan-features li {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.tick-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #483AB6;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+.tick-icon::after {
+  content: '✔'; /* Unicode checkmark */
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column;
+  }
+
+  .checkout-form, .checkout-summary {
+    padding: 20px;
+    border: none;
+  }
+
+  .checkout-summary {
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+  }
+}

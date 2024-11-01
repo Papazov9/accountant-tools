@@ -1,0 +1,30 @@
+<div class="history-container">
+  <h1>User Comparison History</h1>
+  <table class="history-table">
+    <thead>
+    <tr>
+      <th (click)="sortData('batchId')">Batch ID</th>
+      <th (click)="sortData('status')">Status</th>
+      <th (click)="sortData('date')">Date</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let record of paginatedHistory">
+      <td>{{ record.batchId }}</td>
+      <td [ngClass]="record.status.toLowerCase()">{{ record.status }}</td>
+      <td>{{ record.date | date: 'short' }}</td>
+      <td>
+        <button [disabled]="record.status !== 'COMPLETED'" (click)="downloadComparison(record.batchId)">
+          Download
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>

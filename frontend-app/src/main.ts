@@ -14,4 +14,4 @@ bootstrapApplication(AppComponent, {
     ), // Optional if HttpClientModule is required
     FormsModule, // Optional if forms are required
   ]
-}).catch(err => console.error(err));
+}).catch(err => console.error());

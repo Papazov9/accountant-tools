@@ -21,15 +21,15 @@ export class SideNavbarComponent implements OnInit {
   profile: any = null;
   userPlan?: string;
 
-  constructor(private authService: AuthService, private userService: UserService, private router: Router, private toggleService: ToggleService) { }
+  constructor(private authService: AuthService, private userService: UserService, private router: Router, private toggleService: ToggleService) {
+  }
 
   ngOnInit(): void {
-    this.userService.fetchUserProfile().subscribe(profile => {
+    this.userService.fetchUserProfile();
+    this.userService.userProfile$.subscribe(profile => {
       if (profile) {
         this.profile = profile;
         this.userPlan = profile.subscription?.title;
-      } else {
-        console.log("User not logged in!")
       }
     });
   }

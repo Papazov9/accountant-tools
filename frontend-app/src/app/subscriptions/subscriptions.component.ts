@@ -4,9 +4,10 @@ import {PricingPlan} from "../home/pricing-section/pricing-section.component";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {LoadingService} from "../services/loading.service";
-import {UserService} from "../services/user.service";
+import {UserProfile, UserService} from "../services/user.service";
 import {ToggleService} from "../services/toggle.service";
 import Swal from 'sweetalert2';
+import {loadStripe} from "@stripe/stripe-js";
 
 @Component({
   selector: 'app-subscriptions',
@@ -24,36 +25,48 @@ export class SubscriptionsComponent implements OnInit {
   subscriptionPlans: PricingPlan[] = [];
   selectedPlan: PricingPlan | null = null;
   isCurrentUserAcknowledge: boolean = false;
+  currentUser: UserProfile | null = null;
 
   constructor(private http: HttpClient, private router: Router, private loadingService: LoadingService, private userService: UserService, private toggleService: ToggleService) {
   }
 
   ngOnInit() {
     this.loadingService.showOverlay();
-    this.userService.fetchUserProfile().subscribe({
+    this.userService.fetchUserProfile();
+    this.userService.userProfile$.subscribe({
       next: (userProfile) => {
         if (userProfile) {
+          console.log(userProfile);
+          this.currentUser = userProfile;
           this.isCurrentUserAcknowledge = userProfile.isAcknowledge;
-        }else {
+        } else {
           console.log("User not logged in!");
         }
-        this.http.get<PricingPlan[]>('/assets/pricing-plans.json').subscribe({
-          next: (data) => {
-            this.subscriptionPlans = data;
-          },
-          error: (error) => {
-            this.loadingService.hideOverlay();
-            this.router.navigate(['dashboard']);
-            console.log(error);
-          }
-        });
+        this.loadPricing();
       },
       error: (error) => {
-        console.error(error.error.message);
+        console.error();
+        this.loadingService.hideOverlay();
       },
       complete: () => this.loadingService.hideOverlay()
     })
 
+  }
+
+  loadPricing() {
+    this.http.get<PricingPlan[]>('/assets/pricing-plans.json').subscribe({
+      next: (data) => {
+        this.subscriptionPlans = data;
+        console.log(data);
+      },
+      error: (error) => {
+        this.loadingService.hideOverlay();
+        this.router.navigate(['dashboard']);
+        this.loadingService.hideOverlay();
+        console.log(error);
+      },
+      complete: () => this.loadingService.hideOverlay()
+    });
   }
 
   selectPlan(plan: PricingPlan) {
@@ -68,19 +81,18 @@ export class SubscriptionsComponent implements OnInit {
     if (this.selectedPlan) {
       Swal.fire({
         title: 'Confirmation',
-        text: `Confirm that you want to proceed to the payment of the selected ${this.selectedPlan.title} option which costs ${this.selectedPlan.price} EUR?`,
+        text: `Confirm that you want to proceed to checkout with the selected ${this.selectedPlan.title} option which costs ${this.selectedPlan.price} EUR?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#584ca6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, proceed!',
-        background: '#ffffff'
       }).then(result => {
-        if (result.isConfirmed && this.selectedPlan) {
-          this.router.navigate(['/payment'], {queryParams: {plan: this.selectedPlan.title, price: this.selectedPlan.price}});
+        if (result.isConfirmed) {
+          this.toggleService.hideSubscriptions();
+          this.router.navigate(['/checkout'], {state: {plan: this.selectedPlan, user: this.currentUser}});
         }
       });
-
     }
   }
 
@@ -102,11 +114,10 @@ export class SubscriptionsComponent implements OnInit {
       if (result.isConfirmed) {
         this.userService.acceptFreeTrial().subscribe({
           next: (response) => {
-            console.log("Success: ", response);
-            this.toggleService.hideSubscriptions()
+            this.toggleService.hideSubscriptions();
           },
           error: (error) => {
-            console.error(error);
+            console.error();
           }
         });
       }

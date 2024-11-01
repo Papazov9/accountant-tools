@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, map, Observable, of, switchMap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, of, switchMap, tap, throwError} from "rxjs";
 import {AuthService, CurrentUser} from "./auth.service";
 import {HttpClient} from "@angular/common/http";
 import {PricingPlan} from "../home/pricing-section/pricing-section.component";
@@ -37,22 +37,31 @@ export interface Metrics {
 export class UserService {
   private API_URL = 'http://localhost:8080/api/user';
   private METRICS_URL = 'http://localhost:8080/api/metrics';
+  private userProfileSubject = new BehaviorSubject<UserProfile | null>(null);
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  fetchUserProfile(): Observable<UserProfile | null> {
-    let username: string | null = null;
-    this.authService.currentUser$.subscribe((currentUser) => {
-      if (currentUser) {
-        username = currentUser.username;
-      }
-    });
-    if (username) {
-      return this.http.get<UserProfile>(`${this.API_URL}/dashboard/${username}`);
-    }
+  get userProfile$(): Observable<UserProfile | null> {
+    return this.userProfileSubject.asObservable();
+  }
 
-    return of(null);
+  fetchUserProfile(): void {
+   this.authService.currentUser$.pipe(
+     switchMap(currentUser => {
+       if (currentUser && currentUser.username){
+         return this.http.get<UserProfile>(`${this.API_URL}/dashboard/${currentUser.username}`);
+       }
+       return of(null);
+     }),
+     tap(profile => {
+       if (profile) {
+         this.userProfileSubject.next(profile);
+       }else {
+         console.log("User not logged in!");
+       }
+     })
+   ).subscribe();
   }
 
   loadMetrics(username: string): Observable<Metrics> {
@@ -67,8 +76,9 @@ export class UserService {
       switchMap((currentUser: CurrentUser | null) => {
         if (currentUser?.username) {
           return this.http.get<string>(`${this.API_URL}/free/${currentUser.username}`, {responseType: 'text' as 'json'}).pipe(
+            tap(() => this.fetchUserProfile()),
             catchError((error) => {
-              console.error("Error during free trial subscription:", error);
+              console.error(error);
               return throwError(() => new Error("Subscription request failed."));
             })
           );

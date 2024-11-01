@@ -35,8 +35,8 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingService.showOverlay();
-
-    this.userService.fetchUserProfile().pipe(
+    this.userService.fetchUserProfile();
+    this.userService.userProfile$.pipe(
       switchMap((userProfile) => {
         if (userProfile) {
           this.profile = userProfile;
@@ -60,7 +60,7 @@ export class UserHomeComponent implements OnInit {
         this.cdr.detectChanges();
       },
       error: (error) => {
-        console.error('Error loading metrics:', error);
+        console.error(error);
         this.loadingService.hideOverlay();
       },
       complete: () => {
@@ -74,7 +74,6 @@ export class UserHomeComponent implements OnInit {
       return;
     }
 
-    console.log(metrics?.comparisonMetricResponses);
     this.mismatchData = [];
     this.chart.data.labels = [];
 
@@ -140,8 +139,7 @@ export class UserHomeComponent implements OnInit {
             animateRotate: true,
             animateScale: true,
           },
-          scales: {
-          }
+          scales: {}
         }
       });
     }

@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping("/free/{username}")
     public ResponseEntity<String> freeSubscription(@PathVariable String username) {
         try {
-            String result = this.userService.updateUserSubscription(SubscriptionType.FREE, username);
+            String result = this.userService.updateUserSubscription("FREE", username);
             return ResponseEntity.ok(result);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

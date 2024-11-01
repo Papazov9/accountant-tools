@@ -1,0 +1,88 @@
+/* Container to occupy the full available width */
+.history-container {
+  margin: 20px;
+  padding: 20px;
+  max-width: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-x: auto; /* Enable horizontal scroll on smaller screens */
+}
+
+/* Header styling */
+.history-container h1 {
+  color: #483ab6;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Table styling */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.history-table th {
+  background-color: #483ab6;
+  color: white;
+  cursor: pointer;
+}
+
+.history-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.history-table tr:hover {
+  background-color: #ececec;
+}
+
+button {
+  background-color: #584ca6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #6a5bbd;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Status indicator styles */
+.completed {
+  color: green;
+  font-weight: bolder;
+}
+
+.in-progress {
+  color: yellow;
+  font-weight: bolder;
+}
+
+.failed {
+  color: red;
+  font-weight: bolder;
+}
+
+/* Pagination controls */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 40px;
+}

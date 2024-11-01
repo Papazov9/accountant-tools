@@ -1,0 +1,78 @@
+<div class="checkout-wrapper">
+  <div class="checkout-container">
+
+    <!-- Left Column: Form Section -->
+    <div class="checkout-form">
+      <h2>Complete Your Purchase</h2>
+
+      <form [formGroup]="checkoutForm" (ngSubmit)="submitCheckoutForm()">
+
+        <!-- Contact Information Section -->
+        <div class="form-section">
+          <h4>Contact Information</h4>
+          <div class="form-group">
+            <label for="contactEmail">Contact Email:</label>
+            <input id="contactEmail" type="email" formControlName="contactEmail" />
+            <div *ngIf="checkoutForm.get('contactEmail')?.invalid && checkoutForm.get('contactEmail')?.touched">
+              <small *ngIf="checkoutForm.get('contactEmail')?.errors?.['required']">Email is required.</small>
+              <small *ngIf="checkoutForm.get('contactEmail')?.errors?.['email']">Invalid email format.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Method Section -->
+        <div class="form-section">
+          <h4>Payment Method</h4>
+          <div class="form-group">
+            <label for="paymentMethod">Choose a Payment Method:</label>
+            <select id="paymentMethod" formControlName="paymentMethod">
+              <option value="card">Credit Card</option>
+              <option value="bank">Bank Transfer</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Additional Bank Transfer Fields -->
+        <div *ngIf="checkoutForm.get('paymentMethod')?.value === 'bank'" class="bank-transfer-details form-section">
+          <h4>Billing Information</h4>
+          <div class="form-group">
+            <label for="companyName">Company Name:</label>
+            <input id="companyName" type="text" formControlName="companyName" />
+            <div *ngIf="checkoutForm.get('companyName')?.invalid && checkoutForm.get('companyName')?.touched">
+              <small>Company Name is required for Bank Transfer.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="billingAddress">Billing Address:</label>
+            <textarea id="billingAddress" formControlName="billingAddress"></textarea>
+            <div *ngIf="checkoutForm.get('billingAddress')?.invalid && checkoutForm.get('billingAddress')?.touched">
+              <small>Billing Address is required for Bank Transfer.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="vatNumber">VAT Number:</label>
+            <input id="vatNumber" type="text" formControlName="vatNumber" />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" [disabled]="checkoutForm.invalid" class="continue-button">
+          Proceed to Payment
+        </button>
+      </form>
+    </div>
+
+    <!-- Right Column: Order Summary -->
+    <div class="checkout-summary">
+      <h3>Order Summary</h3>
+      <div class="plan-summary">
+        <h4>{{ selectedPlan?.title }}</h4>
+        <p class="price">{{ selectedPlan?.price | currency:'EUR' }}</p>
+        <p>{{ selectedPlan?.comparisons }} comparisons will be added to your account</p>
+        <ul class="plan-features">
+          <li *ngFor="let feature of selectedPlan?.pros"> <span class="tick-icon"></span> {{ feature }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

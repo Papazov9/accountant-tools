@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^18.2.9",
     "@angular/router": "^18.2.9",
     "@auth0/angular-jwt": "^5.2.0",
+    "@stripe/stripe-js": "^4.9.0",
     "@sweetalert2/ngx-sweetalert2": "^12.4.0",
     "@types/chart.js": "^2.9.41",
     "chart.js": "^4.4.4",

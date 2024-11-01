@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,6 +57,16 @@ public class User {
 
     @Column(name = "is_acknowledged")
     private boolean isAcknowledged;
+
+    @Column(name = "confirmation_code")
+    private String confirmationCode;
+
+    @Column(name = "code_expiration_date")
+    private LocalDateTime codeExpirationDate;
+
+
+    @Column(name = "is_verified")
+    private boolean isVerified = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",

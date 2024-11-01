@@ -18,7 +18,6 @@ export class LoginComponent {
   errorMessage: string | null = null;
 
   constructor(private authService: AuthService,
-              private router: Router,
               private fb: FormBuilder,
               private loadingService: LoadingService) {
     this.loginForm = this.fb.group({
@@ -40,20 +39,7 @@ export class LoginComponent {
     this.loadingService.showLoadingForm();
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: (response) => {
-        this.authService.setToken(response.token, this.loginForm.value.rememberMe);
-        this.router.navigate(['dashboard']);
-      },
-      error: (error) => {
-        console.log(error.error.message);
-        this.errorMessage = error.error.message;
-        console.log(error.error.message);
-        this.loadingService.hideLoadingForm();
-      },
-      complete: () => {
-        console.log("Login completed!");
-        this.loadingService.hideLoadingForm();
-      }
-    })
+      complete: () => this.loadingService.hideLoadingForm()
+    });
   }
 }
