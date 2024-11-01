@@ -11,3 +11,4 @@
 /frontend-app/node_modules/
 /accountant-app/test-classes/
 /frontend-app/.idea/
+/backend/target/
