@@ -61,6 +61,9 @@ public class User {
     @Column(name = "confirmation_code")
     private String confirmationCode;
 
+    @Column(name = "stripe_customer_id", unique = true)
+    private String stripeCustomerId;
+
     @Column(name = "code_expiration_date")
     private LocalDateTime codeExpirationDate;
 

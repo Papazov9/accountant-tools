@@ -25,7 +25,12 @@ public class Subscription {
     private SubscriptionType type;
 
     private String description;
+    @Column(nullable = false)
     private Double price;
 
+    @Column(nullable = false)
+    private String stripeProductId;
+
     private int maxComparisons;
+
 }

@@ -1,18 +1,18 @@
 <div class="history-container">
-  <h1>User Comparison History</h1>
+  <h1 i18n>User Comparison History</h1>
   <table class="history-table">
     <thead>
     <tr>
-      <th (click)="sortData('batchId')">Batch ID</th>
-      <th (click)="sortData('status')">Status</th>
-      <th (click)="sortData('date')">Date</th>
+      <th (click)="sortData('batchId')" i18n>Batch ID</th>
+      <th (click)="sortData('status')" i18n>Status</th>
+      <th (click)="sortData('date')" i18n>Date</th>
       <th>Action</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let record of paginatedHistory">
       <td>{{ record.batchId }}</td>
-      <td [ngClass]="record.status.toLowerCase()">{{ record.status }}</td>
+      <td [ngClass]="record.status.toLowerCase()">{{ getStatusTranslation(record.status) }}</td>
       <td>{{ record.date | date: 'short' }}</td>
       <td>
         <button [disabled]="record.status !== 'COMPLETED'" (click)="downloadComparison(record.batchId)">
@@ -23,8 +23,8 @@
     </tbody>
   </table>
   <div class="pagination">
-    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
-    <span>Page {{ currentPage }} of {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    <button (click)="prevPage()" [disabled]="currentPage === 1" i18n>Previous</button>
+    <span>{{ pageText }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" i18n>Next</button>
   </div>
 </div>

@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {CurrencyPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {PricingPlan} from "../home/pricing-section/pricing-section.component";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {LoadingService} from "../services/loading.service";
 import {UserProfile, UserService} from "../services/user.service";
 import {ToggleService} from "../services/toggle.service";
 import Swal from 'sweetalert2';
-import {loadStripe} from "@stripe/stripe-js";
+import {plans} from "../models";
+import {PricingPlan} from "../home/pricing-section/pricing-section.component";
 
 @Component({
   selector: 'app-subscriptions',
@@ -23,7 +23,7 @@ import {loadStripe} from "@stripe/stripe-js";
 })
 export class SubscriptionsComponent implements OnInit {
   subscriptionPlans: PricingPlan[] = [];
-  selectedPlan: PricingPlan | null = null;
+  selectedPlan: PricingPlan | null | undefined = null;
   isCurrentUserAcknowledge: boolean = false;
   currentUser: UserProfile | null = null;
 
@@ -42,10 +42,10 @@ export class SubscriptionsComponent implements OnInit {
         } else {
           console.log("User not logged in!");
         }
-        this.loadPricing();
+        this.subscriptionPlans = plans;
       },
       error: (error) => {
-        console.error();
+        console.error(error);
         this.loadingService.hideOverlay();
       },
       complete: () => this.loadingService.hideOverlay()
@@ -54,7 +54,7 @@ export class SubscriptionsComponent implements OnInit {
   }
 
   loadPricing() {
-    this.http.get<PricingPlan[]>('/assets/pricing-plans.json').subscribe({
+    this.http.get<PricingPlan[]>('/assets/data-files/pricing-plans.json').subscribe({
       next: (data) => {
         this.subscriptionPlans = data;
         console.log(data);

@@ -20,9 +20,17 @@ export class HistoryComponent implements OnInit {
   historyRecords: HistoryRecord[] = [];
   totalPages: number = 0;
   paginatedHistory: HistoryRecord[] = [];
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 10;
   currentPage: number = 1;
   sortDirection: 'asc' | 'desc' = 'desc';
+
+  pageText = $localize`:@@pageText:Page ${this.currentPage} of ${this.totalPages}`;
+
+  statusTranslations: { [key: string]: string } = {
+    pending: $localize`:@@statusPending:Pending`,
+    completed: $localize`:@@statusCompleted:Completed`,
+    canceled: $localize`:@@statusCanceled:Canceled`
+  };
 
   constructor(private historyService: HistoryService) {
   }
@@ -52,6 +60,10 @@ export class HistoryComponent implements OnInit {
       this.currentPage--;
       this.paginateHistory();
     }
+  }
+
+  getStatusTranslation(status: string) {
+    return this.statusTranslations[status.toLowerCase()] || status;
   }
 
   sortData(column: keyof HistoryRecord) {
@@ -105,5 +117,4 @@ export class HistoryComponent implements OnInit {
       }
     })
   }
-
 }

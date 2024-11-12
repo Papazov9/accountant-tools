@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "frontend-app": {
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "bg": "src/locale/messages.bg.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,11 +19,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize": ["bg"],
             "outputPath": "dist/frontend-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -28,22 +36,24 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.css"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "localize": ["bg", "en"],
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "5kB",
+                  "maximumError": "10kB"
                 }
               ],
               "outputHashing": "all"
@@ -52,6 +62,16 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "bg": {
+              "localize": ["bg"],
+              "outputPath": "dist/frontend-app-bg",
+              "baseHref": "/bg/"
+            },
+            "en": {
+              "localize": ["en"],
+              "outputPath": "dist/frontend-app-en",
+              "baseHref": "/en/"
             }
           },
           "defaultConfiguration": "production"
@@ -64,6 +84,12 @@
             },
             "development": {
               "buildTarget": "frontend-app:build:development"
+            },
+            "bg": {
+              "buildTarget": "frontend-app:build:bg"
+            },
+            "en": {
+              "buildTarget": "frontend-app:build:en"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +102,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
@@ -86,6 +113,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.css"
             ],
             "scripts": []

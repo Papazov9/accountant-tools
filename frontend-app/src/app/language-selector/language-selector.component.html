@@ -1,0 +1,6 @@
+<div class="overlay" *ngIf="showLanguageSelector"></div>
+<div class="language-popup" *ngIf="showLanguageSelector">
+  <h2>Select Your Language</h2>
+  <button (click)="selectLanguage('en')">English</button>
+  <button (click)="selectLanguage('bg')">Bulgarian</button>
+</div>

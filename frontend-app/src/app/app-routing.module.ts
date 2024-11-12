@@ -8,7 +8,6 @@ import {AuthGuard} from "./guards/AuthGuard";
 import {InvoiceComparisonComponent} from "./invoice-comparison/invoice-comparison.component";
 import {AuthGuardForHome} from "./guards/AuthGuardForHome";
 import {NotAuthGuard} from "./guards/NotAuthGuard";
-import {SubscriptionsComponent} from "./subscriptions/subscriptions.component";
 import {ErrorComponent} from "./error/error.component";
 import {PaymentSuccessComponent} from "./payment-success/payment-success.component";
 import {PaymentCancelComponent} from "./payment-cancel/payment-cancel.component";
@@ -21,6 +20,7 @@ export const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardForHome]},
   {path: 'success', component: PaymentSuccessComponent, canActivate: [AuthGuard]},
   {path: 'cancel', component: PaymentCancelComponent, canActivate: [AuthGuard]},
+  {path: 'payment-pending', component: PaymentCancelComponent, canActivate: [AuthGuard]},
   {path: 'dashboard', component: UserHomeComponent, canActivate: [AuthGuard]},
   {path: 'invoice-comparison', component: InvoiceComparisonComponent, canActivate: [AuthGuard]},
   {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},

@@ -1,15 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {NgForOf} from "@angular/common";
+import {plans} from "../../models";
+
 
 export interface PricingPlan {
   title: string;
+  oldPrice: number | null;
   price: number,
   comparisons: number,
+  imgUrl: string,
   pros: string[],
   buttonText: string,
 }
-
 
 @Component({
   selector: 'app-pricing-section',
@@ -24,13 +26,10 @@ export interface PricingPlan {
 export class PricingSectionComponent implements OnInit {
   pricingPlans: PricingPlan[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.http.get<PricingPlan[]>('/assets/pricing-plans.json').subscribe(data => {
-      this.pricingPlans = data;
-    });
+    this.pricingPlans = plans;
   }
-
 }

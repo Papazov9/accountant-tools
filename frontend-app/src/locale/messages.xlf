@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="7959897923296366268" datatype="html">
+        <source>Complete Your Purchase</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">6,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4264316377667596437" datatype="html">
+        <source>Contact Email:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8602814243662345124" datatype="html">
+        <source>Email is required.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3174495843910953299" datatype="html">
+        <source>Invalid email format.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5359061492766571193" datatype="html">
+        <source>Company Name:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8726781016173155202" datatype="html">
+        <source>Company Name is required.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2798540610427424935" datatype="html">
+        <source>Billing Address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">37,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4863373404095396982" datatype="html">
+        <source>Country:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="768763729993966116" datatype="html">
+        <source>Country is required.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8499614752066309224" datatype="html">
+        <source>City:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">58,59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1359412855075438461" datatype="html">
+        <source>City is required.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">61,62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4220770149675418165" datatype="html">
+        <source>Postal Code:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">66,67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7968857461604857785" datatype="html">
+        <source>Postal Code is required.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">69,70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1494854187893637707" datatype="html">
+        <source>Address Line 1:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7219370618904652897" datatype="html">
+        <source>Address Line 1 is required.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">77,78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6567751896877364799" datatype="html">
+        <source>Address Line 2:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">82,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2400778048828897652" datatype="html">
+        <source> Proceed to Payment </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5989321675234583651" datatype="html">
+        <source>comparisons will be added to your account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3514595390002343437" datatype="html">
+        <source>Confirm Your Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/confirm-code/confirm-code.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3980908225736514009" datatype="html">
+        <source>Please enter the 6-digit code sent to your email:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/confirm-code/confirm-code.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8214169742072920158" datatype="html">
+        <source>Confirm Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/confirm-code/confirm-code.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4413749567662106172" datatype="html">
+        <source>Return to Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/error/error.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/payment-success/payment-success.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7797211256566252716" datatype="html">
+        <source>TOOLS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9002558656446728189" datatype="html">
+        <source>Invoice Comparison</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/side-navbar/side-navbar.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8067537011964257975" datatype="html">
+        <source>Coming soon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="78618503822933431" datatype="html">
+        <source>INFORMATION</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5080775557941296581" datatype="html">
+        <source>Pricing</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/navbar/navbar.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2501489806101473286" datatype="html">
+        <source>About us</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/navbar/navbar.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8942351587754185907" datatype="html">
+        <source>API</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3229595422546554334" datatype="html">
+        <source>Jobs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">21,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4364040608587263453" datatype="html">
+        <source>LEGAL</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1573561306072316026" datatype="html">
+        <source>Terms of use</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2753974000617980972" datatype="html">
+        <source>License agreement</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6090931838305354672" datatype="html">
+        <source>Privacy policy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5683398894085732559" datatype="html">
+        <source>Cookies policy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1813238393038053050" datatype="html">
+        <source>SUPPORT</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2806917038528218276" datatype="html">
+        <source>FAQ</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7922989125096435449" datatype="html">
+        <source>Contact</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5501415201614904117" datatype="html">
+        <source>SOCIAL MEDIA</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2621980311646344370" datatype="html">
+        <source>User Comparison History</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3537625483230066456" datatype="html">
+        <source>Batch ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3973931101896534797" datatype="html">
+        <source>Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4452427314943113135" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3885497195825665706" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="pageText" datatype="html">
+        <source>Page <x id="PH" equiv-text="this.currentPage"/> of <x id="PH_1" equiv-text="this.totalPages"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="statusPending" datatype="html">
+        <source>Pending</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="statusCompleted" datatype="html">
+        <source>Completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="statusCanceled" datatype="html">
+        <source>Canceled</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/history/history.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2071806712444114006" datatype="html">
+        <source>Why Choose Unparalleled?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5483845663098703851" datatype="html">
+        <source>Unparalleled offers unparalleled solutions to help you grow, save time, and ensure complete accuracy in your invoicing.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8911725057432743106" datatype="html">
+        <source>Unmatched Accuracy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5141104744124846782" datatype="html">
+        <source>Automate every comparison with pinpoint accuracy.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7455942367353772272" datatype="html">
+        <source>Business Growth</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5650334319925676191" datatype="html">
+        <source>Focus on growing your business while we handle your accounts.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7579104348265698722" datatype="html">
+        <source>Lightning Fast</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5321551871635093746" datatype="html">
+        <source>Process thousands of invoices in seconds.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7654086638990025605" datatype="html">
+        <source>Audit-Ready</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4678222040335065177" datatype="html">
+        <source>Keep your records audit-ready without the hassle.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/overview-section/overview-section.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8206652621498866189" datatype="html">
+        <source>Our Pricing Plans</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/pricing-section/pricing-section.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3493910278084624608" datatype="html">
+        <source>Choose the plan that best suits your needs.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/pricing-section/pricing-section.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="213291932785592519" datatype="html">
+        <source>How It Works</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3973160243870032546" datatype="html">
+        <source>Forget about manually comparing long Excel sheets. With our solution, you can automate the comparison process in just a few steps.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2753064288962087576" datatype="html">
+        <source>Go to Invoice Comparison Tab</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2898693844680894570" datatype="html">
+        <source>Use side navigation bar after successful login and click the Invoice Comparison Tab.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8010932022107347292" datatype="html">
+        <source>Upload Your Files</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6525149959451133546" datatype="html">
+        <source>Upload your .csv and .txt files in the appropriate upload fields. The number of uploaded files in both fields has to be equal!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2297291591159314655" datatype="html">
+        <source>Automatic Comparison</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4706862379450618751" datatype="html">
+        <source>Our system matches records by key data points like document number, date, and amount. No more manual Excel matching, we&apos;ve got you covered with UNPARALLELED speed of execution.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1287369564818183094" datatype="html">
+        <source>Get Results Instantly</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6415356522932220858" datatype="html">
+        <source>Receive a detailed Excel report with separate sheets for each type of mismatch. Review audit-ready results for complete accuracy.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="227609897663161573" datatype="html">
+        <source>Automated Invoice Comparison for Accountants</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/welcome-section/welcome-section.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4727160523835880077" datatype="html">
+        <source>Save time, ensure accuracy, and streamline your business with <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;animate&quot;&gt;"/>UNPARALLELED<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> tools for effortless invoice comparisons.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/welcome-section/welcome-section.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6555523727383827002" datatype="html">
+        <source>Sign up today and get 1 free comparison with a file upload limit up to one file per format. Start now and see how easy invoice comparisons can be!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/welcome-section/welcome-section.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6243186155112387354" datatype="html">
+        <source>Get Started Free</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/welcome-section/welcome-section.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/navbar/navbar.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8935839060282476990" datatype="html">
+        <source>Invoice Comparison Tool</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2989446226845135807" datatype="html">
+        <source>Effortlessly compare your CSV and TXT invoice records</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2673238343092015674" datatype="html">
+        <source>Comparisons Left: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6920592035037850584" datatype="html">
+        <source>Subscription Plan: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9162826288248440837" datatype="html">
+        <source>Drop CSV Files here or click to upload</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3055068046984348554" datatype="html">
+        <source>No files selected.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8516195628275522932" datatype="html">
+        <source>Drop TXT Files here or click to upload</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1508991648147187535" datatype="html">
+        <source>Upload &amp; Compare</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4327001039034401261" datatype="html">
+        <source>Enter your username</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2772023564304193657" datatype="html">
+        <source>Enter your password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="931252989873527145" datatype="html">
+        <source>Remember me</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7993400168408015259" datatype="html">
+        <source>Forgot Password?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3894950702316166331" datatype="html">
+        <source>Loading...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">116,117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6192442059947432826" datatype="html">
+        <source>Don’t have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;/register&quot;&gt;"/>Sign up<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3448756000303668129" datatype="html">
+        <source>Let us handle the books, so you can break through limits.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">131,132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6127846938721203226" datatype="html">
+        <source>Access to All Essential Features</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7142489358039489309" datatype="html">
+        <source>Priority Email Support</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4770359858725122423" datatype="html">
+        <source>Monthly Usage Reports</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8555609940032743858" datatype="html">
+        <source>3 Free Add-On Integrations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7133162846214324170" datatype="html">
+        <source>Extended Comparison Library</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7002955679222677443" datatype="html">
+        <source>Learn More</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7669494958116018395" datatype="html">
+        <source>Enhanced Business-Level Support</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4248237372085950240" datatype="html">
+        <source>Unlimited Team Access</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3357649242306773136" datatype="html">
+        <source>Advanced Analytics &amp; Reports</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6283128415799755013" datatype="html">
+        <source>Customized Comparison Tools</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8616294704165377579" datatype="html">
+        <source>Dedicated Account Manager</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2790076617344626722" datatype="html">
+        <source>Priority Customer Success Assistance</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="887221296627167212" datatype="html">
+        <source>Real-Time Data Access</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9101816401291821799" datatype="html">
+        <source>Exclusive API Integrations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2674589325525477633" datatype="html">
+        <source>On-Demand Dedicated Support</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8398877102767341894" datatype="html">
+        <source>Unlimited Data Storage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8073131076327025018" datatype="html">
+        <source>24/7 Advanced Technical Assistance</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="27207612221492846" datatype="html">
+        <source>Advanced Custom Integration Options</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3435202816774299399" datatype="html">
+        <source>Personalized Concierge Service</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3344306436318735787" datatype="html">
+        <source>Bespoke Feature Development</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7097985150849763592" datatype="html">
+        <source>Unlimited Global Comparisons</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6945725824854504002" datatype="html">
+        <source>Ultimate Priority Support</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4864133828800996422" datatype="html">
+        <source>Full Access to All Features &amp; Integrations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2080956741282653274" datatype="html">
+        <source>Exclusive: Only Subscription Plan Offering Monthly Access with Unlimited Comparisons</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/models.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2821179408673282599" datatype="html">
+        <source>Home</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/navbar/navbar.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3945928618939721593" datatype="html">
+        <source>How to...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/navbar/navbar.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8520023152129279437" datatype="html">
+        <source>Log In</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/navbar/navbar.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2960246622843217026" datatype="html">
+        <source>Go Back</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/navbar/navbar.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8214519741318881008" datatype="html">
+        <source>Payment Canceled</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/payment-cancel/payment-cancel.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2607116346277237001" datatype="html">
+        <source>Your payment process was canceled. Please try again or select another plan.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/payment-cancel/payment-cancel.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6822492490320291663" datatype="html">
+        <source>Return to Subscriptions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/payment-cancel/payment-cancel.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="178520337056147266" datatype="html">
+        <source>Go to Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/payment-cancel/payment-cancel.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8206804611071524488" datatype="html">
+        <source>Payment Successful</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/payment-success/payment-success.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1727168093460105153" datatype="html">
+        <source>Thank you for your purchase! Your subscription has been upgraded.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/payment-success/payment-success.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3469656934992856985" datatype="html">
+        <source>Minimum 8 characters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4342035202160108280" datatype="html">
+        <source> At least 1 uppercase letter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6581293717250753379" datatype="html">
+        <source> At least 1 lowercase letter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1899739819468035927" datatype="html">
+        <source> At least 1 number </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7648602145423684055" datatype="html">
+        <source> At least 1 special character </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1267967133679326155" datatype="html">
+        <source>Create Account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">103,104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2708454176461032019" datatype="html">
+        <source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;/login&quot;&gt;"/>Log in<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register.component.html</context>
+          <context context-type="linenumber">123,124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6570363013146073520" datatype="html">
+        <source>Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/side-navbar/side-navbar.component.html</context>
+          <context context-type="linenumber">21,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="186236568870281953" datatype="html">
+        <source>History</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/side-navbar/side-navbar.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1812379335568847528" datatype="html">
+        <source>Subscriptions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/side-navbar/side-navbar.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4930506384627295710" datatype="html">
+        <source>Settings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/side-navbar/side-navbar.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3797778920049399855" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/side-navbar/side-navbar.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4857316010862246947" datatype="html">
+        <source>Choose a Subscription Plan</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2348694862850825281" datatype="html">
+        <source>Select a plan or close this window.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6315980074564954058" datatype="html">
+        <source>This is a one-time payment option except for the Unparalleled option. You will not be charged again unless you need more comparisons.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5461078192269827217" datatype="html">
+        <source>Comparisons</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.ts</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3797570084942068182" datatype="html">
+        <source>Select</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6245883353932832863" datatype="html">
+        <source>Continue to Payment</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4146830966635061119" datatype="html">
+        <source>Welcome,</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7013901754643978013" datatype="html">
+        <source>Here is a quick summary of your invoice comparisons.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2972313243668953826" datatype="html">
+        <source>Total Comparisons</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4676441168309755646" datatype="html">
+        <source>Successful Comparisons</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.ts</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8878470776510967906" datatype="html">
+        <source>Failed Comparisons</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4725974842505512259" datatype="html">
+        <source>Total Mismatches</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8115949972409374565" datatype="html">
+        <source>No data available for graph.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7941401173468129094" datatype="html">
+        <source>No metrics available yet.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6832879550227262389" datatype="html">
+        <source>Comparison</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2700148978892310190" datatype="html">
+        <source>Comparison Success Rate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4273673463601756922" datatype="html">
+        <source>Mismatch Trends</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.ts</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4172017179856173849" datatype="html">
+        <source>Mismatches Count</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user-home/user-home.component.ts</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

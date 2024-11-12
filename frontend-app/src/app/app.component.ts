@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "./navbar/navbar.component";
-import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet} from "@angular/router";
+import { RouterOutlet} from "@angular/router";
 import {LoadingService} from "./services/loading.service";
 import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
 import {AuthService} from "./services/auth.service";
@@ -10,6 +10,7 @@ import {SidebarService} from "./services/sidebar.service";
 import {FooterComponent} from "./footer/footer.component";
 import {SubscriptionsComponent} from "./subscriptions/subscriptions.component";
 import {ToggleService} from "./services/toggle.service";
+import {LanguageSelectorComponent} from "./language-selector/language-selector.component";
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ import {ToggleService} from "./services/toggle.service";
     SideNavbarComponent,
     NgClass,
     FooterComponent,
-    SubscriptionsComponent
+    SubscriptionsComponent,
+    LanguageSelectorComponent
   ]
 })
 export class AppComponent implements OnInit {

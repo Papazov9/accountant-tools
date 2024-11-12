@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center; /* Align everything in the center */
-  background-image: url('/assets/welc0me-background.jpg');
+  background-image: url('/assets/images/welc0me-background.jpg');
   background-size: cover;
   background-position: center;
   padding: 60px 30px; /* Extra space for top padding */

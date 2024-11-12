@@ -12,44 +12,59 @@ public class InvoiceComparisonUtil {
     public static List<ComparisonResult> compareInvoicesAndStoreResults(List<CSVInvoiceRecord> csvRecords, List<InvoiceRecord> txtRecords) {
         List<ComparisonResult> results = new ArrayList<>();
 
-        // Group CSV and TXT records by their IDs
         Map<InvoiceRecordId, List<CSVInvoiceRecord>> csvRecordMap = csvRecords.stream()
                 .collect(Collectors.groupingBy(CSVInvoiceRecord::getId));
         Map<InvoiceRecordId, List<InvoiceRecord>> txtRecordMap = txtRecords.stream()
                 .collect(Collectors.groupingBy(InvoiceRecord::getId));
 
-        // Combine all keys from both CSV and TXT maps
+        Set<CSVInvoiceRecord> unmatchedCSVs = new HashSet<>(csvRecords);
+        Set<InvoiceRecord> unmatchedTxts = new HashSet<>(txtRecords);
+
         Set<InvoiceRecordId> allKeys = new HashSet<>();
         allKeys.addAll(csvRecordMap.keySet());
         allKeys.addAll(txtRecordMap.keySet());
 
-        // Iterate through all unique keys and compare records
         for (InvoiceRecordId key : allKeys) {
             List<CSVInvoiceRecord> csvRecordList = csvRecordMap.getOrDefault(key, Collections.emptyList());
             List<InvoiceRecord> txtRecordList = txtRecordMap.getOrDefault(key, Collections.emptyList());
 
             boolean isDuplicate = csvRecordList.size() > 1 || txtRecordList.size() > 1;
 
-            // Compare CSV and TXT records for each combination
             for (CSVInvoiceRecord csvRecord : csvRecordList) {
                 if (!txtRecordList.isEmpty()) {
                     for (InvoiceRecord txtRecord : txtRecordList) {
+                        unmatchedCSVs.remove(csvRecord);
+                        unmatchedTxts.remove(txtRecord);
                         results.add(compareAndCreateResult(csvRecord, txtRecord, isDuplicate));
                     }
-                } else {
-                    // TXT record is missing
-                    results.add(createMissingTxtResult(csvRecord));
-                }
-            }
-
-            // Handle cases where the CSV record is missing
-            for (InvoiceRecord txtRecord : txtRecordList) {
-                if (csvRecordList.isEmpty()) {
-                    results.add(createMissingCsvResult(txtRecord));
                 }
             }
         }
 
+        Map<String, List<CSVInvoiceRecord>> unmatchedNewGroupingCSV = unmatchedCSVs.stream()
+                .collect(Collectors.groupingBy(record -> record.getId().getBulstat() + "|" + record.getId().getDocumentType() + "|" + record.getTotalAmount()));
+        Map<String, List<InvoiceRecord>> unmatchedNewGroupingTXT = unmatchedTxts.stream()
+                .collect(Collectors.groupingBy(record -> record.getId().getBulstat() + "|" + record.getId().getDocumentType() + "|" + record.getTotalAmount()));
+
+        Set<String> allUnmatchedKeys = new HashSet<>();
+        allUnmatchedKeys.addAll(unmatchedNewGroupingCSV.keySet());
+        allUnmatchedKeys.addAll(unmatchedNewGroupingTXT.keySet());
+
+        for (String key : allUnmatchedKeys) {
+            List<CSVInvoiceRecord> csvInvoiceRecords = unmatchedNewGroupingCSV.getOrDefault(key, Collections.emptyList());
+            List<InvoiceRecord> invoiceRecords = unmatchedNewGroupingTXT.getOrDefault(key, Collections.emptyList());
+
+            for (CSVInvoiceRecord csvInvoiceRecord : csvInvoiceRecords) {
+                for (InvoiceRecord invoiceRecord : invoiceRecords) {
+                    unmatchedCSVs.remove(csvInvoiceRecord);
+                    unmatchedTxts.remove(invoiceRecord);
+                    results.add(compareAndCreateResult(csvInvoiceRecord, invoiceRecord, false));
+                }
+            }
+        }
+
+        unmatchedCSVs.forEach(r -> results.add(createMissingTxtResult(r)));
+        unmatchedTxts.forEach(r -> results.add(createMissingCsvResult(r)));
         return results;
     }
 

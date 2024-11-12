@@ -9,16 +9,7 @@ import {LoadingService} from "../services/loading.service";
   imports: [
     RouterLink
   ],
-  template: `
-    <div class="payment-status-container">
-      <div class="status-icon success">
-        <i class="fa fa-check-circle"></i>
-      </div>
-      <h1>Payment Successful</h1>
-      <p>Thank you for your purchase! Your subscription has been upgraded.</p>
-      <button routerLink="/dashboard">Return to Dashboard</button>
-    </div>
-  `,
+  templateUrl: './payment-success.component.html',
   styleUrl: './payment-success.component.css'
 })
 export class PaymentSuccessComponent implements OnInit {
@@ -39,12 +30,14 @@ export class PaymentSuccessComponent implements OnInit {
 
   checkPaymentStatus() {
     this.loadingService.showOverlay();
-    this.http.get<{ status: string}>(`${this.STRIPE_API_PAYMENT_STATUS}?sessionId=${this.sessionId}`)
+    this.http.get<{ status: string, message: string}>(`${this.STRIPE_API_PAYMENT_STATUS}?sessionId=${this.sessionId}`)
       .subscribe({
         next: (response) => {
           if (response && response.status === 'succeeded') {
+            console.log(response.message);
             this.loadingService.hideOverlay();
           }else {
+            console.log(response.message);
             this.router.navigate(['/cancel']);
             this.loadingService.hideOverlay();
           }

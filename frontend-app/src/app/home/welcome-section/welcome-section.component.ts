@@ -1,15 +1,18 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
+import {Component} from '@angular/core';
 import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-welcome-section',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CommonModule],
   templateUrl: './welcome-section.component.html',
   styleUrl: './welcome-section.component.css'
 })
 export class WelcomeSectionComponent {
 
-  constructor() {}
+  constructor() {
+  }
+
+
 
 }

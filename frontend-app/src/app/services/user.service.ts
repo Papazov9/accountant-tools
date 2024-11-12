@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, map, Observable, of, switchMap, tap, throwError} from "rxjs";
-import {AuthService, CurrentUser} from "./auth.service";
+import {BehaviorSubject, catchError, map, Observable, of, switchMap, take, tap, throwError} from "rxjs";
+import {AuthService} from "./auth.service";
 import {HttpClient} from "@angular/common/http";
 import {PricingPlan} from "../home/pricing-section/pricing-section.component";
 
@@ -72,10 +72,11 @@ export class UserService {
   }
 
   acceptFreeTrial() {
-    return this.authService.currentUser$.pipe(
-      switchMap((currentUser: CurrentUser | null) => {
+    return this.userProfile$.pipe(
+      take(1),
+      switchMap((currentUser: UserProfile | null) => {
         if (currentUser?.username) {
-          return this.http.get<string>(`${this.API_URL}/free/${currentUser.username}`, {responseType: 'text' as 'json'}).pipe(
+          return this.http.get<string>(`${this.API_URL}/free/${currentUser.email}`, {responseType: 'text' as 'json'}).pipe(
             tap(() => this.fetchUserProfile()),
             catchError((error) => {
               console.error(error);

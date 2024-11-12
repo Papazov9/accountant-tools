@@ -2,7 +2,7 @@
   <div class="register-left">
     <div class="register-box">
       <div class="logo-container">
-        <img src="/assets/unparalled-high-resolution-logo-transparent.png" alt="Logo" class="register-logo" height="250"
+        <img src="/assets/images/unparalled-high-resolution-logo-transparent.png" alt="Logo" class="register-logo" height="250"
              width="300"/>
       </div>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -40,35 +40,35 @@
           <i
             [ngClass]="{'fa-solid fa-x': !passwordErrors?.minLength, 'fa fa-check-circle': passwordErrors?.minLength}"></i>
         </span>
-                Minimum 8 characters
+                <ng-container i18n>Minimum 8 characters</ng-container>
               </p>
               <p [ngClass]="{'valid': passwordErrors?.hasUppercase, 'invalid': !passwordErrors?.hasUppercase}">
         <span class="requirement-icon">
           <i
             [ngClass]="{'fa-solid fa-x': !passwordErrors?.hasUppercase, 'fa fa-check-circle': passwordErrors?.hasUppercase}"></i>
         </span>
-                At least 1 uppercase letter
+                <ng-container i18n> At least 1 uppercase letter </ng-container>
               </p>
               <p [ngClass]="{'valid': passwordErrors?.hasLowercase, 'invalid': !passwordErrors?.hasLowercase}">
         <span class="requirement-icon">
           <i
             [ngClass]="{'fa-solid fa-x': !passwordErrors?.hasLowercase, 'fa fa-check-circle': passwordErrors?.hasLowercase}"></i>
         </span>
-                At least 1 lowercase letter
+                <ng-container i18n> At least 1 lowercase letter </ng-container>
               </p>
               <p [ngClass]="{'valid': passwordErrors?.hasNumber, 'invalid': !passwordErrors?.hasNumber}">
         <span class="requirement-icon">
           <i
             [ngClass]="{'fa-solid fa-x': !passwordErrors?.hasNumber, 'fa fa-check-circle': passwordErrors?.hasNumber}"></i>
         </span>
-                At least 1 number
+                <ng-container i18n> At least 1 number </ng-container>
               </p>
               <p [ngClass]="{'valid': passwordErrors?.hasSpecialChar, 'invalid': !passwordErrors?.hasSpecialChar}">
         <span class="requirement-icon">
           <i
             [ngClass]="{'fa-solid fa-x': !passwordErrors?.hasSpecialChar, 'fa fa-check-circle': passwordErrors?.hasSpecialChar}"></i>
         </span>
-                At least 1 special character
+                <ng-container i18n> At least 1 special character </ng-container>
               </p>
             </div>
           </div>
@@ -100,7 +100,7 @@
                 class="submit-button"
                 [disabled]="!registerForm.valid || isLoading"
                 [ngClass]="{'enabled': registerForm.valid && isPasswordValid() && !isLoading}">
-          <span *ngIf="!isLoading; else loadingTemplate">Create Account</span>
+          <span *ngIf="!isLoading; else loadingTemplate" i18n>Create Account</span>
           <ng-template #loadingTemplate>
             <div class="loading-container">
               <div class="lds-roller">
@@ -113,22 +113,22 @@
                 <div></div>
                 <div></div>
               </div>
-              <span>Loading...</span>
+              <span i18n>Loading...</span>
             </div>
           </ng-template>
         </button>
       </form>
 
       <div class="login-link">
-        <p>Already have an account? <a href="/login">Log in</a></p>
+        <p i18n>Already have an account? <a href="/login">Log in</a></p>
       </div>
     </div>
   </div>
 
   <div class="register-right">
     <div class="register-illustration">
-      <img src="/assets/Animation.gif" style="border-radius: 20px" height="400" width="700">
-      <p style="color: #D1CDB6" class="closing-remark">Let us handle the books, so you can break through limits.</p>
+      <img src="/assets/images/Animation.gif" style="border-radius: 20px" height="400" width="700">
+      <p style="color: #D1CDB6" class="closing-remark" i18n>Let us handle the books, so you can break through limits.</p>
     </div>
   </div>
 </div>

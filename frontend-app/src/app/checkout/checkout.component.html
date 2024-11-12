@@ -3,7 +3,7 @@
 
     <!-- Left Column: Form Section -->
     <div class="checkout-form">
-      <h2>Complete Your Purchase</h2>
+      <h2 i18n>Complete Your Purchase</h2>
 
       <form [formGroup]="checkoutForm" (ngSubmit)="submitCheckoutForm()">
 
@@ -11,52 +11,82 @@
         <div class="form-section">
           <h4>Contact Information</h4>
           <div class="form-group">
-            <label for="contactEmail">Contact Email:</label>
-            <input id="contactEmail" type="email" formControlName="contactEmail" />
+            <label for="contactEmail" i18n>Contact Email:</label>
+            <input id="contactEmail" type="email" formControlName="contactEmail" required/>
             <div *ngIf="checkoutForm.get('contactEmail')?.invalid && checkoutForm.get('contactEmail')?.touched">
-              <small *ngIf="checkoutForm.get('contactEmail')?.errors?.['required']">Email is required.</small>
-              <small *ngIf="checkoutForm.get('contactEmail')?.errors?.['email']">Invalid email format.</small>
+              <small *ngIf="checkoutForm.get('contactEmail')?.errors?.['required']" i18n>Email is required.</small>
+              <small *ngIf="checkoutForm.get('contactEmail')?.errors?.['email']" i18n>Invalid email format.</small>
             </div>
           </div>
         </div>
 
-        <!-- Payment Method Section -->
+        <!-- Company Information Section -->
         <div class="form-section">
-          <h4>Payment Method</h4>
+          <h4>Company Information</h4>
           <div class="form-group">
-            <label for="paymentMethod">Choose a Payment Method:</label>
-            <select id="paymentMethod" formControlName="paymentMethod">
-              <option value="card">Credit Card</option>
-              <option value="bank">Bank Transfer</option>
-            </select>
+            <label for="companyName" i18n>Company Name:</label>
+            <input id="companyName" type="text" formControlName="companyName" required/>
+            <div *ngIf="checkoutForm.get('companyName')?.invalid && checkoutForm.get('companyName')?.touched">
+              <small i18n>Company Name is required.</small>
+            </div>
           </div>
         </div>
 
-        <!-- Additional Bank Transfer Fields -->
-        <div *ngIf="checkoutForm.get('paymentMethod')?.value === 'bank'" class="bank-transfer-details form-section">
-          <h4>Billing Information</h4>
+        <!-- Billing Address Section -->
+        <div class="form-section">
+          <h4 i18n>Billing Address</h4>
+
           <div class="form-group">
-            <label for="companyName">Company Name:</label>
-            <input id="companyName" type="text" formControlName="companyName" />
-            <div *ngIf="checkoutForm.get('companyName')?.invalid && checkoutForm.get('companyName')?.touched">
-              <small>Company Name is required for Bank Transfer.</small>
+            <label for="country" i18n>Country:</label>
+            <input
+              id="country"
+              type="text"
+              formControlName="country"
+              [matAutocomplete]="countryAutocomplete"
+              required/>
+            <mat-autocomplete #countryAutocomplete="matAutocomplete">
+              <mat-option *ngFor="let country of filteredCountries$ | async" [value]="country">
+                {{ country }}
+              </mat-option>
+            </mat-autocomplete>
+            <div *ngIf="checkoutForm.get('country')?.invalid && checkoutForm.get('country')?.touched">
+              <small i18n>Country is required.</small>
             </div>
           </div>
+
           <div class="form-group">
-            <label for="billingAddress">Billing Address:</label>
-            <textarea id="billingAddress" formControlName="billingAddress"></textarea>
-            <div *ngIf="checkoutForm.get('billingAddress')?.invalid && checkoutForm.get('billingAddress')?.touched">
-              <small>Billing Address is required for Bank Transfer.</small>
+            <label for="city" i18n>City:</label>
+            <input id="city" type="text" formControlName="city" required/>
+            <div *ngIf="checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched">
+              <small i18n>City is required.</small>
             </div>
           </div>
+
           <div class="form-group">
-            <label for="vatNumber">VAT Number:</label>
-            <input id="vatNumber" type="text" formControlName="vatNumber" />
+            <label for="postalCode" i18n>Postal Code:</label>
+            <input id="postalCode" type="text" formControlName="postalCode" required/>
+            <div *ngIf="checkoutForm.get('postalCode')?.invalid && checkoutForm.get('postalCode')?.touched">
+              <small i18n>Postal Code is required.</small>
+            </div>
           </div>
+
+          <div class="form-group">
+            <label for="addressLine1" i18n>Address Line 1:</label>
+            <input id="addressLine1" type="text" formControlName="addressLine1" required/>
+            <div *ngIf="checkoutForm.get('addressLine1')?.invalid && checkoutForm.get('addressLine1')?.touched">
+              <small i18n>Address Line 1 is required.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="addressLine2" i18n>Address Line 2:</label>
+            <input id="addressLine2" type="text" formControlName="addressLine2"/>
+          </div>
+
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" [disabled]="checkoutForm.invalid" class="continue-button">
+        <button type="submit" [disabled]="checkoutForm.invalid" class="continue-button" i18n>
           Proceed to Payment
         </button>
       </form>
@@ -66,11 +96,11 @@
     <div class="checkout-summary">
       <h3>Order Summary</h3>
       <div class="plan-summary">
-        <h4>{{ selectedPlan?.title }}</h4>
-        <p class="price">{{ selectedPlan?.price | currency:'EUR' }}</p>
-        <p>{{ selectedPlan?.comparisons }} comparisons will be added to your account</p>
+        <h4>{{ selectedPlan.title }}</h4>
+        <p class="price">{{ selectedPlan.price | currency:'EUR' }}</p>
+        <p>{{ selectedPlan.comparisons }} <ng-container i18n>comparisons will be added to your account</ng-container></p>
         <ul class="plan-features">
-          <li *ngFor="let feature of selectedPlan?.pros"> <span class="tick-icon"></span> {{ feature }}</li>
+          <li *ngFor="let feature of selectedPlan?.pros"><span class="tick-icon"></span> {{ feature }}</li>
         </ul>
       </div>
     </div>

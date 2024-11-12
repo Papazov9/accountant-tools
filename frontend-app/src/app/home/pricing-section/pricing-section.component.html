@@ -1,11 +1,14 @@
 <div class="pricing-section">
   <div class="heading">
-    <h1 class="pricing-title">Our Pricing Plans</h1>
-    <p class="pricing-subtitle">Choose the plan that best suits your needs.</p>
+    <h1 class="pricing-title" i18n>Our Pricing Plans</h1>
+    <p class="pricing-subtitle" i18n>Choose the plan that best suits your needs.</p>
   </div>
 
   <div class="pricing-container">
     <div class="pricing-card" *ngFor="let plan of pricingPlans">
+
+      <img [src]="plan.imgUrl" alt="Badge Icon" class="badge-icon">
+
       <h2 class="pricing-card-title">{{ plan.title }}</h2>
       <p class="pricing-price">{{ plan.price }} EUR</p>
       <p class="comparison-count">{{ plan.comparisons }} Comparisons</p>

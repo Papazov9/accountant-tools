@@ -5,10 +5,10 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
-  backdrop-filter: blur(10px); /* Blurs the background */
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
   z-index: 1000;
-  overflow-y: auto; /* Allow scrolling for the entire page */
+  overflow-y: auto;
   animation: fadeIn 0.5s ease-out;
   padding: 20px;
 }
@@ -20,7 +20,7 @@
 
 /* Modal Content */
 .modal-content {
-  background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   padding: 40px;
   max-width: 90%;
@@ -41,7 +41,7 @@
 .plan-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 20px;
   gap: 20px;
 }
@@ -58,15 +58,25 @@
   color: red;
 }
 
+/* Plan Card Styling */
 .plan-card {
+  position: relative;
   background-color: white;
   border: 2px solid #483AB6;
   border-radius: 12px;
-  padding: 20px;
-  flex: 1 1 220px; /* Ensures all cards have a fixed minimum width */
-  max-width: 400px; /* Ensures the max width is the same for all cards */
+  padding: 30px;
+  flex: 1 1 250px;
+  max-width: 400px;
+  text-align: center;
   transition: all 0.3s ease-in-out;
   box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.plan-card.selected {
+  background-color: #483AB6;
+  color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .plan-card:hover {
@@ -74,33 +84,29 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.plan-card.selected h3,
-.plan-card.selected h4,
-.plan-card.selected ul,
-.plan-card.selected ul li {
-  color: white;
-}
-
-.plan-card.selected {
-  background-color: #483AB6;
-  color: white;
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
 .plan-card h3 {
-  color: #483AB6;
   font-size: 1.8rem;
-  margin-bottom: 10px;
+  margin: 20px 0;
+  color: inherit;
 }
 
 .plan-card h4 {
-  color: #6557cf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   font-size: 1.4rem;
-  margin-bottom: 15px;
+}
+
+/* Old Price Styling */
+.old-price {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 1.2rem;
 }
 
 .plan-card ul {
-  color: #584ca6;
+  color: inherit;
   list-style: none;
   padding: 0;
   text-align: left;
@@ -110,8 +116,8 @@
   margin-bottom: 10px;
   padding-left: 30px;
   position: relative;
-  text-wrap: auto;
 }
+
 /* Button Styling */
 button {
   background-color: #483AB6;
@@ -124,33 +130,19 @@ button {
   font-size: 1rem;
 }
 
-.plan-card.selected button {
-  background-color: white;
-  color: #483AB6;
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
 button:hover {
   background-color: #6c63ff;
 }
 
-/* Close Button */
-.close-btn {
-  background-color: transparent;
-  border: 2px solid #483AB6;
+/* Selected Plan Styling */
+.plan-card.selected button {
+  background-color: white;
   color: #483AB6;
-  margin-left: 10px;
 }
 
-.close-btn:hover {
-  background-color: #483AB6;
-  color: white;
-}
-
-.continue-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.plan-card.selected .tick-icon {
+  background-color: white;
+  color: #483AB6;
 }
 
 .tick-icon {
@@ -194,13 +186,77 @@ button:hover {
   transform: translate(-50%, -50%);
 }
 
+/* Badge Styling */
+.popular-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff4081;
+  color: white;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+.actions {
+  display: flex;
+  justify-content: center; /* Center-aligns the buttons */
+  gap: 15px; /* Adds space between the buttons */
+  margin-top: 20px;
+}
+
+/* Common button styling */
+.actions button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Continue button styling */
+.continue-btn {
+  background-color: #483AB6;
+  color: white;
+  border: none;
+}
+
+.continue-btn:hover {
+  background-color: #6c63ff;
+}
+
+.continue-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Close button styling */
+.close-btn {
+  background-color: transparent;
+  color: #483AB6;
+  border: 2px solid #483AB6;
+}
+
+.close-btn:hover {
+  background-color: #483AB6;
+  color: white;
+}
+
+/* Button focus styling */
+.actions button:focus {
+  box-shadow: 0 0 8px rgba(72, 58, 182, 0.4);
+}
+
 @media (max-width: 768px) {
   .plan-cards {
     flex-direction: column;
     align-items: center;
   }
   .plan-card {
-    width: 100%; /* Cards take full width on small screens */
-    max-width: 300px; /* Set a consistent max-width for mobile */
+    width: 100%;
+    max-width: 300px;
   }
 }

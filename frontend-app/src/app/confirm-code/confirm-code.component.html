@@ -1,8 +1,8 @@
 <div class="confirm-code-container">
   <form [formGroup]="confirmCodeForm" (ngSubmit)="onSubmit()">
-    <h2>Confirm Your Email</h2>
-    <p>Please enter the 6-digit code sent to your email:</p>
+    <h2 i18n>Confirm Your Email</h2>
+    <p i18n>Please enter the 6-digit code sent to your email:</p>
     <input type="text" formControlName="code" placeholder="Enter code" maxlength="6">
-    <button type="submit">Confirm Email</button>
+    <button type="submit" i18n>Confirm Email</button>
   </form>
 </div>

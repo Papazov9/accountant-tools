@@ -27,11 +27,14 @@ public class Payment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String sessionId;
 
-    @Column()
+    @Column(unique = true)
     private String paymentIntentId;
+
+    @Column(unique = true)
+    private String invoiceId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

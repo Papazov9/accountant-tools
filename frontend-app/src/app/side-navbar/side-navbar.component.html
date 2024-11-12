@@ -1,15 +1,15 @@
 <div class="side-nav-container">
   <div class="company-logo-container">
-    <img src="/assets/unparalled-favicon-white.png" alt="Company Logo" class="company-logo-img" />
+    <img src="/assets/images/unparalled-favicon-white.png" alt="Company Logo" class="company-logo-img" />
     <span class="company-name">unparalleled.</span>
   </div>
 
   <div class="profile-container">
     <ng-container *ngIf="profile?.gender === 'MALE'; else femaleProfile">
-      <img src="/assets/man-avatar-side-nav.png" alt="Profile image" class="profile-image"/>
+      <img src="/assets/images/man-avatar-side-nav.png" alt="Profile image" class="profile-image"/>
     </ng-container>
     <ng-template #femaleProfile>
-      <img src="/assets/woman-avatar-side-nav.png" alt="Profile image" class="profile-image" />
+      <img src="/frontend-app/src/assets/images/woman-avatar-side-nav.png" alt="Profile image" class="profile-image" />
     </ng-template>
     <h4 class="profile-name">{{ profile?.firstName }} {{ profile?.lastName }}</h4>
     <span class="user-role" (click)="clickSub()">{{ userPlan }}</span>
@@ -18,27 +18,27 @@
     <ul class="side-nav-links">
       <li>
         <a routerLink="/dashboard">
-          <i class="fa fa-tachometer-alt"></i> <span>Dashboard</span>
+          <i class="fa fa-tachometer-alt"></i> <span i18n>Dashboard</span>
         </a>
       </li>
       <li>
         <a routerLink="/invoice-comparison">
-          <i class="fa fa-file-invoice"></i> <span>Invoice Comparison</span>
+          <i class="fa fa-file-invoice"></i> <span i18n>Invoice Comparison</span>
         </a>
       </li>
       <li>
         <a routerLink="/history">
-          <i class="fas fa-history"></i> <span>History</span>
+          <i class="fas fa-history"></i> <span i18n>History</span>
         </a>
       </li>
       <li>
         <a (click)="clickSub()">
-          <i class="fa fa-user-plus" aria-hidden="true"></i> <span>Subscriptions</span>
+          <i class="fa fa-user-plus" aria-hidden="true"></i> <span i18n>Subscriptions</span>
         </a>
       </li>
       <li>
         <a routerLink="/settings">
-          <i class="fa fa-cogs"></i> <span>Settings</span>
+          <i class="fa fa-cogs"></i> <span i18n>Settings</span>
         </a>
       </li>
     </ul>
@@ -46,7 +46,7 @@
 
   <div class="logout-container">
     <a class="logout-button" (click)="onLogout()">
-      <i class="fa fa-sign-out-alt" aria-hidden="true"></i> <span>Logout</span>
+      <i class="fa fa-sign-out-alt" aria-hidden="true"></i> <span i18n>Logout</span>
     </a>
   </div>
 </div>

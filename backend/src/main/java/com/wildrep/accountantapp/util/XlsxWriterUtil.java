@@ -20,12 +20,11 @@ public class XlsxWriterUtil {
     public static ByteArrayOutputStream generateComparisonReport(List<ComparisonResult> comparisonResults) {
         try (SXSSFWorkbook workbook = new SXSSFWorkbook(FLUSH_ROWS)) {
 
-            // Create separate sheets for each type of mismatch
-            Sheet allRecordsSheet = workbook.createSheet("All Records");
-            Sheet mismatchedSheet = workbook.createSheet("Mismatches");
-            Sheet missingInCsvSheet = workbook.createSheet("Missing in CSV");
-            Sheet missingInTxtSheet = workbook.createSheet("Missing in TXT");
-            Sheet duplicateSheet = workbook.createSheet("Duplicates");
+            Sheet allRecordsSheet = workbook.createSheet("Всички записи");
+            Sheet mismatchedSheet = workbook.createSheet("Всички несъответствия");
+            Sheet missingInCsvSheet = workbook.createSheet("Липсващи в НАП");
+            Sheet missingInTxtSheet = workbook.createSheet("Липсващи в Покупки");
+            Sheet duplicateSheet = workbook.createSheet("Дубликати");
 
             CellStyle defaultStyle = createDefaultStyle(workbook);
             CellStyle redTextStyle = createRedTextStyle(workbook);
@@ -80,7 +79,7 @@ public class XlsxWriterUtil {
     }
 
     private static void createHeaderRowForDetailedRecords(Workbook workbook, Sheet sheet, int rowNum, CellStyle headerStyle) {
-        String[] headers = {"Field", "CSV Value", "TXT Value", "Matched"};
+        String[] headers = {"Име", "Стойност НАП", "Стойност Покупки", "Съвпадат"};
 
         Row headerRow = sheet.createRow(rowNum);
 
@@ -136,15 +135,15 @@ public class XlsxWriterUtil {
         fieldCell.setCellStyle(defaultStyle);
 
         Cell csvCell = row.createCell(OFFSET + 1);
-        csvCell.setCellValue(csvValue != null ? csvValue : "Missing");
+        csvCell.setCellValue(csvValue != null ? csvValue : "Липсва");
         csvCell.setCellStyle(styleToApply);
 
         Cell txtCell = row.createCell(OFFSET + 2);
-        txtCell.setCellValue(txtValue != null ? txtValue : "Missing");
+        txtCell.setCellValue(txtValue != null ? txtValue : "Липсва");
         txtCell.setCellStyle(styleToApply);
 
         Cell matchedCell = row.createCell(OFFSET + 3);
-        matchedCell.setCellValue(csvValue != null && csvValue.equals(txtValue) ? "Yes" : "No");
+        matchedCell.setCellValue(csvValue != null && csvValue.equals(txtValue) ? "Да" : "Не");
         matchedCell.setCellStyle(styleToApply);
 
         return rowNum;
@@ -176,6 +175,6 @@ public class XlsxWriterUtil {
     }
 
     private static CellStyle createDefaultStyle(Workbook workbook) {
-        return workbook.createCellStyle();  // Can be customized if needed
+        return workbook.createCellStyle();
     }
 }

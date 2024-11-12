@@ -1,26 +1,40 @@
 <div class="modal-overlay">
   <div class="modal-content">
-    <h2 class="title">Choose a Subscription Plan</h2>
-    <p class="sub-title">Select a plan or close this window.</p>
-    <p class="sub-title-warning">This is a one-time payment options except the Unparalleled option. You will not be charged again unless you need more comparisons.</p>
+    <h2 class="title" i18n>Choose a Subscription Plan</h2>
+    <p class="sub-title" i18n>Select a plan or close this window.</p>
+    <p class="sub-title-warning" i18n>This is a one-time payment option except for the Unparalleled option. You will not be charged again unless you need more comparisons.</p>
 
     <div class="plan-cards">
       <div *ngFor="let plan of subscriptionPlans" class="plan-card" [ngClass]="{ 'selected': selectedPlan === plan }">
+
+        <!-- Popular Badge -->
+<!--        <div *ngIf="plan.isPopular" class="popular-badge">POPULAR</div>-->
+
+        <!-- Plan Title and Price -->
         <h3>{{ plan.title }}</h3>
-        <h4>{{ plan.price }} EUR</h4>
-        <p>{{ plan.comparisons === 1000 ? 'Unlimited' : plan.comparisons }} Comparisons</p>
+        <h4>
+          <span *ngIf="plan.oldPrice" class="old-price">{{ plan.oldPrice }} EUR</span>
+          {{ plan.price }} EUR
+        </h4>
+
+        <!-- Comparisons Information -->
+        <p>{{ plan.comparisons === 1000 ? 'Unlimited' : plan.comparisons }} <ng-container i18n>Comparisons</ng-container></p>
+
+        <!-- Features List -->
         <ul>
           <li *ngFor="let feature of plan.pros">
             <span class="tick-icon" [ngClass]="{ 'selected-tick': selectedPlan === plan }"></span>{{ feature }}
           </li>
         </ul>
-        <button (click)="selectPlan(plan)">Select</button>
+
+        <!-- Select Button -->
+        <button (click)="selectPlan(plan)" i18n>Select</button>
       </div>
     </div>
 
     <div class="actions">
-      <button [disabled]="!selectedPlan" class="continue-btn" (click)="proceedToPayment()">Continue to Payment</button>
-      <button class="close-btn" (click)="closeModal()">Close</button>
+      <button [disabled]="!selectedPlan" class="continue-btn" (click)="proceedToPayment()" i18n>Continue to Payment</button>
+      <button class="close-btn" (click)="closeModal()" i18n>Close</button>
     </div>
   </div>
 </div>

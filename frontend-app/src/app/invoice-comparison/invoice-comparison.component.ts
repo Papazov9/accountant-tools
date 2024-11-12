@@ -7,6 +7,7 @@ import {CommonModule, NgIf} from "@angular/common";
 import {UserProfile, UserService} from "../services/user.service";
 import Swal from "sweetalert2";
 import {ToggleService} from "../services/toggle.service";
+import {delay, retryWhen, take} from "rxjs";
 
 @Component({
   selector: 'app-invoice-comparison',
@@ -36,8 +37,6 @@ export class InvoiceComparisonComponent implements OnInit {
           this.userProfile = userProfile;
           this.isFreePlan = this.userProfile?.subscription?.title === 'FREE';
           this.cdr.detectChanges();
-        }else {
-          console.error();
         }
         this.loadingService.hideOverlay();
       },
@@ -106,20 +105,29 @@ export class InvoiceComparisonComponent implements OnInit {
   onCsvFileSelect(event: any): void {
     this.checkPlan();
     const selectedFiles: File[] = Array.from(event.target.files);
-    selectedFiles.forEach(file => {
-      if (!this.csvFiles.some(existingFile => existingFile.name === file.name)) {
-        this.csvFiles.push(file);
-      }
-    });
+    if (this.isFreePlan && selectedFiles.length >= 1) {
+      this.csvFiles.push(selectedFiles[0]);
+    } else {
+      selectedFiles.forEach(file => {
+        if (!this.csvFiles.some(existingFile => existingFile.name === file.name)) {
+          this.csvFiles.push(file);
+        }
+      });
+    }
   }
 
   onTxtFileSelect(event: any): void {
     const selectedFiles: File[] = Array.from(event.target.files);
-    selectedFiles.forEach(file => {
-      if (!this.txtFiles.some(existingFile => existingFile.name === file.name)) {
-        this.txtFiles.push(file);
-      }
-    });
+
+    if (this.isFreePlan && selectedFiles.length >= 1) {
+      this.txtFiles.push(selectedFiles[0]);
+    } else {
+      selectedFiles.forEach(file => {
+        if (!this.txtFiles.some(existingFile => existingFile.name === file.name)) {
+          this.txtFiles.push(file);
+        }
+      });
+    }
   }
 
   triggerFileInput(inputId: string): void {
@@ -163,6 +171,7 @@ export class InvoiceComparisonComponent implements OnInit {
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
+            this.userService.fetchUserProfile();
           }
 
           if (event.status === HttpStatusCode.Ok) {

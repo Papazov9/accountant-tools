@@ -16,6 +16,7 @@
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  flex-direction: row;
 }
 
 /* Left column: Form */
@@ -23,6 +24,7 @@
   flex: 1;
   padding: 30px;
   border-right: 1px solid #ddd;
+  background-color: #ffffff;
 }
 
 h2 {
@@ -154,18 +156,68 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .checkout-container {
     flex-direction: column;
+    box-shadow: none;
   }
 
   .checkout-form, .checkout-summary {
     padding: 20px;
-    border: none;
   }
 
   .checkout-summary {
     background-color: #ffffff;
     border-top: 1px solid #ddd;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  .form-section h4 {
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 768px) {
+  .checkout-wrapper {
+    padding: 10px;
+  }
+
+  .checkout-form, .checkout-summary {
+    padding: 15px;
+  }
+
+  .continue-button {
+    font-size: 1em;
+  }
+
+  .plan-summary .price {
+    font-size: 1.5em;
+  }
+
+  .plan-features li {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.6em;
+  }
+
+  .checkout-form, .checkout-summary {
+    padding: 10px;
+  }
+
+  input, select, textarea {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .continue-button {
+    padding: 10px;
+    font-size: 1em;
   }
 }

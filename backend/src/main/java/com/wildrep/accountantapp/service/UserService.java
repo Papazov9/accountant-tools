@@ -44,15 +44,36 @@ public class UserService {
             throw new UserAlreadyExistsException(registerRequest.username());
         }
 
-        Role role = this.roleRepository.findByRoleName(RoleEnum.USER).orElseThrow(() -> new RoleDoesNotExist(RoleEnum.USER.name()));
+        Role role = this.roleRepository
+                .findByRoleName(RoleEnum.USER)
+                .orElseThrow(() ->
+                        new RoleDoesNotExist(RoleEnum.USER.name()));
 
-        User user = User.builder().username(registerRequest.username()).comparisonCount(1).email(registerRequest.email()).password(passwordEncoder.encode(registerRequest.password())).firstName(registerRequest.firstName()).lastName(registerRequest.lastName()).gender(Gender.valueOf(registerRequest.gender().toUpperCase())).roles(Set.of(role)).isAcknowledged(false).confirmationCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase()).codeExpirationDate(LocalDateTime.now().plusHours(1)).isVerified(false).build();
+        User user = User.builder()
+                .username(registerRequest.username())
+                .comparisonCount(0)
+                .email(registerRequest.email())
+                .password(passwordEncoder.encode(registerRequest.password()))
+                .firstName(registerRequest.firstName())
+                .lastName(registerRequest.lastName())
+                .gender(Gender.valueOf(registerRequest.gender().toUpperCase()))
+                .roles(Set.of(role))
+                .isAcknowledged(false)
+                .confirmationCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase())
+                .codeExpirationDate(LocalDateTime.now().plusHours(1))
+                .isVerified(false)
+                .build();
 
         this.userRepository.saveAndFlush(user);
 
-        String emailContent = "<p>Hello,</p>" + "<p>Thank you for registering. Please confirm your email by entering this code:</p>" + "<h3>" + user.getConfirmationCode() + "</h3>" + "<p>The code will expire in 1 hour. If you didn't register, please ignore this email.</p>";
+        String emailContent = "<p>Hello,</p>"
+                + "<p>Thank you for registering. Please confirm your email by entering this code:</p>"
+                + "<h3>"
+                + user.getConfirmationCode()
+                + "</h3>"
+                + "<p>The code will expire in 1 hour. If you didn't register, please ignore this email.</p>";
 
-        this.emailService.sendEmail(user.getEmail(), "Account Verification", emailContent);
+        this.emailService.sendEmail(user.getEmail(), "Account Verification", emailContent, null);
 
         return new RegisterResponse(String.format("User with username: %s registered successfully!", user.getUsername()), user.getUsername());
     }
@@ -68,49 +89,82 @@ public class UserService {
             throw new UserNotVerifiedException(user.getUsername());
         }
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.username(),
+                        loginRequest.password()));
 
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(loginRequest.username());
 
         String jwtToken = this.jwtUtil.generateToken(authentication);
 
-        return LoginResponse.builder().message("Login successful!").username(userDetails.getUsername()).token(jwtToken).build();
+        return LoginResponse.builder()
+                .message("Login successful!")
+                .username(userDetails.getUsername())
+                .token(jwtToken)
+                .build();
     }
 
     public DashboardUserResponse loadUserData(String username) {
 
-        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
+        User user = this.userRepository
+                .findByUsername(username)
+                .orElseThrow(() ->
+                        new UserDoesNotExistException(username));
         SubscriptionResponse subscriptionResponse;
         if (user.isAcknowledged()) {
-            subscriptionResponse = new SubscriptionResponse(user.getSubscription().getType().name(), user.getSubscription().getPrice(), user.getComparisonCount(), user.getSubscription().getDescription());
+            subscriptionResponse =
+                    new SubscriptionResponse(
+                            user.getSubscription().getType().name(),
+                            user.getSubscription().getPrice(),
+                            user.getComparisonCount(),
+                            user.getSubscription().getDescription());
         } else {
             subscriptionResponse = new SubscriptionResponse(null, null, null, null);
         }
 
-        return new DashboardUserResponse(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getGender().name(), user.isAcknowledged(), "User loaded successfully!", subscriptionResponse);
+        return new DashboardUserResponse(
+                user.getEmail(),
+                user.getUsername(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getGender().name(),
+                user.isAcknowledged(),
+                "User loaded successfully!",
+                subscriptionResponse);
     }
 
     public String createNewToken(String username) {
-        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
+        User user = this.userRepository
+                .findByUsername(username)
+                .orElseThrow(() ->
+                        new UserDoesNotExistException(username));
 
         return this.jwtUtil.generateNewToken(user);
     }
 
-    public String updateUserSubscription(String subscriptionType, String username) {
+    public String updateUserSubscription(String subscriptionType, String email) {
         SubscriptionType subscription;
         try {
             subscription = SubscriptionType.valueOf(subscriptionType.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Invalid subscription type: " + subscriptionType);
         }
-        Subscription sub = this.subscriptionRepository.findByType(subscription).orElseThrow(() -> new SubscriptionNotFoundException(String.format("Subscription with name: %s was not found", subscriptionType)));
-        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UserDoesNotExistException(username));
+        Subscription sub = this.subscriptionRepository
+                .findByType(subscription)
+                .orElseThrow(() ->
+                        new SubscriptionNotFoundException(
+                                String.format("Subscription with name: %s was not found", subscriptionType)));
+        User user = this.userRepository
+                .findByEmail(email)
+                .orElseThrow(() ->
+                        new UserDoesNotExistException(email));
         user.setSubscription(sub);
         user.setAcknowledged(true);
         user.addComparisons(sub.getMaxComparisons());
 
         this.userRepository.saveAndFlush(user);
-        return String.format("Subscription with name: %s added successfully to user with username: %s!", subscription.name(), username);
+        return String.format("Subscription with tier: %s added successfully to user with email: %s!", subscription.name(), email);
     }
 
     public boolean confirmCode(CodeConfirmRequest codeConfirmRequest) {
@@ -124,7 +178,7 @@ public class UserService {
 
 
             String emailContent = "<p>Hello,</p>" + "<p>Your email has been successfully verified. You can now log in to your account.</p>";
-            this.emailService.sendEmail(user.getEmail(), "Email Verified", emailContent);
+            this.emailService.sendEmail(user.getEmail(), "Email Verified", emailContent, null);
             return true;
         }
 

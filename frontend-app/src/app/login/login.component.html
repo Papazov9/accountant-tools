@@ -2,7 +2,7 @@
   <div class="login-left">
     <div class="login-box">
       <div class="logo-container">
-        <img src="/assets/unparalled-high-resolution-logo-transparent.png" alt="Logo" class="login-logo" height="250" width="300"/>
+        <img src="/assets/images/unparalled-high-resolution-logo-transparent.png" alt="Logo" class="login-logo" height="250" width="300"/>
       </div>
 
       <div *ngIf="errorMessage" class="error-message">
@@ -11,44 +11,44 @@
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="input-container">
-          <input id="email" type="text" formControlName="username" placeholder="Enter your username" required>
+          <input id="email" type="text" formControlName="username" i18n-placeholder placeholder="Enter your username" required>
         </div>
 
         <div class="input-container">
-          <input id="password" type="password" formControlName="password" placeholder="Enter your password" required>
+          <input id="password" type="password" formControlName="password" i18n-placeholder placeholder="Enter your password" required>
         </div>
 
         <div class="remember-me-forgot-password">
           <div class="custom-checkbox">
             <input type="checkbox" id="remember-me" formControlName="rememberMe">
-            <label for="remember-me">Remember me</label>
+            <label for="remember-me" i18n>Remember me</label>
           </div>
           <div class="forgot-password">
-            <a href="#">Forgot Password?</a>
+            <a href="#" i18n>Forgot Password?</a>
           </div>
         </div>
 
         <button type="submit" class="submit-button" [disabled]="isLoading">
-          <span *ngIf="!isLoading; else loadingTemplate">Log In</span>
+          <span *ngIf="!isLoading; else loadingTemplate" i18n-placeholder>Log In</span>
           <ng-template #loadingTemplate>
             <div class="loading-container">
               <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-              <span>Loading...</span>
+              <span i18n>Loading...</span>
             </div>
           </ng-template>
         </button>
       </form>
 
       <div class="signup-link">
-        <p>Don’t have an account? <a href="/register">Sign up</a></p>
+        <p i18n>Don’t have an account? <a href="/register">Sign up</a></p>
       </div>
     </div>
   </div>
 
   <div class="login-right">
     <div class="login-illustration">
-      <img src="/assets/Animation.gif" style="border-radius: 20px" height="400" width="700">
-      <p style="color: #D1CDB6" class="closing-remark">Let us handle the books, so you can break through limits.</p>
+      <img src="/assets/images/Animation.gif" style="border-radius: 20px" height="400" width="700">
+      <p style="color: #D1CDB6" class="closing-remark" i18n>Let us handle the books, so you can break through limits.</p>
     </div>
   </div>
 </div>

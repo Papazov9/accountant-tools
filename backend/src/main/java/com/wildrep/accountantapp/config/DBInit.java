@@ -22,11 +22,11 @@ public class DBInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (this.roleRepository.count() == 0) {
-        initRoles();
+            initRoles();
         }
 
         if (this.subscriptionRepository.count() == 0) {
-        initSubscriptions();
+            initSubscriptions();
         }
     }
 
@@ -40,6 +40,7 @@ public class DBInit implements CommandLineRunner {
                     subscription.setPrice(0.0);
                     subscription.setMaxComparisons(1);
                     subscription.setDescription("Basic subscription type with very limited rights.");
+                    subscription.setStripeProductId("FREE");
                 }
                 case PRO -> {
                     subscription.setType(s);
@@ -49,6 +50,7 @@ public class DBInit implements CommandLineRunner {
                             "Access to All Features\n" +
                             "Priority Email Support\n" +
                             "Additional Comparisons ");
+                    subscription.setStripeProductId("prod_R8bQvxPWyE69qY");
                 }
                 case PREMIUM -> {
                     subscription.setType(s);
@@ -58,6 +60,7 @@ public class DBInit implements CommandLineRunner {
                             "Team Management\n" +
                             "Access to Advanced Features\n" +
                             "Additional Comparisons ");
+                    subscription.setStripeProductId("prod_R8bPVqfuvk6ze3");
                 }
                 case BUSINESS -> {
                     subscription.setType(s);
@@ -67,6 +70,7 @@ public class DBInit implements CommandLineRunner {
                             "Custom Integrations\n" +
                             "Unlimited Comparisons\n" +
                             "Priority Handling");
+                    subscription.setStripeProductId("prod_R8bOFEUXlM4BM5");
                 }
                 case ENTERPRISE -> {
                     subscription.setType(s);
@@ -76,6 +80,7 @@ public class DBInit implements CommandLineRunner {
                             "Custom Integrations\n" +
                             "Unlimited Comparisons\n" +
                             "Priority Handling ");
+                    subscription.setStripeProductId("prod_R8bO4Izu7lHj84");
                 }
                 case UNPARALLELED -> {
                     subscription.setType(s);
@@ -85,6 +90,7 @@ public class DBInit implements CommandLineRunner {
                             "Custom Integrations\n" +
                             "Unlimited Comparisons\n" +
                             "Priority Handling ");
+                    subscription.setStripeProductId("prod_R8bMstAdzJeoMA");
                 }
             }
             this.subscriptionRepository.saveAndFlush(subscription);

@@ -58,9 +58,9 @@ public class FileServiceUtil {
 
                     String docNumber = record.get(4).trim();
                     String formattedDocNumber;
-                    try{
+                    try {
                         formattedDocNumber = String.format("%010d", Long.parseLong(docNumber));
-                    } catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         formattedDocNumber = "Invalid document number";
                     }
                     InvoiceRecordId invoiceRecordId = new InvoiceRecordId(record.get(0).trim(), docType, formattedDocNumber);
@@ -100,7 +100,6 @@ public class FileServiceUtil {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(utf8InputStream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
-                log.info(line);
                 Pattern fullTxtRegexPattern = Pattern.compile(FULL_TXT_REGEX);
                 Matcher matcher = fullTxtRegexPattern.matcher(line.trim());
                 if (matcher.matches()) {
@@ -145,17 +144,6 @@ public class FileServiceUtil {
 
         String finalBulstat = bulstat;
         return currentCSVRecords.stream().filter(c -> (c.getId().getBulstat().equals(finalBulstat) && c.getId().getDocumentNumber().equals(docNumber))).toList().isEmpty();
-    }
-
-    private static String extractCompanyNameCombinedString(String combined) {
-        Pattern splitRegex = Pattern.compile("\\s{2,}(\\S.*)$");
-        Matcher matcher = splitRegex.matcher(combined);
-
-        String companyName = combined;
-        if (matcher.find()) {
-            companyName = combined.substring(0, matcher.start());
-        }
-        return companyName;
     }
 
     private static String validateAccountingPeriod(String accountingPeriod) {

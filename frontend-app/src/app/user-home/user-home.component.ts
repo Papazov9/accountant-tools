@@ -78,8 +78,9 @@ export class UserHomeComponent implements OnInit {
     this.chart.data.labels = [];
 
     metrics!.comparisonMetricResponses.forEach((comparisonMetric: ComparisonMetric, index: number) => {
+      const comparisonLabel = $localize`Comparison`;
       this.mismatchData.push(comparisonMetric.mismatches);
-      this.chart.data.labels.push(`Comparison ${index + 1}`)
+      this.chart.data.labels.push(`${comparisonLabel} ${index + 1}`)
     })
 
     this.chart.data.datasets[0].data = this.mismatchData;
@@ -92,13 +93,17 @@ export class UserHomeComponent implements OnInit {
   }
 
   initializePieChart() {
+    const successfulComparisonsLabel = $localize`Successful Comparisons`;
+    const failedComparisonsLabel = $localize`Failed Comparisons`;
+    const comparisonSuccessRateLabel = $localize`Comparison Success Rate`;
+
     if (this.comparisonPieChart && this.comparisonPieChart.nativeElement) {
       this.chart = new Chart(this.comparisonPieChart.nativeElement, {
         type: 'pie',
         data: {
-          labels: ['Successful Comparisons', 'Failed Comparisons'],
+          labels: [successfulComparisonsLabel, failedComparisonsLabel],
           datasets: [{
-            label: 'Comparison Success Rate',
+            label: comparisonSuccessRateLabel,
             data: [this.metrics?.successfulComparisons, this.metrics?.failedComparisons],
             backgroundColor: ['#483AB6', '#D3D3D3'], // Purple for successful, Gray for failed
             hoverBackgroundColor: ['#6B59D3', '#A9A9A9'], // Slightly lighter on hover
@@ -147,7 +152,9 @@ export class UserHomeComponent implements OnInit {
 
   initializeChart() {
     if (this.mismatchChart && this.mismatchChart.nativeElement) {
-
+      const mismatchTrendsLabel = $localize`Mismatch Trends`;
+      const comparisonsLabel = $localize`Comparisons`;
+      const mismatchesCountLabel = $localize`Mismatches Count`;
       // @ts-ignore
       const gradient = this.mismatchChart.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 400);
       gradient.addColorStop(0, 'rgba(72, 58, 182, 0.5)');
@@ -158,7 +165,7 @@ export class UserHomeComponent implements OnInit {
         data: {
           labels: [],
           datasets: [{
-            label: 'Mismatch Trends',
+            label: mismatchTrendsLabel,
             data: this.mismatchData,
             borderColor: '#483AB6',
             backgroundColor: gradient,
@@ -183,7 +190,7 @@ export class UserHomeComponent implements OnInit {
             x: {
               title: {
                 display: true,
-                text: 'Comparisons',
+                text: comparisonsLabel,
                 color: '#5C5CFF',
                 font: {
                   size: 14,
@@ -201,7 +208,7 @@ export class UserHomeComponent implements OnInit {
             y: {
               title: {
                 display: true,
-                text: 'Mismatches Count',
+                text: mismatchesCountLabel,
                 color: '#5C5CFF',
                 font: {
                   size: 14,

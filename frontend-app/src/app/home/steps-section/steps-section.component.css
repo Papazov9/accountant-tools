@@ -2,7 +2,7 @@
   display: block;
   padding: 50px 20px;
   background-color: #f9f9f9;
-  background-image: url('/assets/steps-back.jpg');
+  background-image: url('/assets/images/steps-back.jpg');
   background-size: cover;
   background-position: center;
 }

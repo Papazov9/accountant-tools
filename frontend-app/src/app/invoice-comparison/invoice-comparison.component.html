@@ -1,15 +1,15 @@
 <div class="invoice-comparison-container">
 
   <div class="title-section">
-    <h1 class="futuristic-title">Invoice Comparison Tool</h1>
-    <p class="futuristic-subtitle">Effortlessly compare your CSV and TXT invoice records</p>
+    <h1 class="futuristic-title" i18n>Invoice Comparison Tool</h1>
+    <p class="futuristic-subtitle" i18n>Effortlessly compare your CSV and TXT invoice records</p>
   </div>
 
   <!-- Subscription Details Section -->
   <div class="subscription-details">
     <div class="subscription-box">
-      <p><strong>Comparisons Left: </strong><span class="comparison-count">{{ userProfile?.subscription?.comparisons }}</span></p>
-      <p><strong>Subscription Plan: </strong> <span class="sub-name">{{ userProfile?.subscription?.title }}</span></p>
+      <p><strong i18n>Comparisons Left: </strong><span class="comparison-count">{{ userProfile?.subscription?.comparisons }}</span></p>
+      <p><strong i18n>Subscription Plan: </strong> <span class="sub-name">{{ userProfile?.subscription?.title }}</span></p>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
     <div class="dropbox-container" (dragover)="onDragOver($event)">
       <div class="dropbox" (drop)="onCsvDrop($event)"  (click)="triggerFileInput('csv-upload')">
         <i class="fa fa-cloud-upload" style="color: #483AB6; font-size: 50px; margin-bottom: 10px" aria-hidden="true"></i>
-        <span class="dropbox-label">Drop CSV Files here or click to upload</span>
+        <span class="dropbox-label" i18n>Drop CSV Files here or click to upload</span>
         <input type="file" id="csv-upload" accept=".csv" (change)="onCsvFileSelect($event)" [disabled]="(csvFiles.length >=1 && isFreePlan) || (userProfile?.subscription?.comparisons === 0)" multiple hidden>
       </div>
       <ul class="uploaded-files">
@@ -29,7 +29,7 @@
           </div>
           <button class="remove-button" (click)="removeCsvFile(file)">&#10005;</button>
         </li>
-        <li *ngIf="csvFiles.length === 0">No files selected.</li>
+        <li *ngIf="csvFiles.length === 0" i18n>No files selected.</li>
       </ul>
     </div>
 
@@ -37,7 +37,7 @@
     <div class="dropbox-container" (dragover)="onDragOver($event)">
       <div class="dropbox" (drop)="onTxtDrop($event)" (click)="triggerFileInput('txt-upload')">
         <i class="fa fa-cloud-upload" style="color: #483AB6; font-size: 50px; margin-bottom: 10px" aria-hidden="true"></i>
-        <span class="dropbox-label">Drop TXT Files here or click to upload</span>
+        <span class="dropbox-label" i18n>Drop TXT Files here or click to upload</span>
         <input type="file" id="txt-upload" accept=".txt" (change)="onTxtFileSelect($event)" [disabled]="(txtFiles.length >=1 && isFreePlan) || (userProfile?.subscription?.comparisons === 0)" multiple hidden>
       </div>
       <ul class="uploaded-files">
@@ -47,10 +47,10 @@
           </div>
           <button class="remove-button" (click)="removeTxtFile(file)">&#10005;</button>
         </li>
-        <li *ngIf="txtFiles.length === 0">No files selected.</li>
+        <li *ngIf="txtFiles.length === 0" i18n>No files selected.</li>
       </ul>
     </div>
   </div>
 
-  <button class="upload-button" [ngClass]="{'disabled-button' : userProfile?.subscription?.comparisons === 0}" (click)="uploadFiles()">Upload & Compare</button>
+  <button class="upload-button" [ngClass]="{'disabled-button' : userProfile?.subscription?.comparisons === 0}" (click)="uploadFiles()" i18n>Upload & Compare</button>
 </div>

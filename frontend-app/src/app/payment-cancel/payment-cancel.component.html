@@ -1,1 +1,9 @@
-<p>payment-cancel works!</p>
+<div class="payment-status-container">
+  <div class="status-icon cancel">
+    <i class="fa fa-times-circle"></i>
+  </div>
+  <h1 i18n>Payment Canceled</h1>
+  <p i18n>Your payment process was canceled. Please try again or select another plan.</p>
+  <button (click)="goToSub()" i18n>Return to Subscriptions</button>
+  <button routerLink="/dashboard" i18n>Go to Dashboard</button>
+</div>

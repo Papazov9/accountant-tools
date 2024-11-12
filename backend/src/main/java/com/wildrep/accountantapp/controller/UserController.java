@@ -23,10 +23,10 @@ public class UserController {
         return ResponseEntity.ok(dashboardUserResponse);
     }
 
-    @GetMapping("/free/{username}")
-    public ResponseEntity<String> freeSubscription(@PathVariable String username) {
+    @GetMapping("/free/{email}")
+    public ResponseEntity<String> freeSubscription(@PathVariable String email) {
         try {
-            String result = this.userService.updateUserSubscription("FREE", username);
+            String result = this.userService.updateUserSubscription("FREE", email);
             return ResponseEntity.ok(result);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

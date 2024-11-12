@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/auth/**", "/index", "/api/stripe/webhook-checkout").permitAll()
+                        .requestMatchers("/api/auth/**", "/index", "/api/stripe/webhook-checkout", "/api/stripe/webhook-invoice-paid").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

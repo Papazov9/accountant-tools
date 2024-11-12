@@ -1,9 +1,29 @@
 import {Component, OnInit} from '@angular/core';
-import {loadStripe} from "@stripe/stripe-js";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, CurrencyPipe, NgForOf, NgIf} from "@angular/common";
+import {PricingPlan} from "../home/pricing-section/pricing-section.component";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatInputModule} from "@angular/material/input";
+import {map, Observable, startWith, switchMap} from "rxjs";
+import {LocationService} from "../services/location.service";
+
+export interface PaymentRequest {
+  contactEmail: string
+  paymentMethod: string
+  companyName: string
+  billingAddress: string
+  price: string
+  subscriptionType: string
+}
+
+interface PaymentResponse {
+  url?: string;
+  status: string;
+  customer_id: string;
+  email: string;
+}
 
 @Component({
   selector: 'app-checkout',
@@ -13,21 +33,27 @@ import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
     CurrencyPipe,
     NgIf,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    AsyncPipe,
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm!: FormGroup;
-  selectedPlan: any;
+  selectedPlan: PricingPlan;
+  filteredCountries$!: Observable<string[]>;
+  filteredCities$!: Observable<string[]>;
+  filteredPostalCodes$!: Observable<string[]>;
   private STRIPE_API_URL = 'http://localhost:8080/api/stripe/create-checkout-session';
-  private stripePromise = loadStripe('pk_test_51QBLeXFWqYIjorXPmniB1m4qZDE6T5sNGjBYbbsTE57yqQytbkwCDwqFDjN47uKKw6fChTU8VIXiJwK49jY0KjBj00o96lorNi');
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private locationService: LocationService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { plan: any };
@@ -37,24 +63,27 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutForm = this.fb.group({
       contactEmail: ['', [Validators.required, Validators.email]],
-      paymentMethod: ['card', Validators.required],
-      companyName: [''],
-      billingAddress: [''],
-      vatNumber: ['']
+      companyName: ['', Validators.required],
+      addressLine1: ['', Validators.required],
+      addressLine2: [''],
+      city: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      country: ['', Validators.required]
     });
 
-    // Update form validators based on payment method
-    this.checkoutForm.get('paymentMethod')?.valueChanges.subscribe((paymentMethod: string) => {
-      if (paymentMethod === 'bank') {
-        this.checkoutForm.get('companyName')?.setValidators([Validators.required]);
-        this.checkoutForm.get('billingAddress')?.setValidators([Validators.required]);
-      } else {
-        this.checkoutForm.get('companyName')?.clearValidators();
-        this.checkoutForm.get('billingAddress')?.clearValidators();
+    this.filteredCountries$ = this.checkoutForm.get('country')!.valueChanges.pipe(
+      startWith(''),
+      switchMap(value => {
+        return this.locationService.getCountries().pipe(
+          map(countries => {
+            return countries.filter(country =>
+              country.toLowerCase().includes(value?.toLowerCase() || '')
+            );
+          })
+        );
       }
-      this.checkoutForm.get('companyName')?.updateValueAndValidity();
-      this.checkoutForm.get('billingAddress')?.updateValueAndValidity();
-    });
+    )
+    );
   }
 
   submitCheckoutForm(): void {
@@ -62,18 +91,18 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    const checkoutData = {
-      title: this.selectedPlan?.title,
-      price: this.selectedPlan?.price,
-      ...this.checkoutForm.value
+    const checkoutData: PaymentRequest = {
+      ...this.checkoutForm.value,
+      price: this.selectedPlan?.price * 100,
+      subscriptionType: this.selectedPlan?.title,
     };
 
-    this.http.post<{ url: string }>(this.STRIPE_API_URL, checkoutData)
-      .subscribe(async (response) => {
-        const stripe = await this.stripePromise;
-        if (stripe && response.url) {
-          await stripe.redirectToCheckout({sessionId: response.url});
+    this.http.post<PaymentResponse>(this.STRIPE_API_URL, checkoutData).subscribe({
+      next: response => {
+        if (response.status === 'success') {
+          this.router.navigate(['/payment-pending'], {queryParams: {email: response.email}});
         }
-      });
+      }
+    })
   }
 }

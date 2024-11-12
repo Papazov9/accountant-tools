@@ -1,8 +1,8 @@
 <div class="user-home-container">
   <main class="dashboard-content">
     <header class="dashboard-header">
-      <h1>Welcome, {{ profile?.firstName }} {{ profile?.lastName }}</h1>
-      <p>Here is a quick summary of your invoice comparisons.</p>
+      <h1><ng-container i18n>Welcome,</ng-container> {{ profile?.firstName }} {{ profile?.lastName }}</h1>
+      <p i18n>Here is a quick summary of your invoice comparisons.</p>
     </header>
 
     <div *ngIf="metrics; else noMetrics">
@@ -19,34 +19,34 @@
         </div>
 
         <div class="metric-card">
-          <h2>Total Comparisons</h2>
+          <h2 i18n>Total Comparisons</h2>
           <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.totalComparisons }}</span>
         </div>
 
         <div class="metric-card">
-          <h2>Successful Comparisons</h2>
+          <h2 i18n>Successful Comparisons</h2>
           <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.successfulComparisons }}</span>
         </div>
 
         <div class="metric-card">
-          <h2>Failed Comparisons</h2>
+          <h2 i18n>Failed Comparisons</h2>
           <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.failedComparisons }}</span>
         </div>
 
 
         <div class="metric-card">
-          <h2>Total Mismatches</h2>
+          <h2 i18n>Total Mismatches</h2>
           <span class="metric-value">{{ metrics.empty ? 'No data' : metrics.totalMismatches }}</span>
         </div>
       </div>
 
       <div class="no-data-message" *ngIf="metrics.empty">
-        <p>No data available for graph.</p>
+        <p i18n>No data available for graph.</p>
       </div>
     </div>
 
     <ng-template #noMetrics>
-      <p>No metrics available yet.</p>
+      <p i18n>No metrics available yet.</p>
     </ng-template>
   </main>
 </div>
