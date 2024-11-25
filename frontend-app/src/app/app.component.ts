@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "./navbar/navbar.component";
-import { RouterOutlet} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 import {LoadingService} from "./services/loading.service";
 import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
 import {AuthService} from "./services/auth.service";
@@ -40,11 +40,11 @@ export class AppComponent implements OnInit {
     private loadingService: LoadingService,
     private cdr: ChangeDetectorRef,
     private toggleService: ToggleService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    // Subscribe to sidebar service to keep the sidebar state updated
     this.toggleService.loadingOverlay$.subscribe((subVisible) => this.isSubVisible = subVisible);
     this.loadingService.loadingOverlay$.subscribe((isLoading) => {
       this.isLoading = isLoading;
@@ -55,7 +55,6 @@ export class AppComponent implements OnInit {
       this.cdr.detectChanges();
     });
 
-    // Set sidebar open or closed depending on screen size
     this.checkScreenSize();
     window.addEventListener('resize', this.checkScreenSize.bind(this));
   }
@@ -71,6 +70,10 @@ export class AppComponent implements OnInit {
 
   isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  isTutorial() {
+    return this.router.url === '/how-it-works';
   }
 
   toggleSideNav(): void {

@@ -6,7 +6,7 @@
       <th (click)="sortData('batchId')" i18n>Batch ID</th>
       <th (click)="sortData('status')" i18n>Status</th>
       <th (click)="sortData('date')" i18n>Date</th>
-      <th>Action</th>
+      <th i18n>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -15,7 +15,7 @@
       <td [ngClass]="record.status.toLowerCase()">{{ getStatusTranslation(record.status) }}</td>
       <td>{{ record.date | date: 'short' }}</td>
       <td>
-        <button [disabled]="record.status !== 'COMPLETED'" (click)="downloadComparison(record.batchId)">
+        <button [disabled]="record.status !== 'COMPLETED'" (click)="downloadComparison(record.batchId)" i18n>
           Download
         </button>
       </td>
@@ -23,7 +23,7 @@
     </tbody>
   </table>
   <div class="pagination">
-    <button (click)="prevPage()" [disabled]="currentPage === 1" i18n>Previous</button>
+    <button (click)="prevPage()" [disabled]="currentPage === 1 || totalPages === 0" i18n>Previous</button>
     <span>{{ pageText }}</span>
     <button (click)="nextPage()" [disabled]="currentPage === totalPages" i18n>Next</button>
   </div>

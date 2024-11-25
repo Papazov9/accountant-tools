@@ -22,12 +22,36 @@
 
         <!-- Company Information Section -->
         <div class="form-section">
-          <h4>Company Information</h4>
+          <h4 i18n>Company Information</h4>
           <div class="form-group">
             <label for="companyName" i18n>Company Name:</label>
             <input id="companyName" type="text" formControlName="companyName" required/>
             <div *ngIf="checkoutForm.get('companyName')?.invalid && checkoutForm.get('companyName')?.touched">
               <small i18n>Company Name is required.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bulstat" i18n>Bulstat:</label>
+            <input id="bulstat" type="text" formControlName="bulstat" required/>
+            <div *ngIf="checkoutForm.get('bulstat')?.invalid && checkoutForm.get('bulstat')?.touched">
+              <small i18n>Company Name is required.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label i18n>VAT Registration:</label>
+            <div class="radio-option">
+              <input id="vat-yes" type="radio" formControlName="vatRegistration" name="vatRegistration" value="yes">
+              <label for="vat-yes">
+                <span class="custom-radio"></span>
+                <ng-container i18n> Yes </ng-container>
+              </label>
+            </div>
+            <div class="radio-option">
+              <input id="vat-no" type="radio" formControlName="vatRegistration" name="vatRegistration" value="no">
+              <label for="vat-no">
+                <span class="custom-radio"></span>
+                <ng-container i18n> No </ng-container>
+              </label>
             </div>
           </div>
         </div>
@@ -94,7 +118,7 @@
 
     <!-- Right Column: Order Summary -->
     <div class="checkout-summary">
-      <h3>Order Summary</h3>
+      <h3 i18n>Order Summary</h3>
       <div class="plan-summary">
         <h4>{{ selectedPlan.title }}</h4>
         <p class="price">{{ selectedPlan.price | currency:'EUR' }}</p>

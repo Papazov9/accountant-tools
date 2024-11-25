@@ -77,6 +77,10 @@ app-side-navbar.open {
   transform: translateX(0);
 }
 
+app-side-navbar.hidden {
+  display: none;
+}
+
 /* Content container for logged-in view */
 .content-container {
   flex-grow: 1;

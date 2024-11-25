@@ -1,0 +1,97 @@
+.pending-payments-container {
+  margin: 20px;
+  padding: 20px;
+  max-width: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.pending-payments-container h1 {
+  color: #483ab6;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.pending-payments-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pending-payments-table th,
+.pending-payments-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.pending-payments-table th {
+  background-color: #483ab6;
+  color: white;
+  cursor: pointer;
+}
+
+.pending-payments-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.pending-payments-table tr:hover {
+  background-color: #ececec;
+}
+.status {
+  color: #b3b329;
+}
+
+.btn-container {
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.complete-btn {
+  background-color: #18cd36;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.decline-btn {
+  background-color: #ea0f0f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+.pagination button {
+  background-color: #584ca6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #6a5bbd;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 40px;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

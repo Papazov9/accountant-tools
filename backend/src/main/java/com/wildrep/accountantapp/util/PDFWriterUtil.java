@@ -5,115 +5,117 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
+import java.io.InputStream;
+import java.time.LocalDate;
 
 @Slf4j
 public class PDFWriterUtil {
 
-    public static File generateProFormaInvoicePDF(PaymentSessionRequest paymentSessionRequest, String iban) {
+    public static File generateProFormaInvoicePDF(PaymentSessionRequest paymentSessionRequest, String invoiceNumber) throws IOException {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
-        String uuid = UUID.randomUUID().toString();
-
         document.addPage(page);
 
-        try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-            contentStream.beginText();
-            contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 20);
-            contentStream.newLineAtOffset(220, 750);
-            contentStream.showText("PROFORMA INVOICE");
-            contentStream.endText();
+        InputStream fontFile = PDFWriterUtil.class.getClassLoader().getResourceAsStream("arial/ARIAL.TTF");
+        PDType0Font font = PDType0Font.load(document, fontFile);
 
-            contentStream.beginText();
-            contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 10);
-            contentStream.newLineAtOffset(40, 700);
+        PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            contentStream.showText("From: Unparalleled LTD");
-            contentStream.newLineAtOffset(0, -15);
-            contentStream.showText("Kichuka 032");
+        contentStream.setNonStrokingColor(Color.LIGHT_GRAY);
+        contentStream.addRect(0, 750, page.getMediaBox().getWidth(), 50);
+        contentStream.fill();
 
-            contentStream.newLineAtOffset(400, 15);
-            contentStream.showText("Bill To: " + paymentSessionRequest.companyName());
-            contentStream.newLineAtOffset(0, -15);
-            contentStream.showText(paymentSessionRequest.addressLine1());
-            contentStream.endText();
+        contentStream.beginText();
+        contentStream.setFont(font, 18);
+        contentStream.setNonStrokingColor(Color.BLACK);
+        contentStream.newLineAtOffset(50, 765);
+        contentStream.showText(String.format("Ф А К Т У Р А - %s", invoiceNumber));
+        contentStream.endText();
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            contentStream.beginText();
-            contentStream.newLineAtOffset(40, 650);
-            contentStream.showText("Invoice #: " + uuid);
-            contentStream.newLineAtOffset(0, -15);
-            contentStream.showText("Date: " + dateFormat.format(new Date()));
-            contentStream.newLineAtOffset(0, -15);
-            contentStream.showText("Due Date: " + dateFormat.format(new Date(System.currentTimeMillis() + 2628000000L)));
-            contentStream.endText();
+        // Client information
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.newLineAtOffset(50, 700);
+        contentStream.setLeading(20f);
 
-            contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 10);
-            contentStream.beginText();
-            contentStream.newLineAtOffset(40, 600);
-            contentStream.showText("DESCRIPTION");
-            contentStream.newLineAtOffset(250, 0);
-            contentStream.showText("UNIT PRICE");
-            contentStream.newLineAtOffset(100, 0);
-            contentStream.showText("QTY");
-            contentStream.newLineAtOffset(50, 0);
-            contentStream.showText("AMOUNT");
-            contentStream.endText();
+        contentStream.showText("Клиент: " + paymentSessionRequest.companyName());
+        contentStream.newLine();
+        contentStream.showText("БУЛСТАТ: " + (paymentSessionRequest.isVatRegistration() ? "BG" + paymentSessionRequest.bulstat() : paymentSessionRequest.bulstat()));
+        contentStream.newLine();
+        contentStream.newLine();
+        contentStream.showText("Адрес: " + paymentSessionRequest.addressLine1() + ", " + paymentSessionRequest.addressLine2() + ", " + paymentSessionRequest.city() + ", " + paymentSessionRequest.postalCode() + ", " + paymentSessionRequest.country());
+        contentStream.newLine();
+        contentStream.newLine();
+        contentStream.endText();
 
-            contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 10);
-            int yPosition = 580;
+        // Таблица за услуги
+        contentStream.setNonStrokingColor(Color.LIGHT_GRAY);
+        contentStream.addRect(50, 600, page.getMediaBox().getWidth() - 100, 25);
+        contentStream.fill();
 
-            contentStream.beginText();
-            contentStream.newLineAtOffset(40, yPosition);
-            contentStream.showText(paymentSessionRequest.subscriptionType());
-            contentStream.newLineAtOffset(250, 0);
-            contentStream.showText(String.format("%.2f", Double.parseDouble(String.valueOf(paymentSessionRequest.price())) / 100.0));
-            contentStream.newLineAtOffset(100, 0);
-            contentStream.showText(String.valueOf(1L));
-            contentStream.newLineAtOffset(50, 0);
-            contentStream.showText(String.format("%.2f", Double.parseDouble(String.valueOf(paymentSessionRequest.price())) / 100.0));
-            contentStream.endText();
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.setNonStrokingColor(Color.BLACK);
+        contentStream.newLineAtOffset(55, 615);
+        contentStream.showText("Наименование на услугата");
+        contentStream.newLineAtOffset(250, 0);
+        contentStream.showText("Цена (без ДДС)");
+        contentStream.newLine();
+        contentStream.endText();
 
-            contentStream.beginText();
-            contentStream.newLineAtOffset(40, yPosition - 30);
-            contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 12);
-            contentStream.showText("Total: " + String.format("%.2f", Double.parseDouble(String.valueOf(paymentSessionRequest.price())) / 100.0));
-            contentStream.endText();
+        // Данни за услуги
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.newLineAtOffset(55, 585);
+        contentStream.showText(paymentSessionRequest.subscriptionType());
+        contentStream.newLineAtOffset(250, 0);
+        contentStream.showText(String.format("%.2f BGN", (paymentSessionRequest.price() / 100.0 * 1.9558) / 1.20));
+        contentStream.newLine();
+        contentStream.endText();
 
+        // Обобщение
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.newLineAtOffset(55, 555);
+        contentStream.showText("ДДС (20%): ");
+        contentStream.newLineAtOffset(250, 0);
+        contentStream.showText(String.format("%.2f BGN",(((paymentSessionRequest.price() / 100.0 * 1.9558) / 1.20) * 0.2)));
+        contentStream.newLine();
+        contentStream.endText();
 
-            contentStream.beginText();
-            contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 10);
-            contentStream.newLineAtOffset(40, yPosition - 80);
-            contentStream.showText("Bank Transfer Instructions:");
-            contentStream.newLineAtOffset(0, -15);
-            contentStream.showText("IBAN: " + iban);
-            contentStream.newLineAtOffset(0, -15);
-            contentStream.showText("Please transfer the total amount to the above IBAN.");
-            contentStream.endText();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.newLineAtOffset(55, 525);
+        contentStream.showText("Обща дължима сума: ");
+        contentStream.newLineAtOffset(250, 0);
+        contentStream.showText(String.format("%.2f BGN",(paymentSessionRequest.price() / 100.0 * 1.9558)));
+        contentStream.endText();
 
-        File file = new File("ProFormaInvoice_" + uuid + ".pdf");
-        try {
-            document.save(file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                document.close();
-            } catch (IOException e) {
-                log.error("FAiled to close pdf document!");
-            }
-        }
+        // Футър с пояснения
+        contentStream.setFont(font, 10);
+        contentStream.beginText();
+        contentStream.newLineAtOffset(50, 100);
+        contentStream.setLeading(14f);
+        contentStream.showText("Моля, преведете сумата по следната сметка:");
+        contentStream.newLine();
+        contentStream.showText("IBAN: BGXXXXXXXXXXXX");
+        contentStream.newLine();
+        contentStream.showText("Краен срок за плащане: " + LocalDate.now().plusMonths(1));
+        contentStream.newLine();
+        contentStream.showText("Основание за плащане: Вашето име и номер на фактура.");
+        contentStream.endText();
 
-        return file;
+        contentStream.close();
+
+        File invoiceFile = new File("EnhancedProformaInvoice.pdf");
+        document.save(invoiceFile);
+        document.close();
+
+        return invoiceFile;
     }
 }

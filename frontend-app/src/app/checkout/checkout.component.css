@@ -56,6 +56,64 @@ label {
   color: #444;
 }
 
+.form-group {
+  margin-bottom: 20px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px; /* Space between radio options */
+  align-items: center;
+  margin-top: 5px;
+}
+
+/* Radio Option Styling */
+.radio-option {
+  display: flex;
+  align-items: center;
+}
+
+.radio-option input[type="radio"] {
+  display: none; /* Hide default radio button */
+}
+
+.radio-option label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: normal;
+  color: #444;
+}
+
+/* Custom radio button */
+.radio-option .custom-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #584ca6;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+/* Checked State */
+.radio-option input[type="radio"]:checked + label .custom-radio {
+  background-color: #584ca6;
+}
+
+.radio-option input[type="radio"]:checked + label .custom-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+}
+
 input, select, textarea {
   width: 100%;
   padding: 12px;
@@ -199,6 +257,9 @@ input:focus, select:focus, textarea:focus {
 
   .plan-features li {
     font-size: 0.85em;
+  }
+  .radio-group {
+    flex-direction: row;
   }
 }
 

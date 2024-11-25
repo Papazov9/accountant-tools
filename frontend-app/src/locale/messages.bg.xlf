@@ -195,6 +195,10 @@
 				<source>Invoice Comparison</source>
 				<target>Сравнение на фактури</target>
 				<context-group purpose="location">
+          <context context-type="sourcefile">src/app/app-selection-overlay/app-selection-overlay.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/footer/footer.component.html</context>
 					<context context-type="linenumber">7,8</context>
 				</context-group>
@@ -548,6 +552,10 @@
 					<context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
 					<context context-type="linenumber">9,10</context>
 				</context-group>
+				 <context-group purpose="location">
+                  <context context-type="sourcefile">src/app/how-works/how-works.component.ts</context>
+                  <context context-type="linenumber">24</context>
+         </context-group>
 			</trans-unit>
 			<trans-unit id="2898693844680894570" datatype="html">
 				<source>Use side navigation bar after successful login and click the Invoice Comparison Tab.</source>
@@ -556,6 +564,10 @@
 					<context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
 					<context context-type="linenumber">10,11</context>
 				</context-group>
+				 <context-group purpose="location">
+                  <context context-type="sourcefile">src/app/how-works/how-works.component.ts</context>
+                  <context context-type="linenumber">24</context>
+         </context-group>
 			</trans-unit>
 			<trans-unit id="8010932022107347292" datatype="html">
 				<source>Upload Your Files</source>
@@ -564,6 +576,10 @@
 					<context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
 					<context context-type="linenumber">17,18</context>
 				</context-group>
+				<context-group purpose="location">
+                  <context context-type="sourcefile">src/app/how-works/how-works.component.ts</context>
+                  <context context-type="linenumber">25</context>
+        </context-group>
 			</trans-unit>
 			<trans-unit id="6525149959451133546" datatype="html">
 				<source>Upload your .csv and .txt files in the appropriate upload fields. The number of uploaded files in both fields has to be equal!</source>
@@ -572,6 +588,10 @@
 					<context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
 					<context context-type="linenumber">18,19</context>
 				</context-group>
+				<context-group purpose="location">
+                  <context context-type="sourcefile">src/app/how-works/how-works.component.ts</context>
+                  <context context-type="linenumber">25</context>
+        </context-group>
 			</trans-unit>
 			<trans-unit id="2297291591159314655" datatype="html">
 				<source>Automatic Comparison</source>
@@ -580,6 +600,10 @@
 					<context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
 					<context context-type="linenumber">26,27</context>
 				</context-group>
+				<context-group purpose="location">
+                  <context context-type="sourcefile">src/app/how-works/how-works.component.ts</context>
+                  <context context-type="linenumber">26</context>
+        </context-group>
 			</trans-unit>
 			<trans-unit id="4706862379450618751" datatype="html">
 				<source>Our system matches records by key data points like document number, date, and amount. No more manual Excel matching, we&apos;ve got you covered with UNPARALLELED speed of execution.</source>
@@ -588,6 +612,10 @@
 					<context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
 					<context context-type="linenumber">27,28</context>
 				</context-group>
+				<context-group purpose="location">
+                  <context context-type="sourcefile">src/app/how-works/how-works.component.ts</context>
+                  <context context-type="linenumber">26</context>
+        </context-group>
 			</trans-unit>
 			<trans-unit id="1287369564818183094" datatype="html">
 				<source>Get Results Instantly</source>
@@ -596,6 +624,10 @@
 					<context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
 					<context context-type="linenumber">35,36</context>
 				</context-group>
+				<context-group purpose="location">
+                  <context context-type="sourcefile">src/app/how-works/how-works.component.ts</context>
+                  <context context-type="linenumber">27</context>
+        </context-group>
 			</trans-unit>
 			<trans-unit id="6415356522932220858" datatype="html">
 				<source>Receive a detailed Excel report with separate sheets for each type of mismatch. Review audit-ready results for complete accuracy.</source>
@@ -604,7 +636,19 @@
 					<context context-type="sourcefile">src/app/home/steps-section/steps-section.component.html</context>
 					<context context-type="linenumber">36,37</context>
 				</context-group>
+				<context-group purpose="location">
+                  <context context-type="sourcefile">src/app/how-works/how-works.component.ts</context>
+                  <context context-type="linenumber">27</context>
+        </context-group>
 			</trans-unit>
+			<trans-unit id="6583019429286698314" datatype="html">
+          <source>Go Back To Comparison</source>
+          <target>Върнете се към сравняване</target>
+          <context-group purpose="location">
+                <context context-type="sourcefile">src/app/how-works/how-works.component.html</context>
+                <context context-type="linenumber">12,13</context>
+          </context-group>
+      </trans-unit>
 			<trans-unit id="227609897663161573" datatype="html">
 				<source>Automated Invoice Comparison for Accountants</source>
 				<target>Автоматизирано сравнение на фактури за счетоводители</target>
@@ -687,7 +731,7 @@
 			</trans-unit>
 			<trans-unit id="9162826288248440837" datatype="html">
 				<source>Drop CSV Files here or click to upload</source>
-				<target>Пуснете CSV файлове тук или кликнете за качване</target>
+				<target>Прикачете CSV файлове тук или кликнете за качване</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
 					<context context-type="linenumber">22,23</context>
@@ -707,7 +751,7 @@
 			</trans-unit>
 			<trans-unit id="8516195628275522932" datatype="html">
 				<source>Drop TXT Files here or click to upload</source>
-				<target>Пуснете TXT файлове тук или кликнете за качване</target>
+				<target>Прикачете TXT файлове тук или кликнете за качване</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.html</context>
 					<context context-type="linenumber">40,41</context>
@@ -1353,6 +1397,328 @@
               <context context-type="linenumber">37,38</context>
           </context-group>
       </trans-unit>
+      <trans-unit id="1234709746630139322" datatype="html">
+          <source>Confirmation</source>
+          <target>Потвърждение</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.ts</context>
+              <context context-type="linenumber">67</context>
+          </context-group>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.ts</context>
+              <context context-type="linenumber">89</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="8050407712560026163" datatype="html">
+          <source>Confirm that you want to proceed to checkout with the selected <x id="PH" equiv-text="this.selectedPlan.title"/> option which costs <x id="PH_1" equiv-text="this.selectedPlan.price"/> EUR?</source>
+          <target>Потвърдете, че искате да продължите към плащане с избрания <x id="PH" equiv-text="this.selectedPlan.title"/> вариант, който струва <x id="PH_1" equiv-text="this.selectedPlan.price"/> EUR?</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.ts</context>
+              <context context-type="linenumber">68</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="8400999591146849796" datatype="html">
+          <source>Yes, proceed!</source>
+          <target>Да, продължете!</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.ts</context>
+              <context context-type="linenumber">73</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="5550886562734003454" datatype="html">
+          <source>Why settle for less? Unlock the full power of our premium plans and get more comparisons, advanced features, and top-tier support. Or stick with just 1 limited free comparison—your choice! Ready to maximize your potential?</source>
+          <target>Защо да се задоволявате с по-малко? Отключете пълната мощ на нашите премиум планове и получете повече сравнения, усъвършенствани функции и поддръжка от най-високо ниво. Или останете с едно ограничено безплатно сравнение - изборът е ваш! Готови ли сте да увеличите максимално потенциала си?</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.ts</context>
+              <context context-type="linenumber">90</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="2807800733729323332" datatype="html">
+          <source>Yes</source>
+          <target>Да</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.ts</context>
+              <context context-type="linenumber">95</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="5871928281314022227" datatype="html">
+          <source>Attention</source>
+          <target>Внимание</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">76</context>
+          </context-group>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">155</context>
+          </context-group>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">206</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="8124826850240357537" datatype="html">
+          <source>Free plan allows only one CSV file. Please upgrade to upload more.</source>
+          <target>Безплатният план позволява само един CSV файл. Моля, надстройте, за да качите повече.</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">77</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="6895252457860940267" datatype="html">
+          <source>Upgrade Plan!</source>
+          <target>Надградете плана!</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">81</context>
+          </context-group>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">211</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="4348666847793327431" datatype="html">
+          <source>Please select files from both types, otherwise the comparison cannot be possible!</source>
+          <target>Моля, изберете файлове от двата типа, в противен случай сравнението няма да е възможно!</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">156</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="1579692722565712588" datatype="html">
+          <source>Okay</source>
+          <target>Добре</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">159</context>
+          </context-group>
+      </trans-unit>
+
+      <trans-unit id="709795361529707132" datatype="html">
+          <source>It seems you are out of comparisons! Would you want to upgrade your plan to add some?</source>
+          <target>Изглежда, че сте изчерпали броя на сравненията! Искате ли да надградите плана си, за да добавите още?</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">207</context>
+          </context-group>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+          <source>Cancel</source>
+          <target>Отказ</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">83</context>
+          </context-group>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/invoice-comparison/invoice-comparison.component.ts</context>
+              <context context-type="linenumber">214</context>
+          </context-group>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.ts</context>
+              <context context-type="linenumber">74</context>
+          </context-group>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/subscriptions/subscriptions.component.ts</context>
+              <context context-type="linenumber">97</context>
+          </context-group>
+      </trans-unit>
+      <trans-unit id="2991553983738580324" datatype="html">
+          <source>Company Information</source>
+          <target>Информация за компанията</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+              <context context-type="linenumber">25,26</context>
+          </context-group>
+      </trans-unit>
+      <trans-unit id="8370146344915267681" datatype="html">
+          <source>Order Summary</source>
+          <target>Обобщение на поръчката</target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+              <context context-type="linenumber">97,98</context>
+          </context-group>
+      </trans-unit>
+      <trans-unit id="9014490689053697268" datatype="html">
+              <source>Bulstat:</source>
+              <target>ЕИК</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+                <context context-type="linenumber">34,35</context>
+              </context-group>
+      </trans-unit>
+      <trans-unit id="1017298806796391974" datatype="html">
+        <source>VAT Registration:</source>
+        <target>Регистрация по ДДС:</target>
+        <context-group purpose="location">
+              <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+              <context context-type="linenumber">41,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4861926948802653243" datatype="html">
+              <source> Yes </source>
+              <target>Да</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+                <context context-type="linenumber">46</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="3603720768157919481" datatype="html">
+              <source> No </source>
+              <target>Не</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/checkout/checkout.component.html</context>
+                <context context-type="linenumber">53</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="9216117865911519658" datatype="html">
+                    <source>Action</source>
+                    <target>Действие</target>
+                    <context-group purpose="location">
+                      <context context-type="sourcefile">src/app/history/history.component.html</context>
+                      <context context-type="linenumber">9,10</context>
+                    </context-group>
+                  </trans-unit>
+                  <trans-unit id="2256581797902573217" datatype="html">
+                    <source> Download </source>
+                    <target>Сваляне</target>
+                    <context-group purpose="location">
+                      <context context-type="sourcefile">src/app/history/history.component.html</context>
+                      <context context-type="linenumber">19</context>
+                    </context-group>
+            </trans-unit>
+            <trans-unit id="759687838251957893" datatype="html">
+              <source>Contact Us</source>
+              <target>Свържете се с нас</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">3,4</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="7528660338133624554" datatype="html">
+              <source>We&apos;re here to help! Get in touch for any questions or inquiries.</source>
+              <target>Тук сме, за да помогнем! Свържете се с нас при всякакви въпроси или запитвания.</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">4,5</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="2070350043624928094" datatype="html">
+              <source>Email Us</source>
+              <target>Изпратете ни имейл</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">11,12</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="6782230648430634688" datatype="html">
+              <source>Call Us</source>
+              <target>Обадете ни се</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">18,19</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="3262090913975567330" datatype="html">
+              <source>Send a Message</source>
+              <target>Изпратете съобщение</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">25,26</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="3620189057047223041" datatype="html">
+              <source>Have a question? Drop us a quick message below!</source>
+              <target>Имате въпрос? Изпратете ни кратко съобщение по-долу!</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">26,27</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="8953033926734869941" datatype="html">
+              <source>Name</source>
+              <target>Име</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">28,29</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="2297688463310993102" datatype="html">
+              <source>Your Name</source>
+              <target>Вашето име</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">29</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="4768749765465246664" datatype="html">
+              <source>Email</source>
+              <target>Имейл</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">31,32</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="204562474612147063" datatype="html">
+              <source>Your Email</source>
+              <target>Вашият имейл</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">32</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="8066608938393600549" datatype="html">
+              <source>Message</source>
+              <target>Съобщение</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">34,35</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="3901848700381049273" datatype="html">
+              <source>Your Message</source>
+              <target>Вашето съобщение</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">35</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="8730666920545442370" datatype="html">
+              <source>Send Message</source>
+              <target>Изпратете съобщение</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/contacts/contacts.component.html</context>
+                <context context-type="linenumber">37,38</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="4421913229860202586" datatype="html">
+              <source>Select Your Application</source>
+              <target>Изберете приложението си</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/app-selection-overlay/app-selection-overlay.component.html</context>
+                <context context-type="linenumber">3,4</context>
+              </context-group>
+            </trans-unit>
+            <trans-unit id="3046357502772222011" datatype="html">
+              <source>Accounts and Balances</source>
+              <target>Разчети и Салда</target>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/app-selection-overlay/app-selection-overlay.component.html</context>
+                <context context-type="linenumber">11,12</context>
+              </context-group>
+              <context-group purpose="location">
+                <context context-type="sourcefile">src/app/footer/footer.component.html</context>
+                <context context-type="linenumber">8,9</context>
+              </context-group>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

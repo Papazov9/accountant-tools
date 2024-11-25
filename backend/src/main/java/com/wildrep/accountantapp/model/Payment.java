@@ -27,15 +27,6 @@ public class Payment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(unique = true)
-    private String sessionId;
-
-    @Column(unique = true)
-    private String paymentIntentId;
-
-    @Column(unique = true)
-    private String invoiceId;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SubscriptionType subscriptionType;
@@ -51,6 +42,10 @@ public class Payment {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "invoice_id", referencedColumnName = "id", nullable = false)
+    private Invoice invoice;
 
     @PrePersist
     protected void onCreate() {

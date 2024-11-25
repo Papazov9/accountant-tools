@@ -6,20 +6,18 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
-}
-
-.logo-link {
-  text-decoration: none;
+  box-sizing: border-box;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 5%; /* Smaller padding to make the navbar smaller */
-  max-width: 1200px;
-  margin: 0 auto; /* Ensures center alignment */
+  padding: 10px 5%;
+  max-width: 85vw;
+  margin: 0 auto;
   transition: background-color 0.3s ease, padding 0.3s ease;
+  box-sizing: border-box;
 }
 
 .logo-container {
@@ -37,15 +35,53 @@ header {
   font-weight: bold;
   color: #483AB6;
   margin-left: 10px;
+  text-decoration: none;
 }
 
+/* Hamburger Icon */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 30px;
+  height: 3px;
+  background-color: #483AB6;
+  display: block;
+  position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  width: 30px;
+  height: 3px;
+  background-color: #483AB6;
+  position: absolute;
+  left: 0;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  top: 8px;
+}
+
+/* Navigation Links */
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 30px;
+  align-items: center;
+  margin: 0 auto;
 }
 
-.nav-links a {
+.nav-links li a {
   color: #7e7979;
   text-decoration: none;
   font-weight: 700;
@@ -53,14 +89,23 @@ header {
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-links li a:hover {
   color: #372A95;
 }
 
 /* CTA Buttons */
 .cta-buttons {
   display: flex;
-  gap: 10px;
+  gap: 15px;
+  margin-left: 20px;
+}
+
+.contact {
+  margin-left: 20px;
+}
+
+.contact i{
+  font-size: 30px;
 }
 
 .cta-signin,
@@ -68,9 +113,11 @@ header {
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;
+  font-size: 16px; /* Different font size to distinguish from nav links */
   text-decoration: none;
 }
 
+/* Distinct styling for CTA buttons */
 .cta-signin {
   color: #483AB6;
   border: 2px solid #483AB6;
@@ -89,51 +136,29 @@ header {
   background-color: #372A95;
 }
 
-/* Sticky Navbar Style (after scroll) */
+/* Sticky Navbar Style */
 .sticky {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 1);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 5px 5%; /* Same padding to ensure the navbar stays in place */
+  padding: 10px 5%;
+  box-sizing: border-box;
 }
 
 .sticky .navbar {
   max-width: 1200px;
-  margin: 0 auto; /* Keep the navbar centered */
+  margin: 0 auto;
 }
 
-.sticky .nav-links a {
+.sticky .nav-links li a {
   color: #7e7979;
 }
 
-.sticky .nav-links a:hover {
+.sticky .nav-links li a:hover {
   color: #372A95;
-}
-
-.sticky .cta-signin {
-  color: #483AB6;
-  border: 2px solid #483AB6;
-}
-
-.sticky .cta-signup {
-  background-color: #483AB6;
-  color: white;
-}
-
-.sticky .cta-signin:hover {
-  background-color: rgba(72, 58, 182, 0.2);
-}
-
-.sticky .cta-signup:hover {
-  background-color: #372A95;
-}
-
-/* Transition effect */
-.sticky-transition {
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
 .go-back {
@@ -151,4 +176,64 @@ header {
 
 .go-back-link:hover {
   color: #372A95; /* Darker hover color */
+}
+
+/* Dropdown Menu for Mobile View */
+@media (max-width: 1039px) {
+  .nav-links {
+    display: none; /* Hide links on mobile initially */
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .nav-links.nav-open {
+    display: flex; /* Show nav links as dropdown when menu is open */
+  }
+
+  /* Separate CTA button styles in dropdown */
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    width: auto;
+  }
+
+  .cta-buttons .cta-signin {
+    color: #483AB6;
+    border: 2px solid #483AB6;
+    padding: 10px 20px;
+    font-size: 16px; /* Same distinct font size for consistency */
+    width: 80%; /* Align CTA buttons width with nav links */
+    text-align: center;
+  }
+
+  .cta-buttons .cta-signin:hover {
+    background-color: rgba(72, 58, 182, 0.2);
+  }
+
+  .cta-buttons .cta-signup {
+    background-color: #483AB6;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px; /* Same distinct font size for consistency */
+    width: 80%; /* Align CTA buttons width with nav links */
+    text-align: center;
+  }
+
+  .cta-buttons .cta-signup:hover {
+    background-color: #372A95;
+  }
+
+  .menu-toggle {
+    display: block; /* Show hamburger icon on mobile */
+  }
 }

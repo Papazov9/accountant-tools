@@ -1,0 +1,34 @@
+<div class="pending-payments-container">
+  <h1>Pending Payments</h1>
+
+  <table class="pending-payments-table">
+    <thead>
+    <tr>
+      <th>Invoice Number</th>
+      <th>Status</th>
+      <th>Customer</th>
+      <th>InvoiceLink</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let paymentRecord of paginatedPendingPayments">
+      <td>{{ paymentRecord.invoiceNumber }}</td>
+      <td class="status">{{ paymentRecord.status }}</td>
+      <td>{{ paymentRecord.customer }}</td>
+      <td><a [href]="paymentRecord.googleDriveLink" target="_blank">Open Invoice in GDrive</a></td>
+      <td>
+        <div class="btn-container">
+          <button (click)="markAsCompleted(paymentRecord.invoiceNumber)" class="complete-btn">Complete</button>
+          <button (click)="declinePayment(paymentRecord.invoiceNumber)" class="decline-btn">Decline</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1 || totalPages === 0">Previous</button>
+    <span>{{ pageText }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>

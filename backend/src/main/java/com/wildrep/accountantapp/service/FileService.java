@@ -71,6 +71,12 @@ public class FileService {
             throw new RuntimeException(e);
         }
         List<ComparisonResult> results = InvoiceComparisonUtil.compareInvoicesAndStoreResults(csvRecords, invoiceRecords);
+        results.sort(Comparator.comparing(result -> {
+            // Use the bulstat from csvInvoiceRecord if present, otherwise from txtInvoiceRecord
+            return result.getCsvInvoiceRecord() != null
+                    ? result.getCsvInvoiceRecord().getId().getBulstat()
+                    : result.getTxtInvoiceRecord().getId().getBulstat();
+        }));
         this.comparisonResultRepository.saveAllAndFlush(results);
         comparison.setComparisonResults(results);
         this.comparisonRepository.saveAndFlush(comparison);

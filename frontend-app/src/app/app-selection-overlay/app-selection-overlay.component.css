@@ -1,0 +1,44 @@
+.overlay-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.app-selection-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.app-icons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.app-icon {
+  cursor: pointer;
+  text-align: center;
+}
+
+.app-icon img {
+  width: 80px;
+  height: 80px;
+}
+
+.app-icon p {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #333;
+}

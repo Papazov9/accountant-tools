@@ -1,13 +1,14 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {LoadingService} from "../services/loading.service";
 import {InvoiceComparisonService} from "../services/invoice-comparison.service";
-import {HttpClient, HttpEventType, HttpResponse, HttpStatusCode} from "@angular/common/http";
+import {HttpEventType, HttpStatusCode} from "@angular/common/http";
 import {CommonModule, NgIf} from "@angular/common";
 import {UserProfile, UserService} from "../services/user.service";
 import Swal from "sweetalert2";
 import {ToggleService} from "../services/toggle.service";
-import {delay, retryWhen, take} from "rxjs";
+import '@angular/localize/init';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-invoice-comparison',
@@ -26,7 +27,7 @@ export class InvoiceComparisonComponent implements OnInit {
   isFreePlan: boolean = true;
   userProfile?: UserProfile;
 
-  constructor(private comparisonService: InvoiceComparisonService, private userService: UserService, private loadingService: LoadingService, private cdr: ChangeDetectorRef, private toggleService: ToggleService) {
+  constructor(private comparisonService: InvoiceComparisonService, private userService: UserService, private loadingService: LoadingService, private cdr: ChangeDetectorRef, private toggleService: ToggleService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -53,6 +54,10 @@ export class InvoiceComparisonComponent implements OnInit {
     event.preventDefault();
   }
 
+  navigateToHowItWorks() {
+    this.router.navigate(['/how-it-works']);
+  }
+
   onCsvDrop(event: DragEvent): void {
     event.preventDefault();
     this.checkPlan();
@@ -71,8 +76,25 @@ export class InvoiceComparisonComponent implements OnInit {
   }
 
   private checkPlan() {
+    const title = $localize`Attention`;
+    const text = $localize`Free plan allows only one CSV file. Please upgrade to upload more.`;
+    const confirmText =  $localize`Upgrade Plan!`;
     if (this.isFreePlan && this.csvFiles.length >= 1) {
-      alert("Free plan allows only one CSV file. Please upgrade to upload more.");
+      Swal.fire({
+        title: title,
+        text: text,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#584ca6',
+        confirmButtonText: $localize`Upgrade Plan!`,
+        cancelButtonColor: '#d33',
+        cancelButtonText: $localize`Cancel`,
+        background: '#ffffff'
+      }).then(result => {
+        if (result.isConfirmed) {
+          this.toggleService.showSubscriptions();
+        }
+      });
       return;
     }
   }
@@ -139,11 +161,11 @@ export class InvoiceComparisonComponent implements OnInit {
     this.checkComparisonsCount();
     if (this.csvFiles.length === 0 || this.txtFiles.length === 0) {
       Swal.fire({
-        title: 'Attention',
-        text: `Please select files from both types, otherwise the comparison cannot be possible!`,
+        title: $localize`Attention`,
+        text: $localize`Please select files from both types, otherwise the comparison cannot be possible!`,
         icon: 'warning',
         confirmButtonColor: '#584ca6',
-        confirmButtonText: 'Okay',
+        confirmButtonText: $localize`Okay`,
         background: '#ffffff'
       });
       return;
@@ -190,13 +212,14 @@ export class InvoiceComparisonComponent implements OnInit {
   private checkComparisonsCount() {
     if (this.userProfile?.subscription?.comparisons === 0) {
       Swal.fire({
-        title: 'Attention',
-        text: `It seems you are out of comparisons! Would you want to upgrade your plan to add some?`,
+        title: $localize`Attention`,
+        text: $localize`It seems you are out of comparisons! Would you want to upgrade your plan to add some?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#584ca6',
-        confirmButtonText: 'Upgrade Plan!',
+        confirmButtonText: $localize`Upgrade Plan!`,
         cancelButtonColor: '#d33',
+        cancelButtonText: $localize`Cancel`,
         background: '#ffffff'
       }).then(result => {
         if (result.isConfirmed) {

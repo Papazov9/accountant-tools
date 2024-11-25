@@ -28,3 +28,10 @@ stripe:
     Premium: prod_R8bPVqfuvk6ze3
     Business: prod_R8bOFEUXlM4BM5
     Enterprise: prod_R8bO4Izu7lHj84
+google:
+  credentials:
+    path: backend/src/main/resources/macro-context-416213-59760d902b8a.json
+  application:
+    name: Unparallaled-Invoices
+  folder:
+    id: 1xJ9gPWsnrlS7zkEKFrPKTBq_0JLVwr70

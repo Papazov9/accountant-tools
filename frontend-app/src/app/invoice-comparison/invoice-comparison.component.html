@@ -10,9 +10,9 @@
     <div class="subscription-box">
       <p><strong i18n>Comparisons Left: </strong><span class="comparison-count">{{ userProfile?.subscription?.comparisons }}</span></p>
       <p><strong i18n>Subscription Plan: </strong> <span class="sub-name">{{ userProfile?.subscription?.title }}</span></p>
+      <button class="how-it-works-button" (click)="navigateToHowItWorks()" i18n>How It Works</button>
     </div>
   </div>
-
   <!-- Upload Section -->
   <div class="upload-section">
     <!-- CSV Drop Area -->

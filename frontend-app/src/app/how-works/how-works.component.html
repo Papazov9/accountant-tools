@@ -1,0 +1,33 @@
+<div class="how-it-works-container">
+  <div class="steps-sidebar">
+    <ul class="steps-list">
+      <li
+        *ngFor="let step of steps"
+        [class.active]="step === currentStep"
+        (click)="selectStep(step)"
+        class="step-item"
+      >
+        {{ step.id }}. {{ step.title }}
+      </li>
+      <li><a routerLink="/invoice-comparison" class="step-item-back" i18n>Go Back To Comparison</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="content-area">
+    <div
+      *ngFor="let step of steps"
+      [attr.id]="'step-' + step.id"
+      class="step-content"
+    >
+      <div class="step-header">
+        <span class="step-number">{{ step.id }}</span>
+        <h2>{{ step.title }}</h2>
+      </div>
+      <p>{{ step.description }}</p>
+      <div class="step-image">
+        <img [src]="step.imageUrl" [alt]="step.title">
+      </div>
+    </div>
+  </div>
+</div>

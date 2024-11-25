@@ -1,0 +1,91 @@
+body, html {
+  font-family: 'Arbutus', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eaecff;
+}
+
+.admin-panel-container {
+  padding: 30px;
+  max-width: 800px;
+  margin: 60px auto;
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f9f9f9;
+}
+
+.admin-header {
+  border-bottom: 2px solid #483AB6;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+}
+
+h1 {
+  font-size: 28px;
+  color: #483AB6;
+  text-align: center;
+}
+
+.admin-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.admin-actions h2 {
+  font-size: 24px;
+  color: #483AB6;
+  margin-bottom: 20px;
+}
+
+.admin-actions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-actions li {
+  margin-bottom: 15px;
+}
+
+.admin-actions button {
+  background-color: #483AB6;
+  color: #FFFFFF;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-actions button:hover {
+  background-color: #6255CC;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-actions button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .admin-panel-container {
+    padding: 20px;
+  }
+
+  .admin-header h1 {
+    font-size: 24px;
+  }
+
+  .admin-actions h2 {
+    font-size: 20px;
+  }
+
+  .admin-actions button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}

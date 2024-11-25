@@ -1,35 +1,28 @@
-:host {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #FFFFFF;
-  padding: 50px;
-  height: 100vh;
-}
-
+/* General Styling for Overview Section */
 .overview-section {
   text-align: center;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 60px 0;
 }
 
-.heading {
+.overview-section .heading {
   text-align: center;
   width: 100%;
-  margin-top: -100px;
-  margin-bottom: 140px;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .overview-section h2 {
   color: #483AB6;
-  font-size: 3.5rem; /* Increased title font size */
+  font-size: 3rem; /* Adjusted font size for responsiveness */
   margin-bottom: 20px;
 }
 
 .overview-section p {
-  font-size: 1.6rem; /* Increased subtitle font size */
-  margin-bottom: 50px;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
   color: #9c9cf4;
 }
 
@@ -37,66 +30,48 @@
 .features-container {
   display: flex;
   justify-content: space-between;
-  flex-wrap: nowrap; /* Ensures items stay in one row */
-  gap: 15px; /* Reduced gap between items */
+  flex-wrap: wrap; /* Allows items to stack on smaller screens */
+  gap: 15px;
 }
 
-/* Individual Feature Styling - Circular Shape */
+/* Individual Feature Styling */
 .feature {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 250px; /* Larger width */
-  height: 250px; /* Larger height */
+  width: 250px;
+  height: 250px;
   background-color: #f9f9ff;
   padding: 20px;
   border-radius: 50%;
   transition: transform 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  position: relative; /* To position background icon */
 }
 
 .feature:hover {
   transform: translateY(-10px);
 }
 
-/* Background FA Icon */
-.feature::before {
-  content: attr(data-icon); /* Use the FontAwesome unicode character */
-  position: absolute;
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  font-size: 120px; /* Make the icon large */
-  color: #ececff; /* Light color for background */
-  opacity: 0.2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centers the icon */
-}
-
 .feature-icon {
   font-size: 50px;
   color: #483AB6;
   margin-bottom: 10px;
-  z-index: 1; /* Make sure text appears above the background icon */
 }
 
 .feature h3 {
   color: #483AB6;
-  font-size: 1.6rem; /* Adjusted to fit larger circles */
+  font-size: 1.6rem;
   margin-bottom: 10px;
-  z-index: 1;
 }
 
 .feature p {
   font-size: 1.1rem;
   color: #666;
-  z-index: 1;
 }
 
-/* Responsive Design for Smaller Screens */
+/* Responsive Adjustments for Overview Section */
 @media (max-width: 1024px) {
   .features-container {
     flex-direction: column;
@@ -119,5 +94,20 @@
 
   .feature p {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .overview-section h2 {
+    font-size: 2rem;
+  }
+
+  .overview-section p {
+    font-size: 1.2rem;
+  }
+
+  .overview-section .heading {
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 }

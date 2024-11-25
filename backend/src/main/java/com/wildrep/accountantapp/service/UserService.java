@@ -111,6 +111,20 @@ public class UserService {
                 .findByUsername(username)
                 .orElseThrow(() ->
                         new UserDoesNotExistException(username));
+        SubscriptionResponse subscriptionResponse = getSubscriptionResponse(user);
+
+        return new DashboardUserResponse(
+                user.getEmail(),
+                user.getUsername(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getGender().name(),
+                user.isAcknowledged(),
+                "User loaded successfully!",
+                subscriptionResponse);
+    }
+
+    private static SubscriptionResponse getSubscriptionResponse(User user) {
         SubscriptionResponse subscriptionResponse;
         if (user.isAcknowledged()) {
             subscriptionResponse =
@@ -122,16 +136,7 @@ public class UserService {
         } else {
             subscriptionResponse = new SubscriptionResponse(null, null, null, null);
         }
-
-        return new DashboardUserResponse(
-                user.getEmail(),
-                user.getUsername(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getGender().name(),
-                user.isAcknowledged(),
-                "User loaded successfully!",
-                subscriptionResponse);
+        return subscriptionResponse;
     }
 
     public String createNewToken(String username) {

@@ -1,25 +1,31 @@
 <header [ngClass]="{'sticky sticky-transition': isSticky}">
   <nav class="navbar" *ngIf="!isLoginOrRegisterPage()">
     <a href="#" data-section="welcome" (click)="scrollTo($event)" class="logo-link">
-    <div class="logo-container">
-      <img src="/assets/images/unparalled-favicon-color.png" alt="Logo" class="logo-img" height="50" width="50"/>
-      <span class="logo-text">unparalleled.</span>
+    <div data-section="welcome" class="logo-container">
+      <img data-section="welcome" src="/assets/images/unparalled-favicon-color.png" alt="Logo" class="logo-img" height="50" width="50"/>
+      <span data-section="welcome" class="logo-text">unparalleled.</span>
     </div>
     </a>
-    <ul class="nav-links">
+
+    <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+
+    <ul class="nav-links" [ngClass]="{'nav-open': isMenuOpen}">
       <li><a href="#" data-section="welcome" (click)="scrollTo($event)" i18n>Home</a></li>
       <li><a href="#" data-section="steps" (click)="scrollTo($event)" i18n>How to...</a></li>
       <li><a href="#" data-section="pricing" (click)="scrollTo($event)" i18n>Pricing</a></li>
       <li><a href="#" data-section="overview" (click)="scrollTo($event)" i18n>About us</a></li>
+      <div class="cta-buttons">
+        <a class="cta-signin" routerLink="/login" i18n>Log In</a>
+        <a class="cta-signup" routerLink="/register" i18n>Get Started Free</a>
+      </div>
+      <li><a routerLink="/contact" class="contact"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
     </ul>
-    <div class="cta-buttons">
-      <a class="cta-signin" href="/login" i18n>Log In</a>
-      <a class="cta-signup" href="/register" i18n>Get Started Free</a>
-    </div>
   </nav>
 
   <!-- Go Back link for login/register pages -->
     <div class="go-back" *ngIf="isLoginOrRegisterPage()">
-      <a href="/" class="go-back-link" i18n>Go Back</a>
+      <a routerLink="/" class="go-back-link" i18n>Go Back</a>
     </div>
 </header>

@@ -15,7 +15,7 @@
       <button class="hamburger-button" (click)="toggleSideNav()">
         <i class="fa" [ngClass]="isNavOpen ? 'fa-times' : 'fa-bars'"></i>
       </button>
-      <app-side-navbar [ngClass]="{ 'open': isNavOpen, 'closed': !isNavOpen }"></app-side-navbar>
+      <app-side-navbar [ngClass]="{ 'open': isNavOpen, 'closed': !isNavOpen, 'hidden': isTutorial() }"></app-side-navbar>
       <div class="content-container">
         <app-subscriptions *ngIf="isSubVisible"></app-subscriptions>
         <router-outlet></router-outlet>

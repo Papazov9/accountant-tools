@@ -19,7 +19,8 @@ export class LoginComponent {
 
   constructor(private authService: AuthService,
               private fb: FormBuilder,
-              private loadingService: LoadingService) {
+              private loadingService: LoadingService,
+              private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -39,7 +40,10 @@ export class LoginComponent {
     this.loadingService.showLoadingForm();
 
     this.authService.login(this.loginForm.value).subscribe({
-      complete: () => this.loadingService.hideLoadingForm()
+      complete: () => {
+        this.loadingService.hideLoadingForm()
+        this.router.navigate(['/app-selection']);
+      }
     });
   }
 }

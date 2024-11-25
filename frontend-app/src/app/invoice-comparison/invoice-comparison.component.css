@@ -14,7 +14,23 @@
   font-weight: 700;
   background: linear-gradient(to right, #5e4cce, #8a6ce2);
   -webkit-background-clip: text;
-  color: transparent;
+}
+
+.how-it-works-button {
+  background-color: #8a6ce2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin: 20px auto 0 auto;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.how-it-works-button:hover {
+  background-color: #5e4cce;
 }
 
 .futuristic-subtitle {
@@ -36,7 +52,7 @@
   padding: 15px 30px;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  text-align: center;
   font-size: 1rem;
 }
 

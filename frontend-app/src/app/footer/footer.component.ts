@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -17,11 +17,14 @@ export class FooterComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isAuthenticated();
   }
 
+  goToRegister(): void {
+    this.router.navigate(['/register']);
+  }
 }

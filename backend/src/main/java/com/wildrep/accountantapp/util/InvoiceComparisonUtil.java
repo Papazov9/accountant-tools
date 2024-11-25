@@ -63,6 +63,29 @@ public class InvoiceComparisonUtil {
             }
         }
 
+        allUnmatchedKeys.clear();
+
+        Map<String, List<CSVInvoiceRecord>> unmatchedTypeCSV = unmatchedCSVs.stream()
+                .collect(Collectors.groupingBy(record -> record.getId().getBulstat() + "|" + record.getId().getDocumentNumber() + "|" + record.getTotalAmount()));
+        Map<String, List<InvoiceRecord>> unmatchedTypeTXT = unmatchedTxts.stream()
+                .collect(Collectors.groupingBy(record -> record.getId().getBulstat() + "|" + record.getId().getDocumentNumber() + "|" + record.getTotalAmount()));
+
+        allUnmatchedKeys.addAll(unmatchedTypeCSV.keySet());
+        allUnmatchedKeys.addAll(unmatchedTypeTXT.keySet());
+
+        for (String key : allUnmatchedKeys) {
+            List<CSVInvoiceRecord> csvTypes = unmatchedTypeCSV.getOrDefault(key, Collections.emptyList());
+            List<InvoiceRecord> invoiceRecordsTypes = unmatchedTypeTXT.getOrDefault(key, Collections.emptyList());
+
+            for (CSVInvoiceRecord csvInvoiceRecord : csvTypes) {
+                for (InvoiceRecord invoiceRecord : invoiceRecordsTypes) {
+                    unmatchedCSVs.remove(csvInvoiceRecord);
+                    unmatchedTxts.remove(invoiceRecord);
+                    results.add(compareAndCreateResult(csvInvoiceRecord, invoiceRecord, false));
+                }
+            }
+        }
+
         unmatchedCSVs.forEach(r -> results.add(createMissingTxtResult(r)));
         unmatchedTxts.forEach(r -> results.add(createMissingCsvResult(r)));
         return results;

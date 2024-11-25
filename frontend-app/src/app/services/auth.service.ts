@@ -88,7 +88,9 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem('selectedApp');
     sessionStorage.removeItem(this.TOKEN_KEY);
+    sessionStorage.removeItem("admin-access");
     this.currentUser.next(null);
     this.stopTokenCheck();
     this.router.navigate(['/']);

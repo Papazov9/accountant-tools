@@ -17,17 +17,17 @@
   <nav>
     <ul class="side-nav-links">
       <li>
-        <a routerLink="/dashboard">
+        <a [routerLink]="['/', basePath, 'home']">
           <i class="fa fa-tachometer-alt"></i> <span i18n>Dashboard</span>
         </a>
       </li>
       <li>
-        <a routerLink="/invoice-comparison">
+        <a [routerLink]="['/', basePath, 'main']">
           <i class="fa fa-file-invoice"></i> <span i18n>Invoice Comparison</span>
         </a>
       </li>
       <li>
-        <a routerLink="/history">
+        <a [routerLink]="['/', basePath, 'history']">
           <i class="fas fa-history"></i> <span i18n>History</span>
         </a>
       </li>
@@ -37,8 +37,13 @@
         </a>
       </li>
       <li>
-        <a routerLink="/settings">
+        <a [routerLink]="['/', basePath, 'settings']">
           <i class="fa fa-cogs"></i> <span i18n>Settings</span>
+        </a>
+      </li>
+      <li *ngIf="isAdmin$ | async">
+        <a routerLink="admin-entry">
+          <i class="fa fa-user" aria-hidden="true"></i> <span i18n>Admin Access</span>
         </a>
       </li>
     </ul>

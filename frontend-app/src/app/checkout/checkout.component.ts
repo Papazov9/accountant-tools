@@ -8,6 +8,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
 import {map, Observable, startWith, switchMap} from "rxjs";
 import {LocationService} from "../services/location.service";
+import {UserService} from "../services/user.service";
+import {AppSelectionService} from "../services/app-selection.service";
 
 export interface PaymentRequest {
   contactEmail: string
@@ -44,26 +46,40 @@ interface PaymentResponse {
 export class CheckoutComponent implements OnInit {
   checkoutForm!: FormGroup;
   selectedPlan: PricingPlan;
+  currentEmail: string = '';
   filteredCountries$!: Observable<string[]>;
   filteredCities$!: Observable<string[]>;
   filteredPostalCodes$!: Observable<string[]>;
   private STRIPE_API_URL = 'http://localhost:8080/api/stripe/create-checkout-session';
+  private basePath!: 'invoice-comparison' | 'inventory';
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private fb: FormBuilder,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private userService: UserService,
+    private appSelectionService: AppSelectionService,
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { plan: any };
     this.selectedPlan = state?.plan;
+    console.log(this.selectedPlan);
   }
 
   ngOnInit(): void {
+    this.userService.userProfile$.subscribe({
+      next: userProfile => {
+        if (userProfile) {
+          this.currentEmail = userProfile.email;
+        }
+      }
+    });
     this.checkoutForm = this.fb.group({
-      contactEmail: ['', [Validators.required, Validators.email]],
+      contactEmail: [`${this.currentEmail}`, [Validators.required, Validators.email]],
       companyName: ['', Validators.required],
+      bulstat: ['', Validators.required],
+      vatRegistration: ['', Validators.required],
       addressLine1: ['', Validators.required],
       addressLine2: [''],
       city: ['', Validators.required],
@@ -84,6 +100,8 @@ export class CheckoutComponent implements OnInit {
       }
     )
     );
+
+    this.appSelectionService.selectedApp$.subscribe(app => this.basePath = app);
   }
 
   submitCheckoutForm(): void {
@@ -100,7 +118,7 @@ export class CheckoutComponent implements OnInit {
     this.http.post<PaymentResponse>(this.STRIPE_API_URL, checkoutData).subscribe({
       next: response => {
         if (response.status === 'success') {
-          this.router.navigate(['/payment-pending'], {queryParams: {email: response.email}});
+          this.router.navigate([`/${this.basePath}/payment-pending`], {queryParams: {email: response.email}});
         }
       }
     })

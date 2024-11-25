@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CurrencyPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {LoadingService} from "../services/loading.service";
 import {UserProfile, UserService} from "../services/user.service";
@@ -27,7 +26,7 @@ export class SubscriptionsComponent implements OnInit {
   isCurrentUserAcknowledge: boolean = false;
   currentUser: UserProfile | null = null;
 
-  constructor(private http: HttpClient, private router: Router, private loadingService: LoadingService, private userService: UserService, private toggleService: ToggleService) {
+  constructor(private router: Router, private loadingService: LoadingService, private userService: UserService, private toggleService: ToggleService) {
   }
 
   ngOnInit() {
@@ -43,6 +42,7 @@ export class SubscriptionsComponent implements OnInit {
           console.log("User not logged in!");
         }
         this.subscriptionPlans = plans;
+        this.loadingService.hideOverlay()
       },
       error: (error) => {
         console.error(error);
@@ -51,22 +51,6 @@ export class SubscriptionsComponent implements OnInit {
       complete: () => this.loadingService.hideOverlay()
     })
 
-  }
-
-  loadPricing() {
-    this.http.get<PricingPlan[]>('/assets/data-files/pricing-plans.json').subscribe({
-      next: (data) => {
-        this.subscriptionPlans = data;
-        console.log(data);
-      },
-      error: (error) => {
-        this.loadingService.hideOverlay();
-        this.router.navigate(['dashboard']);
-        this.loadingService.hideOverlay();
-        console.log(error);
-      },
-      complete: () => this.loadingService.hideOverlay()
-    });
   }
 
   selectPlan(plan: PricingPlan) {
@@ -80,17 +64,18 @@ export class SubscriptionsComponent implements OnInit {
   proceedToPayment() {
     if (this.selectedPlan) {
       Swal.fire({
-        title: 'Confirmation',
-        text: `Confirm that you want to proceed to checkout with the selected ${this.selectedPlan.title} option which costs ${this.selectedPlan.price} EUR?`,
+        title: $localize`Confirmation`,
+        text: $localize`Confirm that you want to proceed to checkout with the selected ${this.selectedPlan.title} option which costs ${this.selectedPlan.price} EUR?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#584ca6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, proceed!',
+        confirmButtonText: $localize`Yes, proceed!`,
+        cancelButtonText: $localize`Cancel`
       }).then(result => {
         if (result.isConfirmed) {
           this.toggleService.hideSubscriptions();
-          this.router.navigate(['/checkout'], {state: {plan: this.selectedPlan, user: this.currentUser}});
+          this.router.navigate(['/invoice-comparison/checkout'], {state: {plan: this.selectedPlan, user: this.currentUser}});
         }
       });
     }
@@ -102,21 +87,22 @@ export class SubscriptionsComponent implements OnInit {
       return;
     }
     Swal.fire({
-      title: 'Confirmation',
-      text: 'Why settle for less? Unlock the full power of our premium plans and get more comparisons, advanced features, and top-tier support. Or stick with just 1 limited free comparison—your choice! Ready to maximize your potential?',
+      title: $localize`Confirmation`,
+      text: $localize`Why settle for less? Unlock the full power of our premium plans and get more comparisons, advanced features, and top-tier support. Or stick with just 1 limited free comparison—your choice! Ready to maximize your potential?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#584ca6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes...',
+      confirmButtonText: $localize`Yes`,
+      cancelButtonText: $localize`Cancel`,
       background: '#ffffff'
     }).then(result => {
       if (result.isConfirmed) {
         this.userService.acceptFreeTrial().subscribe({
-          next: (response) => {
+          next: () => {
             this.toggleService.hideSubscriptions();
           },
-          error: (error) => {
+          error: () => {
             console.error();
           }
         });

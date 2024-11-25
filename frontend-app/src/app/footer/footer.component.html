@@ -4,8 +4,8 @@
     <div class="footer-section">
       <h3 i18n>TOOLS</h3>
       <ul>
-        <li><a href="#" i18n>Invoice Comparison</a></li>
-        <li><a href="#" i18n>Coming soon</a></li>
+        <li><a routerLink="register" i18n>Invoice Comparison</a></li>
+        <li><a href="#" i18n>Accounts and Balances</a></li>
         <li><a href="#" i18n>Coming soon</a></li>
         <li><a href="#" i18n>Coming soon</a></li>
       </ul>
@@ -38,7 +38,7 @@
       <h3 i18n>SUPPORT</h3>
       <ul>
         <li><a href="#" i18n>FAQ</a></li>
-        <li><a href="#" i18n>Contact</a></li>
+        <li><a routerLink="contact" i18n>Contact</a></li>
       </ul>
     </div>
 
@@ -50,7 +50,7 @@
         <a href="#"><i class="fa-brands fa-linkedin"></i></a>
         <a href="#"><i class="fa-brands fa-youtube"></i></a>
       </div>
-      <button class="sign-up-btn">Sign up</button>
+      <button class="sign-up-btn" (click)="goToRegister()">Sign up</button>
     </div>
   </div>
 

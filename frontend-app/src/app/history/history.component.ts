@@ -39,6 +39,10 @@ export class HistoryComponent implements OnInit {
     this.historyService.loadHistory().subscribe((records) => {
       this.historyRecords = records;
       this.totalPages = Math.ceil(this.historyRecords.length / this.itemsPerPage);
+      this.pageText = $localize`:@@pageText:Page ${this.currentPage} of ${this.totalPages}`;
+      if (this.totalPages === 0) {
+        this.currentPage = 0;
+      }
       this.paginateHistory();
     });
   }

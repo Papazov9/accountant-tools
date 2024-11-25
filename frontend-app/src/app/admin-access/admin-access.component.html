@@ -1,0 +1,28 @@
+<div class="admin-entry-container">
+  <h1>Admin Panel Access</h1>
+  <p class="info-text">
+    A verification code has been sent to the admin email. Please enter the code below to access the admin panel.
+  </p>
+
+  <form [formGroup]="accessForm" (ngSubmit)="verifyCode()">
+    <div class="form-group">
+      <label for="activationCode">Activation Code</label>
+      <input
+        id="activationCode"
+        type="text"
+        formControlName="activationCode"
+        placeholder="Enter Activation Code"
+        [maxlength]="12"
+        [ngClass]="{ 'invalid': isFieldInvalid('activationCode') }"
+      />
+      <div class="error" *ngIf="isFieldInvalid('activationCode')">
+        <small *ngIf="activationCode?.errors?.['required']">Activation code is required.</small>
+        <small *ngIf="activationCode?.errors?.['maxlength']">Code must be exactly 12 characters.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="verify-button" [disabled]="accessForm.invalid">Verify Code</button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</div>

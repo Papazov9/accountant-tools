@@ -7,8 +7,6 @@
   <div class="pricing-container">
     <div class="pricing-card" *ngFor="let plan of pricingPlans">
 
-      <img [src]="plan.imgUrl" alt="Badge Icon" class="badge-icon">
-
       <h2 class="pricing-card-title">{{ plan.title }}</h2>
       <p class="pricing-price">{{ plan.price }} EUR</p>
       <p class="comparison-count">{{ plan.comparisons }} Comparisons</p>
